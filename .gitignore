@@ -3,8 +3,12 @@
 /public/build
 /public/hot
 /public/storage
+/public/media
 /storage/*.key
 /storage/pail
+/storage/framework
+/storage/logs
+/storage/media
 /vendor
 .env
 .env.backup
@@ -21,3 +25,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/draft.yaml
+/.blueprint
+_ide_helper_models.php
+_ide_helper.php
