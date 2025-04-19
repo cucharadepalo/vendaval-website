@@ -10,6 +10,8 @@ class ManageSchedules extends ManageRecords
 {
     protected static string $resource = ScheduleResource::class;
 
+    protected static ?string $title = 'Programa';
+
     protected function getHeaderActions(): array
     {
         return [

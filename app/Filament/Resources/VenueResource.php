@@ -8,7 +8,10 @@ use App\Models\Venue;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,27 +20,51 @@ class VenueResource extends Resource
 {
     protected static ?string $model = Venue::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-building-office';
+    protected static ?string $navigationIcon = 'bx-buildings';
+
+    protected static ?string $activeNavigationIcon = 'bxs-buildings';
+
+    protected static ?string $navigationLabel = 'Lugares';
+
+    protected static ?string $modelLabel = 'lugar';
+
+    protected static ?string $pluralModelLabel = 'lugares';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+            ->schema(Venue::getForm());
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->size(TextColumn\TextColumnSize::Large)
+                    ->weight(FontWeight::Bold)
+                    ->translateLabel(),
+                TextColumn::make('town')
+                    ->translateLabel(),
+                IconColumn::make('map')
+                    ->icon('heroicon-o-map-pin')
+                    ->url(fn (Venue $record): string|null => $record->map)
+                    ->openUrlInNewTab()
+                    ->translateLabel(),
+                IconColumn::make('website')
+                    ->icon('heroicon-o-globe-alt')
+                    ->url(fn (Venue $record): string|null => $record->website)
+                    ->openUrlInNewTab()
+                    ->translateLabel(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

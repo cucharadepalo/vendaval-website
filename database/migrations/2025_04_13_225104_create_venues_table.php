@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 191)->index();
             $table->string('town', 191);
-            $table->string('map', 191)->nullable();
+            $table->string('map', 255)->nullable();
+            $table->string('address', 191)->nullable();
             $table->text('text')->nullable();
             $table->string('website')->nullable();
             $table->timestamps();

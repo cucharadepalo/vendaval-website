@@ -19,9 +19,15 @@ class FilmResource extends Resource
 {
     protected static ?string $model = Film::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-video-camera';
+    protected static ?string $navigationIcon = 'bx-movie';
 
-    protected static ?string $activeNavigationIcon = 'heroicon-s-video-camera';
+    protected static ?string $activeNavigationIcon = 'bxs-movie';
+
+    protected static ?string $navigationLabel = 'Películas';
+
+    protected static ?string $modelLabel = 'película';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -36,13 +42,19 @@ class FilmResource extends Resource
                 SpatieMediaLibraryImageColumn::make('poster')
                     ->conversion('preview')
                     ->height(64)
-                    ->width(43),
+                    ->width(43)
+                    ->translateLabel(),
                 TextColumn::make('title')
                     ->size(TextColumn\TextColumnSize::Large)
-                    ->weight(FontWeight::Bold),
-                TextColumn::make('director'),
-                TextColumn::make('year'),
+                    ->weight(FontWeight::Bold)
+                    ->translateLabel(),
+                TextColumn::make('director')
+                    ->translateLabel(),
+                TextColumn::make('year')
+                    ->translateLabel(),
                 TextColumn::make('schedules.start_time')
+                    ->dateTime('j/F/Y — H:i')
+                    ->label('Proxeccións'),
             ])
             ->filters([
                 //

@@ -20,9 +20,17 @@ class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-musical-note';
+    protected static ?string $navigationIcon = 'bx-music';
 
-    protected static ?string $activeNavigationIcon = 'heroicon-s-musical-note';
+    protected static ?string $activeNavigationIcon = 'bxs-music';
+
+    protected static ?string $navigationLabel = 'Actividades';
+
+    protected static ?string $modelLabel = 'actividad';
+
+    protected static ?string $pluralModelLabel = 'actividades';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -37,12 +45,15 @@ class ActivityResource extends Resource
                 SpatieMediaLibraryImageColumn::make('image')
                     ->width(96)
                     ->height(64)
-                    ->conversion('preview'),
+                    ->conversion('preview')
+                    ->translateLabel(),
                 TextColumn::make('title')
                     ->size(TextColumn\TextColumnSize::Large)
                     ->weight(FontWeight::Bold)
-                    ->description(fn (Activity $item): string => $item->summary),
+                    ->description(fn (Activity $item): string => $item->summary)
+                    ->translateLabel(),
                 TextColumn::make('schedules.start_time')
+                    ->translateLabel(),
             ])
             ->filters([
                 //

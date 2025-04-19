@@ -85,7 +85,7 @@ class Activity extends Model implements HasMedia
                                     'codeBlock',
                                     'strike'
                                 ])
-                                ->minHeight('32rem')
+                                ->minHeight('20rem')
                                 ->translateLabel(),
                         ]),
                     Section::make()
@@ -93,6 +93,7 @@ class Activity extends Model implements HasMedia
                         ->schema([
                             SpatieMediaLibraryFileUpload::make('image')
                                 ->conversion('preview')
+                                ->translateLabel()
                         ])
                 ])
         ];
