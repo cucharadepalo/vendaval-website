@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Repeater;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -93,7 +96,33 @@ class Activity extends Model implements HasMedia
                         ->schema([
                             SpatieMediaLibraryFileUpload::make('image')
                                 ->conversion('preview')
-                                ->translateLabel()
+                                ->translateLabel(),
+                            Repeater::make('schedules')
+                                ->label('Sesións')
+                                ->relationship()
+                                ->schema([
+                                    DateTimePicker::make('start_time')
+                                        ->label('Data')
+                                        ->native(false)
+                                        ->seconds(false)
+                                        ->minutesStep(15)
+                                        // ->minDate(now())
+                                        ->displayFormat('j / F / Y — H:i')
+                                        ->locale('es')
+                                        ->required(),
+                                    Select::make('venue_id')
+                                        ->relationship(name: 'venue', titleAttribute: 'name')
+                                        ->label('Lugar')
+                                        ->required(),
+                                    TextInput::make('description')
+                                        ->translateLabel()
+                                        ->maxLength(191)
+                                        ->helperText('Ex: "Música" ou "Obradoiro"'),
+                                    TextInput::make('notes')
+                                        ->translateLabel()
+                                        ->maxLength(255)
+                                        ->helperText('Ex: Presentado por...'),
+                                ])
                         ])
                 ])
         ];

@@ -153,7 +153,7 @@ class Film extends Model implements HasMedia
                                     TextInput::make('description')
                                         ->translateLabel()
                                         ->maxLength(191)
-                                        ->helperText('Ex: Cinema o Cinema ao ar libre'),
+                                        ->helperText('Ex: "Cinema" ou "Cinema ao aire libre"'),
                                     TextInput::make('notes')
                                         ->translateLabel()
                                         ->maxLength(255)
