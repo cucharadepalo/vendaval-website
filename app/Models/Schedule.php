@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -52,5 +55,36 @@ class Schedule extends Model
     public function schedulable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Get the filament form CRUD configuration.
+     *
+     */
+    public static function getForm(): array
+    {
+        return [
+            DateTimePicker::make('start_time')
+                ->label('Data')
+                ->native(false)
+                ->seconds(false)
+                ->minutesStep(15)
+                // ->minDate(now())
+                ->displayFormat('j / F / Y — H:i')
+                ->locale('es')
+                ->required(),
+            Select::make('venue_id')
+                ->relationship(name: 'venue', titleAttribute: 'name')
+                ->label('Lugar')
+                ->required(),
+            TextInput::make('description')
+                ->translateLabel()
+                ->maxLength(191)
+                ->helperText('Ex: "Cinema" ou "Música"'),
+            TextInput::make('notes')
+                ->translateLabel()
+                ->maxLength(255)
+                ->helperText('Ex: Presentado por...'),
+        ];
     }
 }

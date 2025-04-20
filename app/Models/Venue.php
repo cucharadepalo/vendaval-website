@@ -66,19 +66,19 @@ class Venue extends Model
             TextInput::make('address')
                 ->maxLength(191)
                 ->columnSpanFull()
-                ->prefixIcon('heroicon-o-map')
+                ->prefixIcon('bx-map-alt')
                 ->translateLabel(),
             TextInput::make('map')
                 ->maxLength(255)
                 ->url()
-                ->prefixIcon('heroicon-o-map-pin')
+                ->prefixIcon('bx-map')
                 ->placeholder('https://www.google.com/maps/place/...')
                 ->columnSpanFull()
                 ->translateLabel(),
             TextInput::make('website')
                 ->maxLength(255)
                 ->url()
-                ->prefixIcon('heroicon-o-globe-alt')
+                ->prefixIcon('bx-link-alt')
                 ->placeholder('https://')
                 ->columnSpanFull()
                 ->translateLabel(),

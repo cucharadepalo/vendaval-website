@@ -49,12 +49,14 @@ class VenueResource extends Resource
                 TextColumn::make('town')
                     ->translateLabel(),
                 IconColumn::make('map')
-                    ->icon('heroicon-o-map-pin')
+                    ->icon('bx-map')
+                    ->color('primary')
                     ->url(fn (Venue $record): string|null => $record->map)
                     ->openUrlInNewTab()
                     ->translateLabel(),
                 IconColumn::make('website')
-                    ->icon('heroicon-o-globe-alt')
+                    ->icon('bx-link-alt')
+                    ->color('primary')
                     ->url(fn (Venue $record): string|null => $record->website)
                     ->openUrlInNewTab()
                     ->translateLabel(),

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\FilmResource\Pages;
 use App\Filament\Resources\FilmResource\RelationManagers;
 use App\Models\Film;
+use App\Models\Schedule;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -53,7 +54,8 @@ class FilmResource extends Resource
                 TextColumn::make('year')
                     ->translateLabel(),
                 TextColumn::make('schedules.start_time')
-                    ->dateTime('j/F/Y — H:i')
+                    ->listWithLineBreaks()
+                    ->dateTime('j / F / Y — H:i')
                     ->label('Proxeccións'),
             ])
             ->filters([

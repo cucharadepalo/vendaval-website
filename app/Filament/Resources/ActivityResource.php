@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Filament\Resources\ActivityResource\RelationManagers;
 use App\Models\Activity;
+use App\Models\Schedule;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -53,6 +54,8 @@ class ActivityResource extends Resource
                     ->description(fn (Activity $item): string => $item->summary)
                     ->translateLabel(),
                 TextColumn::make('schedules.start_time')
+                    ->listWithLineBreaks()
+                    ->dateTime('j / F / Y — H:i')
                     ->translateLabel(),
             ])
             ->filters([

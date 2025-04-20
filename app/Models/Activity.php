@@ -100,29 +100,7 @@ class Activity extends Model implements HasMedia
                             Repeater::make('schedules')
                                 ->label('Sesións')
                                 ->relationship()
-                                ->schema([
-                                    DateTimePicker::make('start_time')
-                                        ->label('Data')
-                                        ->native(false)
-                                        ->seconds(false)
-                                        ->minutesStep(15)
-                                        // ->minDate(now())
-                                        ->displayFormat('j / F / Y — H:i')
-                                        ->locale('es')
-                                        ->required(),
-                                    Select::make('venue_id')
-                                        ->relationship(name: 'venue', titleAttribute: 'name')
-                                        ->label('Lugar')
-                                        ->required(),
-                                    TextInput::make('description')
-                                        ->translateLabel()
-                                        ->maxLength(191)
-                                        ->helperText('Ex: "Música" ou "Obradoiro"'),
-                                    TextInput::make('notes')
-                                        ->translateLabel()
-                                        ->maxLength(255)
-                                        ->helperText('Ex: Presentado por...'),
-                                ])
+                                ->schema(Schedule::getForm())
                         ])
                 ])
         ];
