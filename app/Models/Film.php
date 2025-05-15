@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
@@ -18,126 +19,137 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Film extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+	use HasFactory, InteractsWithMedia;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'title',
-        'director',
-        'year',
-        'genre',
-        'language',
-        'version',
-        'duration',
-        'text',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'title',
+		'director',
+		'year',
+		'genre',
+		'language',
+		'version',
+		'duration',
+		'text',
+	];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'event' => 'boolean',
-    ];
+	/**
+	 * Get all of the film's schedules.
+	 *
+	 */
+	public function schedules(): MorphMany
+	{
+		return $this->morphMany(Schedule::class, 'schedulable');
+	}
 
-    /**
-     * Get all of the film's schedules.
-     *
-     */
-    public function schedules(): MorphMany
-    {
-        return $this->morphMany(Schedule::class, 'schedulable');
-    }
+	/**
+	 * Get the film edition.
+	 */
+	public function edition(): BelongsTo
+	{
+		return $this->belongsTo(Edition::class);
+	}
 
-    /**
-     * Generate thumbnail media conversion for Spatie media library.
-     *
-     */
-    public function registerMediaConversions(?Media $media = null): void
-    {
-        $this->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
-    }
+	/**
+	 * Get the filament form CRUD configuration.
+	 *
+	 */
+	public static function getForm(): array
+	{
+		return [
+			Grid::make(5)
+				->schema([
+					Section::make()
+						->columnSpan(3)
+						->columns(2)
+						->schema([
+							TextInput::make('title')
+								->required()
+								->maxLength(191)
+								->columnSpanFull()
+								->translateLabel(),
+							TextInput::make('director')
+								->required()
+								->maxLength(191)
+								->translateLabel(),
+							TextInput::make('year')
+								->numeric()
+								->minValue(1900)
+								->maxValue(2100)
+								->placeholder(2000)
+								->translateLabel(),
+							TextInput::make('genre')
+								->maxLength(191)
+								->helperText('Ex: Documentario o Ficción... ')
+								->translateLabel(),
+							TextInput::make('duration')
+								->numeric()
+								->minValue(1)
+								->maxValue(600)
+								->suffix('Minutos')
+								->translateLabel(),
+							TextInput::make('language')
+								->maxLength(191)
+								->placeholder('PT')
+								->translateLabel(),
+							TextInput::make('version')
+								->maxLength(191)
+								->helperText('Ex: Versión orixinal con subtítulos en...')
+								->translateLabel(),
+							MarkdownEditor::make('text')
+								->disableToolbarButtons([
+									'attachFiles',
+									'codeBlock',
+									'strike',
+								])
+								->minHeight('24rem')
+								->columnSpanFull()
+								->translateLabel(),
+						]),
+					Section::make()
+						->columnSpan(2)
+						->schema([
+							SpatieMediaLibraryFileUpload::make('poster')
+								->collection('poster')
+								->conversion('preview'),
+							SpatieMediaLibraryFileUpload::make('still')
+								->collection('stills')
+								->multiple()
+								->conversion('preview'),
+							Repeater::make('schedules')
+								->label('Proxeccións')
+								->relationship()
+								->schema(Schedule::getForm())
+						])
+				])
+		];
+	}
 
-    /**
-     * Get the filament form CRUD configuration.
-     *
-     */
-    public static function getForm(): array
-    {
-        return [
-            Grid::make(5)
-                ->schema([
-                    Section::make()
-                        ->columnSpan(3)
-                        ->columns(2)
-                        ->schema([
-                            TextInput::make('title')
-                                ->required()
-                                ->maxLength(191)
-                                ->columnSpanFull()
-                                ->translateLabel(),
-                            TextInput::make('director')
-                                ->required()
-                                ->maxLength(191)
-                                ->translateLabel(),
-                            TextInput::make('year')
-                                ->numeric()
-                                ->minValue(1900)
-                                ->maxValue(2100)
-                                ->placeholder(2000)
-                                ->translateLabel(),
-                            TextInput::make('genre')
-                                ->maxLength(191)
-                                ->helperText('Ex: Documentario o Ficción... ')
-                                ->translateLabel(),
-                            TextInput::make('duration')
-                                ->numeric()
-                                ->minValue(1)
-                                ->maxValue(600)
-                                ->suffix('Minutos')
-                                ->translateLabel(),
-                            TextInput::make('language')
-                                ->maxLength(191)
-                                ->placeholder('PT')
-                                ->translateLabel(),
-                            TextInput::make('version')
-                                ->maxLength(191)
-                                ->helperText('Ex: Versión orixinal con subtítulos en...')
-                                ->translateLabel(),
-                            MarkdownEditor::make('text')
-                                ->disableToolbarButtons([
-                                    'attachFiles',
-                                    'codeBlock',
-                                    'strike',
-                                ])
-                                ->minHeight('24rem')
-                                ->columnSpanFull()
-                                ->translateLabel(),
-                        ]),
-                    Section::make()
-                        ->columnSpan(2)
-                        ->schema([
-                            SpatieMediaLibraryFileUpload::make('poster')
-                                ->conversion('preview'),
-                            SpatieMediaLibraryFileUpload::make('still')
-                                ->collection('stills')
-                                ->multiple()
-                                ->conversion('preview'),
-                            Repeater::make('schedules')
-                                ->label('Proxeccións')
-                                ->relationship()
-                                ->schema(Schedule::getForm())
-                        ])
-                    ])
-        ];
-    }
+	/**
+	 * Spatie Media library collections.
+	 */
+	public function registerMediaCollections(): void
+	{
+		$this->addMediaCollection('poster')
+			->singleFile()
+			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 
+		$this->addMediaCollection('stills')
+			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
+	}
+
+	/**
+	 * Generate thumbnail media conversion for Spatie media library.
+	 *
+	 */
+	public function registerMediaConversions(?Media $media = null): void
+	{
+		$this->addMediaConversion('preview')
+			->fit(Fit::Contain, 300, 300)
+			->nonQueued();
+	}
 }

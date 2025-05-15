@@ -10,6 +10,8 @@ return new class extends Migration
 	{
 		Schema::create('films', function (Blueprint $table) {
 			$table->id();
+			$table->foreignId('edition_id');
+
 			$table->string('title', 191)->index();
 			$table->string('director', 191);
 			$table->year('year')->nullable();
@@ -18,6 +20,7 @@ return new class extends Migration
 			$table->string('version', 191)->nullable();
 			$table->time('duration', precision: 0)->nullable();
 			$table->text('text');
+
 			$table->timestamps();
 		});
 	}
