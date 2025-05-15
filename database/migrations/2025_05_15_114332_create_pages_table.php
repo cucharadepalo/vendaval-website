@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->boolean('in_menu');
 
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

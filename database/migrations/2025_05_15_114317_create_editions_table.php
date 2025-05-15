@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->json('colors')->nullable();
 			$table->string('splash_alt_text', 191)->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
