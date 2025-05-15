@@ -6,22 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('editions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+	public function up(): void
+	{
+		Schema::create('editions', function (Blueprint $table) {
+			$table->id();
+			$table->string('name', 191)->unique()->index();
+			$table->date('date');
+			$table->string('title', 191)->nullable();
+			$table->boolean('is_active')->default(false);
+			$table->json('colors')->nullable();
+			$table->string('splash_alt_text', 191)->nullable();
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('editions');
-    }
+	public function down(): void
+	{
+		Schema::dropIfExists('editions');
+	}
 };
