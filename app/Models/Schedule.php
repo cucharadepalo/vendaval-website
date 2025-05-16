@@ -12,79 +12,79 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Schedule extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'start_time',
-        'description',
-        'notes',
-        'schedulable_id',
-        'schedulable_type',
-        'venue_id',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'start_time',
+		'description',
+		'notes',
+		'schedulable_id',
+		'schedulable_type',
+		'venue_id',
+	];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'start_time' => 'datetime',
-        'schedulable_id' => 'integer',
-        'venue_id' => 'integer',
-    ];
+	/**
+	 * The attributes that should be cast to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'integer',
+		'start_time' => 'datetime',
+		'schedulable_id' => 'integer',
+		'venue_id' => 'integer',
+	];
 
-    /**
-     * Get the parent Venue model
-     *
-     */
-    public function venue(): BelongsTo
-    {
-        return $this->belongsTo(Venue::class);
-    }
+	/**
+	 * Get the parent Venue model
+	 *
+	 */
+	public function venue(): BelongsTo
+	{
+		return $this->belongsTo(Venue::class);
+	}
 
-    /**
-     * Get the parent schedulable model (Film or activity).
-     */
-    public function schedulable(): MorphTo
-    {
-        return $this->morphTo();
-    }
+	/**
+	 * Get the parent schedulable model (Film or activity).
+	 */
+	public function schedulable(): MorphTo
+	{
+		return $this->morphTo();
+	}
 
-    /**
-     * Get the filament form CRUD configuration.
-     *
-     */
-    public static function getForm(): array
-    {
-        return [
-            DateTimePicker::make('start_time')
-                ->label('Data')
-                ->native(false)
-                ->seconds(false)
-                ->minutesStep(15)
-                // ->minDate(now())
-                ->displayFormat('j / F / Y — H:i')
-                ->locale('es')
-                ->required(),
-            Select::make('venue_id')
-                ->relationship(name: 'venue', titleAttribute: 'name')
-                ->label('Lugar')
-                ->required(),
-            TextInput::make('description')
-                ->translateLabel()
-                ->maxLength(191)
-                ->helperText('Ex: "Cinema" ou "Música"'),
-            TextInput::make('notes')
-                ->translateLabel()
-                ->maxLength(255)
-                ->helperText('Ex: Presentado por...'),
-        ];
-    }
+	/**
+	 * Get the filament form CRUD configuration.
+	 *
+	 */
+	public static function getForm(): array
+	{
+		return [
+			DateTimePicker::make('start_time')
+				->label('Data')
+				->native(false)
+				->seconds(false)
+				->minutesStep(15)
+				// ->minDate(now())
+				->displayFormat('j / F / Y — H:i')
+				->locale('es')
+				->required(),
+			Select::make('venue_id')
+				->relationship(name: 'venue', titleAttribute: 'name')
+				->label('Lugar')
+				->required(),
+			TextInput::make('description')
+				->translateLabel()
+				->maxLength(191)
+				->helperText('Ex: "Cinema" ou "Música"'),
+			TextInput::make('notes')
+				->translateLabel()
+				->maxLength(255)
+				->helperText('Ex: Presentado por...'),
+		];
+	}
 }

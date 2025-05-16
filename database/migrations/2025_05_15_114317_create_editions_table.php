@@ -11,7 +11,8 @@ return new class extends Migration
 		Schema::create('editions', function (Blueprint $table) {
 			$table->id();
 			$table->string('name', 191)->unique()->index();
-			$table->date('date');
+			$table->date('start_date');
+			$table->date('end_date');
 			$table->string('title', 191)->nullable();
 			$table->boolean('is_active')->default(false);
 			$table->json('colors')->nullable();

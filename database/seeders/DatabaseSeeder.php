@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
 
 		$edition = Edition::create([
 			'name' => '2024',
-			'date' => Carbon::create(2024, 1, 1, 0, 0, 0),
+			'start_date' => Carbon::create(2024, 8, 23, 0, 0, 0),
+			'end_date' => Carbon::create(2024, 8, 25, 0, 0, 0),
 			'title' => '1ª Mostra de cinema portugués da Ribeira Sacra',
 			'is_active' => true,
 		]);
@@ -96,7 +97,8 @@ class DatabaseSeeder extends Seeder
 			'name' => 'A Casa da Memoria',
 			'town' => 'Xullán, Bóveda',
 			'address' => 'Rúa Maior, 1. Xullán, Bóveda 27343 Lugo',
-			'https://www.google.com/maps/place/Casa+da+memoria/@42.6392777,-7.4717012,17z/data=!3m1!4b1!4m6!3m5!1s0xd303f99e14d7301:0xdd44240b739d5051!8m2!3d42.6392738!4d-7.4691263!16s%2Fg%2F11sw2wf03p!5m1!1e4?hl=gl-ES&entry=ttu'
+			'map' => 'https://www.google.com/maps/place/Casa+da+memoria/@42.6392777,-7.4717012,17z/data=!3m1!4b1!4m6!3m5!1s0xd303f99e14d7301:0xdd44240b739d5051!8m2!3d42.6392738!4d-7.4691263!16s%2Fg%2F11sw2wf03p!5m1!1e4?hl=gl-ES&entry=ttu',
+			'website' => 'https://acasadamemoria.com'
 		]);
 
 		DB::table('media')->insert([

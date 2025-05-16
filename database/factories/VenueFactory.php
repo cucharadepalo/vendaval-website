@@ -25,7 +25,7 @@ class VenueFactory extends Factory
 			'town' => fake()->regexify('[A-Za-z0-9]{191}'),
 			'map' => fake()->regexify('[A-Za-z0-9]{191}'),
 			'text' => fake()->text(),
-			'link' => fake()->word(),
+			'website' => fake()->word(),
 		];
 	}
 }

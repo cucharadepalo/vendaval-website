@@ -24,11 +24,11 @@ class FilmResource extends Resource
 
 	protected static ?string $activeNavigationIcon = 'bxs-movie';
 
-	protected static ?string $navigationLabel = 'Películas';
+	protected static ?string $navigationLabel = 'Filmes';
 
-	protected static ?string $modelLabel = 'película';
+	protected static ?string $modelLabel = 'film';
 
-	protected static ?int $navigationSort = 1;
+	protected static ?int $navigationSort = 2;
 
 	public static function form(Form $form): Form
 	{
@@ -41,6 +41,7 @@ class FilmResource extends Resource
 		return $table
 			->columns([
 				SpatieMediaLibraryImageColumn::make('poster')
+					->collection('poster')
 					->conversion('preview')
 					->height(64)
 					->width(43)

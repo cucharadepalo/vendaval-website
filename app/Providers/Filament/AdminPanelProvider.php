@@ -6,10 +6,12 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Notifications\Livewire\Notifications;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -23,16 +25,19 @@ class AdminPanelProvider extends PanelProvider
 {
 	public function panel(Panel $panel): Panel
 	{
+		Notifications::alignment(Alignment::Center);
+
 		return $panel
 			->default()
 			->id('admin')
 			->path('admin')
+			->domain('admin.vendaval.test')
 			->login()
 			->brandLogo(fn () => view('filament.admin.logo'))
 			->colors([
 				'primary' => Color::Emerald,
 			])
-			->font('IBM Plex Sans')
+			// ->font('IBM Plex Sans')
 			->sidebarCollapsibleOnDesktop()
 			->sidebarWidth('14rem')
 			->maxContentWidth(MaxWidth::ScreenTwoExtraLarge)
