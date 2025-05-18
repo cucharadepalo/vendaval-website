@@ -21,10 +21,26 @@ return new class extends Migration
 			$table->timestamps();
 			$table->softDeletes();
 		});
+
+		Schema::create('edition_film', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('edition_id')->constrained()->onDelete('cascade');
+			$table->foreignId('film_id')->constrained()->onDelete('cascade');
+			$table->timestamps();
+		});
+
+		Schema::create('activity_edition', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('edition_id')->constrained()->onDelete('cascade');
+			$table->foreignId('activity_id')->constrained()->onDelete('cascade');
+			$table->timestamps();
+		});
 	}
 
 	public function down(): void
 	{
 		Schema::dropIfExists('editions');
+		Schema::dropIfExists('edition_film');
+		Schema::dropIfExists('activity_edition');
 	}
 };

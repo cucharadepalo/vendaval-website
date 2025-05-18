@@ -10,7 +10,6 @@ return new class extends Migration
 	{
 		Schema::create('films', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('edition_id')->nullable();
 
 			$table->string('title', 191)->index();
 			$table->string('director', 191);

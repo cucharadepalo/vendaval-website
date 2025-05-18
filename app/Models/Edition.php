@@ -13,7 +13,9 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -51,17 +53,17 @@ class Edition extends Model implements HasMedia
 	/**
 	 * Get the films of the edition.
 	 */
-	public function films(): HasMany
+	public function films(): BelongsToMany
 	{
-		return $this->hasMany(Film::class);
+		return $this->belongsToMany(Film::class);
 	}
 
 	/**
 	 * Get the activities of the edition.
 	 */
-	public function activities(): HasMany
+	public function activities(): BelongsToMany
 	{
-		return $this->hasMany(Activity::class);
+		return $this->belongsToMany(Activity::class);
 	}
 
 	/**

@@ -10,7 +10,6 @@ return new class extends Migration
 	{
 		Schema::create('activities', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('edition_id');
 
 			$table->string('title', 191)->index();
 			$table->string('summary');

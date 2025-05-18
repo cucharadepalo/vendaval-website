@@ -55,17 +55,19 @@ class FilmResource extends Resource
 					->translateLabel(),
 				TextColumn::make('year')
 					->translateLabel(),
-				TextColumn::make('edition.name')
-					->label('Edición'),
+				TextColumn::make('editions.name')
+					->label('Edición(s)')
+					->listWithLineBreaks()
+    			->badge(),
 				TextColumn::make('schedules.start_time')
 					->listWithLineBreaks()
 					->dateTime('j / F / Y — H:i')
 					->label('Proxeccións'),
 			])
 			->filters([
-				SelectFilter::make('edition')
-					->label('Edición')
-					->relationship('edition', 'name')
+				SelectFilter::make('editions')
+					->label('Edicións')
+					->relationship('editions', 'name')
 			])
 			->actions([
 				Tables\Actions\EditAction::make(),

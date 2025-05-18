@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -44,9 +46,9 @@ class Activity extends Model implements HasMedia
 	/**
 	 * Get the activity edition.
 	 */
-	public function edition(): BelongsTo
+	public function editions(): BelongsToMany
 	{
-		return $this->belongsTo(Edition::class);
+		return $this->belongsToMany(Edition::class);
 	}
 
 	/**
@@ -59,15 +61,30 @@ class Activity extends Model implements HasMedia
 				->schema([
 					Section::make()
 						->columnSpan(3)
+						->columns(2)
 						->schema([
+							Select::make('editions')
+								->label('Edición(s) da Mostra')
+								->multiple()
+								->relationship(titleAttribute: 'name')
+								->default(function () {
+									$active_edition = Edition::where('is_active', 1)->first();
+									return $active_edition ? $active_edition->id : null;
+								})
+								->searchable(false)
+								->preload()
+								->required()
+								->columnSpan(1),
 							TextInput::make('title')
 								->required()
 								->maxLength(191)
-								->translateLabel(),
+								->translateLabel()
+								->columnSpanFull(),
 							Textarea::make('summary')
 								->required()
 								->maxLength(255)
-								->translateLabel(),
+								->translateLabel()
+								->columnSpanFull(),
 							MarkdownEditor::make('text')
 								->disableToolbarButtons([
 									'attachFiles',
@@ -75,7 +92,8 @@ class Activity extends Model implements HasMedia
 									'strike'
 								])
 								->minHeight('20rem')
-								->translateLabel(),
+								->translateLabel()
+								->columnSpanFull(),
 						]),
 					Section::make()
 						->columnSpan(2)
