@@ -17,6 +17,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class EditionResource extends Resource
 {
@@ -44,7 +45,14 @@ class EditionResource extends Resource
 			->columns([
 				SpatieMediaLibraryImageColumn::make('splash')
 					->collection('splash')
+					->filterMediaUsing(
+						fn(Collection $media): Collection => $media->where(
+							'custom_properties.version', 'landscape'
+						)
+					)
 					->conversion('thumb')
+					->width(150)
+					->height(100)
 					->label('Deseño'),
 				TextColumn::make('name')
 					->size(TextColumn\TextColumnSize::Large)

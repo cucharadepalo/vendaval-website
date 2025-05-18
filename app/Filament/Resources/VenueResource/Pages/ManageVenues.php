@@ -8,13 +8,12 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageVenues extends ManageRecords
 {
-    protected static string $resource = VenueResource::class;
+	protected static string $resource = VenueResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make()
-                ->slideOver(),
-        ];
-    }
+	protected function getHeaderActions(): array
+	{
+		return [
+			Actions\CreateAction::make(),
+		];
+	}
 }

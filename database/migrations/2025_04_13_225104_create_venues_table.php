@@ -14,8 +14,10 @@ return new class extends Migration
 			$table->string('town', 191);
 			$table->string('map', 255)->nullable();
 			$table->string('address', 191)->nullable();
-			$table->text('text')->nullable();
 			$table->string('website')->nullable();
+			$table->boolean('has_page')->default(false);
+			$table->text('content')->nullable();
+			$table->boolean('in_menu')->default(false);
 			$table->timestamps();
 		});
 	}

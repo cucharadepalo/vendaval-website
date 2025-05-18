@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
 			'end_date' => Carbon::create(2024, 8, 25, 0, 0, 0),
 			'title' => '1ª Mostra de cinema portugués da Ribeira Sacra',
 			'is_active' => true,
+			'colors' => config('custom.edition.default_colors')
 		]);
 
 		Film::factory()->create([
@@ -93,12 +94,14 @@ class DatabaseSeeder extends Seeder
 			'text' => 'A partir do visionamento atento da curtametraxe “O Casaco Rosa” (O Abrigo Rosa), unha animación musical e política sobre un abrigo rosa sempre con un as na manga, o colectivo FITA – Cinema com olhos de ver impartirá un taller para nenos, nenas e xoves a partir dos 8 anos. Nun exercicio intuitivo e lúdico, escudriñaranse as claves narrativas do filme e xogarase a criar unha escena con algunhas personaxes da historia portuguesa. O taller será impartido en galego e portugués.\n\nFITA – Cinema com olhos de ver é un colectivo educativo que nace có obxectivo de fomentar a curiosidade e a creatividade a través de un ollar atento sobre o cinema e a animación. Crendo na educación como motor de cambio e na paixón como vehículo para a aprendizaxe, Marta Ramírez Cores e Tamara González xuntaron os seus coñecementos en ilustración, deseño, cinema e pedagoxía neste proxecto de educación informal baseado na creatividade, a exploración persoal e a experiencia propia.',
 		]);
 
-		Venue::factory()->create([
+		Venue::create([
 			'name' => 'A Casa da Memoria',
 			'town' => 'Xullán, Bóveda',
 			'address' => 'Rúa Maior, 1. Xullán, Bóveda 27343 Lugo',
 			'map' => 'https://www.google.com/maps/place/Casa+da+memoria/@42.6392777,-7.4717012,17z/data=!3m1!4b1!4m6!3m5!1s0xd303f99e14d7301:0xdd44240b739d5051!8m2!3d42.6392738!4d-7.4691263!16s%2Fg%2F11sw2wf03p!5m1!1e4?hl=gl-ES&entry=ttu',
-			'website' => 'https://acasadamemoria.com'
+			'website' => 'https://acasadamemoria.com',
+			'has_page' => false,
+			'in_menu' => false
 		]);
 
 		DB::table('media')->insert([

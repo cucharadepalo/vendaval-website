@@ -8,5 +8,5 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateEdition extends CreateRecord
 {
-    protected static string $resource = EditionResource::class;
+	protected static string $resource = EditionResource::class;
 }

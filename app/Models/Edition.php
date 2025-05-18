@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -37,9 +42,22 @@ class Edition extends Model implements HasMedia
 	{
 		return [
 			'start_date' => 'datetime',
-			'end_date' => 'datetime'
+			'end_date' => 'datetime',
+			'colors' => 'array'
 		];
 	}
+
+	/**
+	 * The model's default values for attributes.
+	 *
+	 * @var array
+	 */
+	// protected $attributes = [
+	// 	'colors' => '{
+	// 			"main_bg": "#166164",
+	// 			"main_text": "#FFFFFF"
+	// 		}'
+	// ];
 
 	/**
 	 * Get the films of the edition.
@@ -62,7 +80,7 @@ class Edition extends Model implements HasMedia
 	 */
 	public function registerMediaCollections(): void
 	{
-    $this->addMediaCollection('splash')
+		$this->addMediaCollection('splash')
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 
 		$this->addMediaCollection('og')
@@ -90,42 +108,50 @@ class Edition extends Model implements HasMedia
 			Grid::make(5)
 				->schema([
 					Section::make()
-						->columnSpan(2)
-						->columns(2)
+						->columnSpanFull()
+						->columns(5)
 						->schema([
 							TextInput::make('name')
 								->required()
 								->maxLength(191)
 								->label('Nome / Identificador / Ano')
 								->placeholder('2025')
-								->columnSpanFull(),
+								->columnSpan(1),
 							TextInput::make('title')
 								->maxLength(191)
 								->label('Título')
 								->placeholder('1º Mostra de Cinema Portugués...')
-								->columnSpanFull(),
+								->columnSpan(2),
 							DatePicker::make('start_date')
 								->native(false)
 								->locale('es')
 								->required()
 								->label('Data de inicio')
+								->columnSpan(1)
 								->displayFormat('j / F / Y'),
 							DatePicker::make('end_date')
 								->native(false)
 								->locale('es')
 								->required()
 								->label('Data final')
+								->columnSpan(1)
 								->displayFormat('j / F / Y')
 						]),
 					Section::make('Deseño')
-						->columnSpan(3)
-						->columns(2)
+						->columnSpanFull()
+						->columns(5)
 						->schema([
 							SpatieMediaLibraryFileUpload::make('landscape_splash')
-								->label('Imaxe desktop')
+								->label('Imaxe horizontal')
 								->disk('media')
 								->collection('splash')
 								->customProperties(['version' => 'landscape'])
+								->filterMediaUsing(
+									fn(Collection $media, Get $get): Collection => $media->where(
+										'custom_properties.version',
+										'landscape'
+									)
+								)
 								->maxSize(2048)
 								->required()
 								->panelAspectRatio('3:2')
@@ -134,8 +160,62 @@ class Edition extends Model implements HasMedia
 								->imageEditorMode(1)
 								->imageEditorViewportWidth(1200)
 								->imageEditorViewportHeight(800)
+								->columnSpan(3)
+								->hint('1200×800px'),
+							SpatieMediaLibraryFileUpload::make('portrait_splash')
+								->label('Imaxe vertical')
+								->disk('media')
+								->collection('splash')
+								->customProperties(['version' => 'portrait'])
+								->filterMediaUsing(
+									fn(Collection $media, Get $get): Collection => $media->where(
+										'custom_properties.version',
+										'portrait'
+									)
+								)
+								->maxSize(2048)
+								->required()
+								->panelAspectRatio('1:1.015')
+								->image()
+								->imageEditor()
+								->imageEditorMode(1)
+								->imageEditorViewportWidth(800)
+								->imageEditorViewportHeight(1200)
+								->columnSpan(2)
+								->hint('800×1200px'),
+							TextInput::make('splash_alt_text')
+								->label('Texto alternativo das imaxes')
+								->required()
 								->columnSpanFull()
-								->placeholder('Arrastra e solta o teu ficheiro ou faz click')
+								->helperText('Se as imaxes conteñen texto, escríbeo aquí para as tecnoloxías de asistencia. Se non, describe a imaxe')
+								->maxLength(191)
+								->hint('alt text'),
+							SpatieMediaLibraryFileUpload::make('og_image')
+								->label('Imaxe RRSS')
+								->disk('media')
+								->collection('og')
+								->maxSize(2048)
+								->panelAspectRatio('1.9:1')
+								->hint('1200×630px')
+								->image()
+								->columnSpan(3)
+								->helperText('Esta é a imaxe que se verá cando a páxina se comparta nas redes sociais.'),
+							Repeater::make('colors')
+								->label('Cores')
+								->columnSpan(2)
+								->schema([
+									TextInput::make('name')
+										->label('Nome')
+										->readonly(),
+									ColorPicker::make('color')
+										->regex('/^#([a-f0-9]{6}|[a-f0-9]{3})\b$/')
+										->label('Cor')
+								])
+								->columns(2)
+								->default(config('custom.edition.default_colors'))
+								->addable(false)
+								->deletable(false)
+								->reorderable(false)
 						])
 				])
 		];
