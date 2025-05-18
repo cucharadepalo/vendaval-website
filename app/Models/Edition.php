@@ -11,6 +11,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Get;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -48,18 +49,6 @@ class Edition extends Model implements HasMedia
 	}
 
 	/**
-	 * The model's default values for attributes.
-	 *
-	 * @var array
-	 */
-	// protected $attributes = [
-	// 	'colors' => '{
-	// 			"main_bg": "#166164",
-	// 			"main_text": "#FFFFFF"
-	// 		}'
-	// ];
-
-	/**
 	 * Get the films of the edition.
 	 */
 	public function films(): HasMany
@@ -90,7 +79,6 @@ class Edition extends Model implements HasMedia
 
 	/**
 	 * Generate thumbnail media conversion for Spatie media library.
-	 *
 	 */
 	public function registerMediaConversions(?Media $media = null): void
 	{

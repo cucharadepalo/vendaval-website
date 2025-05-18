@@ -53,12 +53,10 @@ class VenueResource extends Resource
 					->url(fn(Venue $record): string|null => $record->map)
 					->openUrlInNewTab()
 					->translateLabel(),
-				IconColumn::make('website')
-					->icon('bx-link-alt')
+				IconColumn::make('has_page')
+					->icon('bx-check-circle')
 					->color('primary')
-					->url(fn(Venue $record): string|null => $record->website)
-					->openUrlInNewTab()
-					->translateLabel(),
+					->Label('Páxina propia'),
 			])
 			->filters([
 				//

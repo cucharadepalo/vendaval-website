@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -54,22 +55,22 @@ class FilmResource extends Resource
 					->translateLabel(),
 				TextColumn::make('year')
 					->translateLabel(),
+				TextColumn::make('edition.name')
+					->label('Edición'),
 				TextColumn::make('schedules.start_time')
 					->listWithLineBreaks()
 					->dateTime('j / F / Y — H:i')
 					->label('Proxeccións'),
 			])
 			->filters([
-				//
+				SelectFilter::make('edition')
+					->label('Edición')
+					->relationship('edition', 'name')
 			])
 			->actions([
 				Tables\Actions\EditAction::make(),
 			])
-			->bulkActions([
-				Tables\Actions\BulkActionGroup::make([
-					Tables\Actions\DeleteBulkAction::make(),
-				]),
-			]);
+			->bulkActions([]);
 	}
 
 	public static function getRelations(): array

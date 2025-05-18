@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -67,6 +69,15 @@ class Film extends Model implements HasMedia
 						->columnSpan(3)
 						->columns(2)
 						->schema([
+							Select::make('edition_id')
+								->label('Edición da Mostra')
+								->relationship(name: 'edition', titleAttribute: 'name')
+								->default(function () {
+									$active_edition = Edition::where('is_active', 1)->first();
+									return $active_edition ? $active_edition->id : null;
+								})
+								->required()
+								->columnSpan(1),
 							TextInput::make('title')
 								->required()
 								->maxLength(191)
@@ -115,7 +126,8 @@ class Film extends Model implements HasMedia
 						->schema([
 							SpatieMediaLibraryFileUpload::make('poster')
 								->collection('poster')
-								->conversion('preview'),
+								->conversion('preview')
+								->panelAspectRatio('2:3'),
 							SpatieMediaLibraryFileUpload::make('still')
 								->collection('stills')
 								->multiple()
@@ -149,7 +161,7 @@ class Film extends Model implements HasMedia
 	public function registerMediaConversions(?Media $media = null): void
 	{
 		$this->addMediaConversion('preview')
-			->fit(Fit::Contain, 300, 300)
+			->fit(Fit::Contain, 427, 640)
 			->nonQueued();
 	}
 }

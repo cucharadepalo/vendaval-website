@@ -24,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
 		Relation::enforceMorphMap([
 			'film' => 'App\Models\Film',
 			'activity' => 'App\Models\Activity',
-			'edition' => 'App\Models\Edition'
+			'edition' => 'App\Models\Edition',
+			'venue' => 'App\Models\Venue'
 		]);
 	}
 }
