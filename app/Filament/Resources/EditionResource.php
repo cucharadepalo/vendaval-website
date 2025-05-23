@@ -25,7 +25,7 @@ class EditionResource extends Resource
 
 	protected static ?string $navigationIcon = 'bx-play-circle';
 
-	protected static ?string $activeNavigationIcon = 'bx-caret-right';
+	protected static ?string $activeNavigationIcon = 'bxs-caret-right-circle';
 
 	protected static ?string $navigationLabel = 'Edicións';
 

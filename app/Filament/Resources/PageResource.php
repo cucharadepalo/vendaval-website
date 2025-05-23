@@ -15,50 +15,52 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PageResource extends Resource
 {
-    protected static ?string $model = Page::class;
+	protected static ?string $model = Page::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+	protected static ?string $navigationIcon = 'bx-layer';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
+	protected static ?string $activeNavigationIcon = 'bxs-layer';
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+	public static function form(Form $form): Form
+	{
+		return $form
+			->schema([
+				//
+			]);
+	}
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+	public static function table(Table $table): Table
+	{
+		return $table
+			->columns([
+				//
+			])
+			->filters([
+				//
+			])
+			->actions([
+				Tables\Actions\EditAction::make(),
+			])
+			->bulkActions([
+				Tables\Actions\BulkActionGroup::make([
+					Tables\Actions\DeleteBulkAction::make(),
+				]),
+			]);
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListPages::route('/'),
-            'create' => Pages\CreatePage::route('/create'),
-            'edit' => Pages\EditPage::route('/{record}/edit'),
-        ];
-    }
+	public static function getRelations(): array
+	{
+		return [
+			//
+		];
+	}
+
+	public static function getPages(): array
+	{
+		return [
+			'index' => Pages\ListPages::route('/'),
+			'create' => Pages\CreatePage::route('/create'),
+			'edit' => Pages\EditPage::route('/{record}/edit'),
+		];
+	}
 }

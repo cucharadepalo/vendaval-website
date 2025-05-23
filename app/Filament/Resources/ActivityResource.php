@@ -3,19 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ActivityResource\Pages;
-use App\Filament\Resources\ActivityResource\RelationManagers;
 use App\Models\Activity;
-use App\Models\Schedule;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Support\Enums\FontWeight;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ActivityResource extends Resource
 {
@@ -54,13 +50,19 @@ class ActivityResource extends Resource
 					->weight(FontWeight::Bold)
 					->description(fn(Activity $item): string => $item->summary)
 					->translateLabel(),
+				TextColumn::make('editions.name')
+					->label('Edicion(s')
+					->listWithLineBreaks()
+					->badge(),
 				TextColumn::make('schedules.start_time')
 					->listWithLineBreaks()
 					->dateTime('j / F / Y — H:i')
 					->translateLabel(),
 			])
 			->filters([
-				//
+				SelectFilter::make('editions')
+					->label('Edicións')
+					->relationship('editions', 'name')
 			])
 			->actions([
 				Tables\Actions\EditAction::make(),

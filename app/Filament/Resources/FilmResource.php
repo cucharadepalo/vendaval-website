@@ -3,19 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FilmResource\Pages;
-use App\Filament\Resources\FilmResource\RelationManagers;
 use App\Models\Film;
-use App\Models\Schedule;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Support\Enums\FontWeight;
 
 class FilmResource extends Resource
 {

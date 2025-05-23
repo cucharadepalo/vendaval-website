@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Support\Enums\Alignment;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -76,8 +78,7 @@ class Film extends Model implements HasMedia
 									$active_edition = Edition::where('is_active', 1)->first();
 									return [$active_edition ? $active_edition->id : null];
 								})
-								->searchable(false)
-								->preload()
+								->options(Edition::all()->pluck('name', 'id'))
 								->required()
 								->columnSpan(1),
 							TextInput::make('title')
@@ -123,21 +124,28 @@ class Film extends Model implements HasMedia
 								->columnSpanFull()
 								->translateLabel(),
 						]),
-					Section::make()
+					Group::make()
 						->columnSpan(2)
 						->schema([
-							SpatieMediaLibraryFileUpload::make('poster')
-								->collection('poster')
-								->conversion('preview')
-								->panelAspectRatio('2:3'),
-							SpatieMediaLibraryFileUpload::make('still')
-								->collection('stills')
-								->multiple()
-								->conversion('preview'),
-							Repeater::make('schedules')
-								->label('Proxeccións')
-								->relationship()
-								->schema(Schedule::getForm())
+							Section::make()
+								->schema([
+									SpatieMediaLibraryFileUpload::make('poster')
+										->collection('poster')
+										->conversion('preview'),
+									SpatieMediaLibraryFileUpload::make('stills')
+										->collection('stills')
+										->multiple()
+										->conversion('preview')
+							]),
+							Section::make()
+								->schema([
+									Repeater::make('schedules')
+										->label('Proxeccións')
+										->relationship()
+										->addActionAlignment(Alignment::Start)
+										->addActionLabel('Añadir proxección')
+										->schema(Schedule::getForm())
+								])
 						])
 				])
 		];

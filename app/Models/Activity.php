@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
+use Filament\Support\Enums\Alignment;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Image\Enums\Fit;
@@ -69,10 +71,9 @@ class Activity extends Model implements HasMedia
 								->relationship(titleAttribute: 'name')
 								->default(function () {
 									$active_edition = Edition::where('is_active', 1)->first();
-									return $active_edition ? $active_edition->id : null;
+									return [$active_edition ? $active_edition->id : null];
 								})
-								->searchable(false)
-								->preload()
+								->options(Edition::all()->pluck('name', 'id'))
 								->required()
 								->columnSpan(1),
 							TextInput::make('title')
@@ -95,16 +96,24 @@ class Activity extends Model implements HasMedia
 								->translateLabel()
 								->columnSpanFull(),
 						]),
-					Section::make()
+					Group::make()
 						->columnSpan(2)
 						->schema([
-							SpatieMediaLibraryFileUpload::make('image')
-								->conversion('preview')
-								->translateLabel(),
-							Repeater::make('schedules')
-								->label('Sesións')
-								->relationship()
-								->schema(Schedule::getForm())
+							Section::make()
+								->schema([
+									SpatieMediaLibraryFileUpload::make('image')
+										->conversion('preview')
+										->translateLabel()
+								]),
+							Section::make()
+								->schema([
+								Repeater::make('schedules')
+										->label('Sesións')
+										->relationship()
+										->addActionAlignment(Alignment::Start)
+										->addActionLabel('Añadir sesión')
+										->schema(Schedule::getForm())
+								])
 						])
 				])
 		];
