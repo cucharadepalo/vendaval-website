@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
 			->default()
 			->id('admin')
 			->path('admin')
-			->domain('admin.vendaval.test')
+			// ->domain('admin.vendaval.test')
 			->login()
 			->brandLogo(fn () => view('filament.admin.logo'))
 			->colors([
