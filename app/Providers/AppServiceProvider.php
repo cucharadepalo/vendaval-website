@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\View\Composers\EditionComposer;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
 			'edition' => 'App\Models\Edition',
 			'venue' => 'App\Models\Venue'
 		]);
+
+		Facades\View::composer('*', EditionComposer::class);
 	}
 }

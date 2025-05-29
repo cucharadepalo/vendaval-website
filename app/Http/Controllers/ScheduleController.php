@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Edition;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class HomeController extends Controller
+class ScheduleController extends Controller
 {
 	/**
 	 * Create a new schedule controller.
@@ -17,10 +18,10 @@ class HomeController extends Controller
 	}
 
 	/**
-	 * Handle the incoming request.
+	 * Show the Schedule list page.
 	 */
-	public function __invoke(Request $request)
+	public function index(Request $request): View
 	{
-		return view('home');
+		return view('schedule.index');
 	}
 }

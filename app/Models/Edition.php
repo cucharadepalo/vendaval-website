@@ -6,6 +6,7 @@ use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -64,6 +65,15 @@ class Edition extends Model implements HasMedia
 	public function activities(): BelongsToMany
 	{
 		return $this->belongsToMany(Activity::class);
+	}
+
+	/**
+	 * Scope a query to only include popular users.
+	 */
+	#[Scope]
+	protected function active(Builder $query): void
+	{
+		$query->where('is_active', 1);
 	}
 
 	/**
@@ -147,7 +157,9 @@ class Edition extends Model implements HasMedia
 								->panelAspectRatio('3:2')
 								->image()
 								->imageEditor()
-								->imageEditorMode(1)
+								->imageEditorEmptyFillColor(function (Edition $record): null | string {
+									return $record->colors[0]['color'];
+								})
 								->imageEditorViewportWidth(1200)
 								->imageEditorViewportHeight(800)
 								->columnSpan(3)
@@ -168,7 +180,9 @@ class Edition extends Model implements HasMedia
 								->panelAspectRatio('1:1.015')
 								->image()
 								->imageEditor()
-								->imageEditorMode(1)
+								->imageEditorEmptyFillColor(function (Edition $record): null | string {
+									return $record->colors[0]['color'];
+								})
 								->imageEditorViewportWidth(800)
 								->imageEditorViewportHeight(1200)
 								->columnSpan(2)
@@ -197,6 +211,7 @@ class Edition extends Model implements HasMedia
 									TextInput::make('name')
 										->label('Nome')
 										->readonly(),
+									Hidden::make('variable'),
 									ColorPicker::make('color')
 										->regex('/^#([a-f0-9]{6}|[a-f0-9]{3})\b$/')
 										->label('Cor')
