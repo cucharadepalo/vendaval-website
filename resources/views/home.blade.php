@@ -4,7 +4,7 @@
 
 @section('content')
 	<main>
-		<section id="splash" class="w-full pt-16 pb-6 bg-cover bg-no-repeat bg-right-top xl:py-30" style="background-image: url({{ $splash_portrait->getFullUrl() }})">
+		<section id="splash" class="w-full pt-16 pb-6 bg-cover bg-no-repeat bg-right-top text-(--vdl-splash-txt-color) xl:py-30" @isset($splash)style="background-image: url({{ $splash->getFullUrl() }})"@endisset>
 			<div class="w-full px-6 max-w-7xl mx-auto xl:grid xl:grid-cols-3 xl:gap-12">
 				<div class="col-span-2">
 					<h1><span class="splash-title">Vendaval</span> <span class="splash-subtitle">{{ $edition->title }}</span> <span class="splash-place">Ribeira Sacra</span></h1>
@@ -37,5 +37,4 @@
 			</div>
 		</section>
 	</main>
-
 @endsection

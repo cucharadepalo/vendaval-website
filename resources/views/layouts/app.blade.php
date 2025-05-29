@@ -8,19 +8,11 @@
 	<link rel="preload" href="https://use.typekit.net/kdg6lzn.css" as="style">
 	<link href="https://use.typekit.net/kdg6lzn.css" rel="stylesheet">
 	<link href="https://fonts.bunny.net/css?family=ibm-plex-sans|ibm-plex-sans-condensed" rel="stylesheet">
-	@vite(['resources/css/app.css', 'resources/js/app.js'])
+	<link href="{{ Vite::asset('resources/css/app.css') }}" rel="stylesheet">
 
-	@if ($edition && $edition->colors)
-		<style>
-			:root {
-				@foreach($edition->colors as $color)
-					{{ $color['variable'] }}: {{ $color['color'] }};
-				@endforeach
-			}
-		</style>
-	@endif
+	{!! printCssVariables($edition->colors) !!}
 </head>
-<body class="bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color)">
-	@yield('content')
+<body class="bg-(--vdl-bg-color) text-(--vdl-txt-color)">
+@yield('content')
 </body>
 </html>

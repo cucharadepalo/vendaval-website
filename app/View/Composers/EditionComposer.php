@@ -21,9 +21,8 @@ class EditionComposer
 	 */
 	public function compose(View $view): void
 	{
-		$splash_portrait = $this->edition->getMedia('splash', ['version' => 'portrait'])->first();
-		$splash_landscape = $this->edition->getMedia('splash', ['version' => 'landscape'])->first();
+		$splash = $this->edition->getMedia('splash')->first();
 
-		$view->with(['edition' => $this->edition, 'splash_landscape' => $splash_landscape, 'splash_portrait' => $splash_portrait ]);
+		$view->with(['edition' => $this->edition, 'splash' => $splash ]);
 	}
 }
