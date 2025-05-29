@@ -52,8 +52,8 @@ return [
 			'root' => storage_path('app/media'),
 			'url' => env('APP_URL') . '/media',
 			'visibility' => 'public',
-			'throw' => false,
-			'report' => false,
+			'throw' => true,
+			'report' => true,
 		],
 
 		's3' => [

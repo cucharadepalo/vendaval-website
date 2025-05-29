@@ -10,6 +10,9 @@
 	--font-sans-condensed: "IBM Plex Sans Condensed", "Roboto Condensed",
 		ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
 		"Segoe UI Symbol", "Noto Color Emoji";
+	--font-brand: cofo-peshka-variable, "IBM Plex Sans Condensed", "Roboto Condensed",
+		ui-sans-serif, system-ui, sans-serif;
+	--font-brand--font-variation-settings: "slnt" 0, "wdth" 62.5, "wght" 700;
 
 	--color-zinc-50: #fafafa;
 	--color-zinc-100: #f5f5f5;
@@ -37,4 +40,15 @@
 }
 
 @layer base {
+}
+
+@layer components {
+	.splash-title {
+		@apply font-brand tracking-wide leading-[0.75] antialiased;
+		font-size: clamp(4rem, 25vw, 14rem);
+	}
+	.splash-subtitle {
+		@apply font-brand tracking-wide leading-none;
+		font-size: clamp(2rem, 8vw, 4rem);
+	}
 }
