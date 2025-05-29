@@ -44,11 +44,15 @@
 
 @layer components {
 	.splash-title {
-		@apply font-brand tracking-wide leading-[0.75] antialiased;
-		font-size: clamp(4rem, 25vw, 14rem);
+		@apply block font-brand tracking-wide leading-[0.75] antialiased;
+		font-size: clamp(4rem, 25vw, 11.25rem);
 	}
 	.splash-subtitle {
-		@apply font-brand tracking-wide leading-none;
-		font-size: clamp(2rem, 8vw, 4rem);
+		@apply block font-brand tracking-wide leading-none;
+		font-size: clamp(2rem, 8vw, 3.25rem);
+	}
+	.splash-place {
+		@apply block font-brand tracking-wide leading-none;
+		font-size: clamp(2rem, 8vw, 3.25rem);
 	}
 }

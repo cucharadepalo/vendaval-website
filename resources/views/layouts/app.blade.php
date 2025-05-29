@@ -20,7 +20,7 @@
 		</style>
 	@endif
 </head>
-<body class="bg-zinc-200">
+<body class="bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color)">
 	@yield('content')
 </body>
 </html>
