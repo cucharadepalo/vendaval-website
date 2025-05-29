@@ -32,16 +32,16 @@ class DatabaseSeeder extends Seeder
 			'name' => '2024',
 			'start_date' => Carbon::create(2024, 8, 23, 0, 0, 0),
 			'end_date' => Carbon::create(2024, 8, 25, 0, 0, 0),
-			'title' => '1ª Mostra de cinema portugués da Ribeira Sacra',
+			'title' => '1ª Mostra de Cinema Portugués',
 			'is_active' => false,
 			'colors' => config('custom.edition.default_colors')
 		]);
 
 		$edition_2 = Edition::create([
-			'name' => '2024 Inverno',
-			'start_date' => Carbon::create(2024, 11, 10, 0, 0, 0),
-			'end_date' => Carbon::create(2024, 11, 12, 0, 0, 0),
-			'title' => '1ª Mostra de cinema portugués da Ribeira Sacra',
+			'name' => '2025',
+			'start_date' => Carbon::create(2025, 08, 20, 0, 0, 0),
+			'end_date' => Carbon::create(2025, 08, 24, 0, 0, 0),
+			'title' => '2ª Mostra de Cinema Portugués',
 			'is_active' => true,
 			'colors' => config('custom.edition.default_colors')
 		]);
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
 			'language' => 'PT',
 			'version' => 'Versión orixinal subtitulada ao español',
 			'duration' => '01:00:00',
-			'text' => 'Unha centena de cartas, escritas por mulleres portuguesas en 1958, foran encontradas por casualidade por un coleccionador de libros e documentos antigos, que non as leu por pensar que eran cartas de amor. As cartas respondían a unha circular enviada por un misterioso “Movimento de Apoio à Ditadura” do cal non hai ningunha referencia nos libros de Historia. A circular orixinal nunca foi encontrada, pero, polas respostas, enténdese que era un convite para que as mulleres se mobilizasen en nome da paz, da orde e, sobre todo, en defensa do “salvador da patria”: António de Oliveira Salazar (1889-1970).\n\nPremio á Mellor Longametraxe Nacional no DocLisboa (2006), Fipa de Prata no FipaDoc (2007), premio do Público na Mostra de Cinema de São Paulo (2007) e premio Femina Rio de Janeiro (2008).'
+			'text' => '<p>Unha centena de cartas, escritas por mulleres portuguesas en 1958, foran encontradas por casualidade por un coleccionador de libros e documentos antigos, que non as leu por pensar que eran cartas de amor. As cartas respondían a unha circular enviada por un misterioso “Movimento de Apoio à Ditadura” do cal non hai ningunha referencia nos libros de Historia. A circular orixinal nunca foi encontrada, pero, polas respostas, enténdese que era un convite para que as mulleres se mobilizasen en nome da paz, da orde e, sobre todo, en defensa do “salvador da patria”: António de Oliveira Salazar (1889-1970).</p><p>Premio á Mellor Longametraxe Nacional no DocLisboa (2006), Fipa de Prata no FipaDoc (2007), premio do Público na Mostra de Cinema de São Paulo (2007) e premio Femina Rio de Janeiro (2008).</p>'
 		]);
 
 		$film_2 = Film::factory()->create([
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
 			'language' => 'PT',
 			'version' => 'Versión orixinal subtitulada ao español',
 			'duration' => '01:33:00',
-			'text' => 'O que pode unha fotografía de un rostro revelar sobre un sistema político? O que pode unha imaxe tirada fai mais de 35 anos dicir sobre a nosa actualidade?\n\nPartindo de un núcleo de fotografías do rexistro de prisioneiros políticos da ditadura portuguesa (1926-1974), 48 procura mostrar os mecanismos a través dos que un sistema autoritario se intentou auto perpetuar.\n\nGrande premio do Cinéma du reel (2010), premio Opus Bonum no festival de Jihlava (2010), Premio FIPRESCI no Dok Leipzig (2010), entre outros.'
+			'text' => '<p>O que pode unha fotografía de un rostro revelar sobre un sistema político? O que pode unha imaxe tirada fai mais de 35 anos dicir sobre a nosa actualidade?<\p><p>Partindo de un núcleo de fotografías do rexistro de prisioneiros políticos da ditadura portuguesa (1926-1974), 48 procura mostrar os mecanismos a través dos que un sistema autoritario se intentou auto perpetuar.<\p><p>Grande premio do Cinéma du reel (2010), premio Opus Bonum no festival de Jihlava (2010), Premio FIPRESCI no Dok Leipzig (2010), entre outros.<\p>'
 		]);
 
 		$film_3 = Film::factory()->create([
@@ -76,25 +76,25 @@ class DatabaseSeeder extends Seeder
 			'language' => 'PT',
 			'version' => 'Versión orixinal subtitulada ao español',
 			'duration' => '00:08:00',
-			'text' => 'No conforto do seu lar, Casaco Rosa cose e tortura os opositores do sistema. Baseado en Rosa Casaco, o inspector da PIDE (policía política portuguesa durante a ditadura) que foi xefe da brigada que asasinou ao Xeneral Humberto Delgado.'
+			'text' => '<p>No conforto do seu lar, Casaco Rosa cose e tortura os opositores do sistema. Baseado en Rosa Casaco, o inspector da PIDE (policía política portuguesa durante a ditadura) que foi xefe da brigada que asasinou ao Xeneral Humberto Delgado.<\p>'
 		]);
 
 		$activity_1 = Activity::factory()->create([
 			'title' => 'DJ Jufra',
 			'summary' => 'DJ set en vinilo de discográficas independientes dos anos 70 e bandas sonoras, ES',
-			'text' => 'DJ Jufra comezou a súa traxectoria artística no colectivo “La familia feliz”, na Compostela dos anos 90, pertencendo a varias formacións musicais, entre elas Taxi Driver e Hemisferio Izquierdo, formación coa que chegaría a gravar disco no programa Diario Pop de Radio 3. Máis tarde creou o seu propio proxecto musical baixo o nome de Almax, conseguido que unha das súas maquetas fose recoñecida como a segunda mellor maqueta do ano para a revista “Rock de Lux”. Destaca tamén o seu traballo como responsable dos teclados e samplers na banda Mequetrefe.DJ Jufra comezou a súa traxectoria artística no colectivo “La familia feliz”, na Compostela dos anos 90, pertencendo a varias formacións musicais, entre elas Taxi Driver e Hemisferio Izquierdo, formación coa que chegaría a gravar disco no programa Diario Pop de Radio 3. Máis tarde creou o seu propio proxecto musical baixo o nome de Almax, conseguido que unha das súas maquetas fose recoñecida como a segunda mellor maqueta do ano para a revista “Rock de Lux”. Destaca tamén o seu traballo como responsable dos teclados e samplers na banda Mequetrefe.\n\nNos últimos tempos compaxina a súa faceta de músico coa de DJ, realizando sesións en diferentes locais da noite galega baixo o alias de “DJ Jufra”, moitas delas có vinilo como protagonista, principalmente en Santiago de Compostela. Nas súas sesións intercámbianse os sons de Manchester, o pop-rock de discográficas independentes como Creation 4AD ou Rought Trade, os ecos dub de Bristol e o noise máis duro e tamén o máis delicado kraut, low-fi… Conta tamén con música de baile da década dos 80 e dos 90, en sesións máis comerciais e nostálxicas.',
+			'text' => '<p>DJ Jufra comezou a súa traxectoria artística no colectivo “La familia feliz”, na Compostela dos anos 90, pertencendo a varias formacións musicais, entre elas Taxi Driver e Hemisferio Izquierdo, formación coa que chegaría a gravar disco no programa Diario Pop de Radio 3. Máis tarde creou o seu propio proxecto musical baixo o nome de Almax, conseguido que unha das súas maquetas fose recoñecida como a segunda mellor maqueta do ano para a revista “Rock de Lux”. Destaca tamén o seu traballo como responsable dos teclados e samplers na banda Mequetrefe.DJ Jufra comezou a súa traxectoria artística no colectivo “La familia feliz”, na Compostela dos anos 90, pertencendo a varias formacións musicais, entre elas Taxi Driver e Hemisferio Izquierdo, formación coa que chegaría a gravar disco no programa Diario Pop de Radio 3. Máis tarde creou o seu propio proxecto musical baixo o nome de Almax, conseguido que unha das súas maquetas fose recoñecida como a segunda mellor maqueta do ano para a revista “Rock de Lux”. Destaca tamén o seu traballo como responsable dos teclados e samplers na banda Mequetrefe.<\p><p>Nos últimos tempos compaxina a súa faceta de músico coa de DJ, realizando sesións en diferentes locais da noite galega baixo o alias de “DJ Jufra”, moitas delas có vinilo como protagonista, principalmente en Santiago de Compostela. Nas súas sesións intercámbianse os sons de Manchester, o pop-rock de discográficas independentes como Creation 4AD ou Rought Trade, os ecos dub de Bristol e o noise máis duro e tamén o máis delicado kraut, low-fi… Conta tamén con música de baile da década dos 80 e dos 90, en sesións máis comerciais e nostálxicas.</p>',
 		]);
 
 		$activity_2 = Activity::factory()->create([
 			'title' => 'Fíos de Fado',
 			'summary' => 'Iria Estévez e Gonzo Piña',
-			'text' => 'Iria Estévez presenta Fíos de Fado, un concerto dinámico no que explora os distintos estilos de fado, poñéndoo en diálogo con outras músicas, como a cantiga galega e a música brasileira, entre outras, e ofrecendo unha visión ampla do que o fado supón, a partir daqueles aspectos que comparte con outros estilos musicais.',
+			'text' => '<p>Iria Estévez presenta Fíos de Fado, un concerto dinámico no que explora os distintos estilos de fado, poñéndoo en diálogo con outras músicas, como a cantiga galega e a música brasileira, entre outras, e ofrecendo unha visión ampla do que o fado supón, a partir daqueles aspectos que comparte con outros estilos musicais.<\p>',
 		]);
 
 		$activity_3 = Activity::factory()->create([
 			'title' => 'FITA – CINEMA COM OLHOS DE VER',
 			'summary' => 'Taller para nenos',
-			'text' => 'A partir do visionamento atento da curtametraxe “O Casaco Rosa” (O Abrigo Rosa), unha animación musical e política sobre un abrigo rosa sempre con un as na manga, o colectivo FITA – Cinema com olhos de ver impartirá un taller para nenos, nenas e xoves a partir dos 8 anos. Nun exercicio intuitivo e lúdico, escudriñaranse as claves narrativas do filme e xogarase a criar unha escena con algunhas personaxes da historia portuguesa. O taller será impartido en galego e portugués.\n\nFITA – Cinema com olhos de ver é un colectivo educativo que nace có obxectivo de fomentar a curiosidade e a creatividade a través de un ollar atento sobre o cinema e a animación. Crendo na educación como motor de cambio e na paixón como vehículo para a aprendizaxe, Marta Ramírez Cores e Tamara González xuntaron os seus coñecementos en ilustración, deseño, cinema e pedagoxía neste proxecto de educación informal baseado na creatividade, a exploración persoal e a experiencia propia.',
+			'text' => '<p>A partir do visionamento atento da curtametraxe “O Casaco Rosa” (O Abrigo Rosa), unha animación musical e política sobre un abrigo rosa sempre con un as na manga, o colectivo FITA &ndash; Cinema com olhos de ver impartirá un taller para nenos, nenas e xoves a partir dos 8 anos. Nun exercicio intuitivo e lúdico, escudriñaranse as claves narrativas do filme e xogarase a criar unha escena con algunhas personaxes da historia portuguesa. O taller será impartido en galego e portugués.<\p><p>FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxectivo de fomentar a curiosidade e a creatividade a través de un ollar atento sobre o cinema e a animación. Crendo na educación como motor de cambio e na paixón como vehículo para a aprendizaxe, Marta Ramírez Cores e Tamara González xuntaron os seus coñecementos en ilustración, deseño, cinema e pedagoxía neste proxecto de educación informal baseado na creatividade, a exploración persoal e a experiencia propia.<\p>',
 		]);
 
 		Venue::create([

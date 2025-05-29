@@ -82,6 +82,7 @@ class Edition extends Model implements HasMedia
 	public function registerMediaCollections(): void
 	{
 		$this->addMediaCollection('splash')
+			->singleFile()
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 
 		$this->addMediaCollection('og')
@@ -141,17 +142,10 @@ class Edition extends Model implements HasMedia
 						->columnSpanFull()
 						->columns(5)
 						->schema([
-							SpatieMediaLibraryFileUpload::make('landscape_splash')
-								->label('Imaxe horizontal')
+							SpatieMediaLibraryFileUpload::make('splash_bg')
+								->label('Imaxe de fondo')
 								->disk('media')
 								->collection('splash')
-								->customProperties(['version' => 'landscape'])
-								->filterMediaUsing(
-									fn(Collection $media, Get $get): Collection => $media->where(
-										'custom_properties.version',
-										'landscape'
-									)
-								)
 								->maxSize(2048)
 								->required()
 								->panelAspectRatio('3:2')
@@ -163,47 +157,7 @@ class Edition extends Model implements HasMedia
 								->imageEditorViewportWidth(1200)
 								->imageEditorViewportHeight(800)
 								->columnSpan(3)
-								->hint('1200×800px'),
-							SpatieMediaLibraryFileUpload::make('portrait_splash')
-								->label('Imaxe vertical')
-								->disk('media')
-								->collection('splash')
-								->customProperties(['version' => 'portrait'])
-								->filterMediaUsing(
-									fn(Collection $media, Get $get): Collection => $media->where(
-										'custom_properties.version',
-										'portrait'
-									)
-								)
-								->maxSize(2048)
-								->required()
-								->panelAspectRatio('1:1.015')
-								->image()
-								->imageEditor()
-								->imageEditorEmptyFillColor(function (Edition $record): null | string {
-									return $record->colors[0]['color'];
-								})
-								->imageEditorViewportWidth(800)
-								->imageEditorViewportHeight(1200)
-								->columnSpan(2)
-								->hint('800×1200px'),
-							TextInput::make('splash_alt_text')
-								->label('Texto alternativo das imaxes')
-								->required()
-								->columnSpanFull()
-								->helperText('Se as imaxes conteñen texto, escríbeo aquí para as tecnoloxías de asistencia. Se non, describe a imaxe')
-								->maxLength(191)
-								->hint('alt text'),
-							SpatieMediaLibraryFileUpload::make('og_image')
-								->label('Imaxe RRSS')
-								->disk('media')
-								->collection('og')
-								->maxSize(2048)
-								->panelAspectRatio('1.9:1')
-								->hint('1200×630px')
-								->image()
-								->columnSpan(3)
-								->helperText('Esta é a imaxe que se verá cando a páxina se comparta nas redes sociais.'),
+								->hint('~ 1200×800px'),
 							Repeater::make('colors')
 								->label('Cores')
 								->columnSpan(2)
@@ -220,7 +174,17 @@ class Edition extends Model implements HasMedia
 								->default(config('custom.edition.default_colors'))
 								->addable(false)
 								->deletable(false)
-								->reorderable(false)
+								->reorderable(false),
+							SpatieMediaLibraryFileUpload::make('og_image')
+								->label('Imaxe RRSS')
+								->disk('media')
+								->collection('og')
+								->maxSize(2048)
+								->panelAspectRatio('1.9:1')
+								->hint('1200×630px')
+								->image()
+								->columnSpan(3)
+								->helperText('Esta é a imaxe que se verá cando a páxina se comparta nas redes sociais.'),
 						])
 				])
 		];
