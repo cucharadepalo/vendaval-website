@@ -39,8 +39,8 @@ class DatabaseSeeder extends Seeder
 
 		$edition_2 = Edition::create([
 			'name' => '2025',
-			'start_date' => Carbon::create(2025, 08, 20, 0, 0, 0),
-			'end_date' => Carbon::create(2025, 08, 24, 0, 0, 0),
+			'start_date' => Carbon::create(2025, 8, 20, 0, 0, 0),
+			'end_date' => Carbon::create(2025, 8, 24, 0, 0, 0),
 			'title' => '2ª Mostra de Cinema Portugués',
 			'is_active' => true,
 			'colors' => config('custom.edition.default_colors')
