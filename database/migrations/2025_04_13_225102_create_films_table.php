@@ -15,7 +15,7 @@ return new class extends Migration
 			$table->string('director', 191);
 			$table->year('year')->nullable();
 			$table->string('genre', 191)->nullable();
-			$table->string('language', 191)->nullable();
+			$table->string('country', 191)->nullable();
 			$table->string('version', 191)->nullable();
 			$table->time('duration', precision: 0)->nullable();
 			$table->text('text');

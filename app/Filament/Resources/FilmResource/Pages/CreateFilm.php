@@ -35,7 +35,7 @@ class CreateFilm extends CreateRecord
 	 */
 	protected function handleRecordCreation(array $data): Model
 	{
-		$active_edition = Edition::active()->first();
+		$active_edition = Edition::where('is_active', 1)->first();
 		$data['edition_id'] = $active_edition ? $active_edition->id : null;
 
 		return static::getModel()::create($data);

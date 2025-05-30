@@ -106,7 +106,7 @@ class Film extends Model implements HasMedia
 								->maxValue(600)
 								->suffix('Minutos')
 								->translateLabel(),
-							TextInput::make('language')
+							TextInput::make('country')
 								->maxLength(191)
 								->placeholder('PT')
 								->translateLabel(),

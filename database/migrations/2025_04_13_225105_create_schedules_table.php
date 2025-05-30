@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->text('notes')->nullable();
 			$table->unsignedInteger('schedulable_id');
 			$table->string('schedulable_type');
+
 			$table->foreignId('venue_id');
 			$table->timestamps();
 		});
