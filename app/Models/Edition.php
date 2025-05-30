@@ -151,9 +151,6 @@ class Edition extends Model implements HasMedia
 								->panelAspectRatio('3:2')
 								->image()
 								->imageEditor()
-								->imageEditorEmptyFillColor(function (Edition $record): null | string {
-									return $record->colors[0]['color'];
-								})
 								->imageEditorViewportWidth(1200)
 								->imageEditorViewportHeight(800)
 								->columnSpan(3)
@@ -162,15 +159,14 @@ class Edition extends Model implements HasMedia
 								->label('Cores')
 								->columnSpan(2)
 								->schema([
-									TextInput::make('name')
-										->label('Nome')
-										->readonly(),
+									Hidden::make('name'),
 									Hidden::make('variable'),
 									ColorPicker::make('color')
-										->regex('/^#([a-f0-9]{6}|[a-f0-9]{3})\b$/')
+										->regex('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/')
 										->label('Cor')
 								])
-								->columns(2)
+								->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+								->grid(2)
 								->default(config('custom.edition.default_colors'))
 								->addable(false)
 								->deletable(false)
