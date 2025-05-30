@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Edition;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -22,6 +23,19 @@ class ScheduleController extends Controller
 	 */
 	public function index(Request $request): View
 	{
-		return view('schedule.index');
+		if (! $this->edition) {
+
+			return view('inactive');
+
+		} else {
+
+			$start_date = $this->edition->start_date;
+			$end_date = $this->edition->end_date;
+
+			$schedules = Schedule::whereBetween('start_time', [$start_date, $end_date])->get();
+
+			return view('schedule', compact(['schedules', 'start_date', 'end_date']));
+		}
+
 	}
 }
