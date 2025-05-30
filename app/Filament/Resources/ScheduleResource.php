@@ -7,6 +7,8 @@ use App\Filament\Resources\ScheduleResource\RelationManagers;
 use App\Models\Schedule;
 use Filament\Forms;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -29,7 +31,7 @@ class ScheduleResource extends Resource
 
 	protected static ?string $pluralModelLabel = 'sesiones';
 
-	protected static ?int $navigationSort = 5;
+	protected static ?int $navigationSort = 4;
 
 	public static function form(Form $form): Form
 	{
@@ -41,17 +43,23 @@ class ScheduleResource extends Resource
 	{
 		return $table
 			->columns([
-				TextColumn::make('venue.name')
-					->sortable()
-					->translateLabel(),
 				TextColumn::make('start_time')
 					->sortable()
 					->label('Data')
-					->dateTime('j / F / Y — H:i'),
+					->dateTime('j/m/Y H:i'),
+				TextColumn::make('venue.name')
+					->sortable()
+					->translateLabel(),
 				TextColumn::make('description')
 					->translateLabel(),
-				TextColumn::make('schedulable.title')
-					->label('Película / Actividade'),
+				TextColumn::make('films.title')
+					->limit(24)
+					->label('Película(s)')
+					->listWithLineBreaks(),
+				TextColumn::make('activities.title')
+					->limit(24)
+					->label('Actividade(s)')
+					->listWithLineBreaks()
 			])
 			->defaultSort('start_time', 'asc')
 			->filters([
@@ -59,6 +67,26 @@ class ScheduleResource extends Resource
 			])
 			->actions([
 				Tables\Actions\EditAction::make()
+					->form([
+						Section::make()
+							->schema(Schedule::getForm())
+							->columns(2),
+						Section::make()
+							->schema([
+								Select::make('films')
+									->label('Filmes')
+									->relationship(name: 'films', titleAttribute: 'title')
+									->multiple()
+									->preload(),
+								Select::make('activities')
+									->label('Actividades')
+									->relationship(name: 'activities', titleAttribute: 'title')
+									->multiple()
+									->preload()
+							])
+						->columns(2)
+
+					])
 					->slideOver(),
 				Tables\Actions\DeleteAction::make(),
 			])

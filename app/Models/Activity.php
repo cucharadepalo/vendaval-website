@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\MarkdownEditor;
@@ -15,6 +12,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
 use Filament\Support\Enums\Alignment;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Image\Enums\Fit;
@@ -40,9 +39,9 @@ class Activity extends Model implements HasMedia
 	/**
 	 * Get all of the activity's schedules.
 	 */
-	public function schedules(): MorphMany
+	public function schedules(): MorphToMany
 	{
-		return $this->morphMany(Schedule::class, 'schedulable');
+		return $this->morphToMany(Schedule::class, 'schedulable');
 	}
 
 	/**
