@@ -34,7 +34,7 @@ class EditFilm extends EditRecord
 	 */
 	protected function mutateFormDataBeforeSave(array $data): array
 	{
-		$data['duration'] = convertToHoursMins($data['duration']);
+		$data['duration'] = convertToHoursMinsSecs($data['duration']);
 
 		return $data;
 	}
