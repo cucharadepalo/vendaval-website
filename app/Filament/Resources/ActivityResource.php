@@ -8,6 +8,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -62,8 +63,13 @@ class ActivityResource extends Resource
 			->filters([
 				SelectFilter::make('editions')
 					->label('Edicións')
+					->placeholder('Todas')
 					->relationship('editions', 'name')
 			])
+			->persistFiltersInSession()
+			->filtersTriggerAction( function (Action $action) {
+				return $action->button()->label('Filtros');
+			})
 			->actions([
 				Tables\Actions\EditAction::make(),
 			])

@@ -5,7 +5,7 @@ use Carbon\Carbon;
 /**
  * Converts minutes to hh:mm format to store the value in a 'time' type column.
  */
-function convertToHoursMins(int $minutes, $format = '%02d:%02d')
+function convertToHoursMinsSecs(int $minutes, $format = '%02d:%02d:%02d')
 {
 	if ($minutes < 1) {
 		return;
@@ -13,18 +13,19 @@ function convertToHoursMins(int $minutes, $format = '%02d:%02d')
 
 	$hours = floor($minutes / 60);
 	$mins = $minutes % 60;
+	$secs = 0;
 
-	return sprintf($format, $hours, $mins);
+	return sprintf($format, $hours, $mins, $secs);
 }
 
 /**
- * Converts time in hh:mm format to minutes.
+ * Converts time in hh:mm or hh:mm:ss (ignores seconds) format to minutes.
  */
-function convertToMinutes(string $time)
+function convertToMinutes(string $time): int
 {
 	$time = explode(':', $time);
 
-	return ($time[0] * 60) + ($time[1]) + ($time[2] / 60);
+	return ($time[0] * 60) + ($time[1]);
 }
 
 /**

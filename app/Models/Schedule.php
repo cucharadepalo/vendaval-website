@@ -8,7 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Schedule extends Model
 {
@@ -50,11 +50,19 @@ class Schedule extends Model
 	}
 
 	/**
-	 * Get the parent schedulable model (Film or activity).
+	 * Get all the films with this schedule.
 	 */
-	public function schedulable(): MorphTo
+	public function films(): MorphToMany
 	{
-		return $this->morphTo();
+		return $this->morphedByMany(Film::class, 'schedulable');
+	}
+
+	/**
+	 * Get all the films with this schedule.
+	 */
+	public function activities(): MorphToMany
+	{
+		return $this->morphedByMany(Activity::class, 'schedulable');
 	}
 
 	/**

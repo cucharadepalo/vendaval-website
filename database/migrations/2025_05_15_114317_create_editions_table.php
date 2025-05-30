@@ -25,6 +25,7 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('edition_id')->constrained()->onDelete('cascade');
 			$table->foreignId('film_id')->constrained()->onDelete('cascade');
+
 			$table->timestamps();
 		});
 
@@ -32,6 +33,7 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('edition_id')->constrained()->onDelete('cascade');
 			$table->foreignId('activity_id')->constrained()->onDelete('cascade');
+
 			$table->timestamps();
 		});
 	}

@@ -17,7 +17,7 @@ return new class extends Migration
 			$table->string('genre', 191)->nullable();
 			$table->string('country', 191)->nullable();
 			$table->string('version', 191)->nullable();
-			$table->time('duration', precision: 0)->nullable();
+			$table->time('duration')->nullable();
 			$table->text('text');
 
 			$table->timestamps();
