@@ -9,6 +9,7 @@
 	<link href="https://use.typekit.net/kdg6lzn.css" rel="stylesheet">
 	<link href="https://fonts.bunny.net/css?family=ibm-plex-sans|ibm-plex-sans-condensed" rel="stylesheet">
 	<link href="{{ Vite::asset('resources/css/app.css') }}" rel="stylesheet">
+	<script src="{{ Vite::asset('resources/js/app.js') }}" defer></script>
 
 	{!! printCssVariables($edition->colors) !!}
 </head>

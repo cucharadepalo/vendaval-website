@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Edition;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class ScheduleController extends Controller
@@ -32,9 +34,27 @@ class ScheduleController extends Controller
 			$start_date = $this->edition->start_date;
 			$end_date = $this->edition->end_date;
 
-			$schedules = Schedule::whereBetween('start_time', [$start_date, $end_date])->get();
+			$squery = Schedule::whereBetween('start_time', [$start_date, $end_date])->get();
 
-			return view('schedule', compact(['schedules', 'start_date', 'end_date']));
+			if (! $squery->count()) {
+
+				return view('inactive');
+
+			} else {
+
+				// Agrupamos por días y horas
+				// OJO: Cualquier acto que empiece antes de las 2:01 de la mañana se agrupa con el dia anterior
+				$schedules = $squery->groupBy([function (Schedule $item, int $key) {
+					$day = Carbon::parse($item->start_time)->subHours(2);
+					return $day->startOfDay()->format('Y-m-d');
+				}, function (Schedule $item) {
+					return Carbon::createFromFormat('Y-m-d H:i:s', $item->start_time)->format('H:i');
+				}]);
+
+				return view('schedule', compact(['schedules', 'start_date', 'end_date']));
+
+			}
+
 		}
 
 	}

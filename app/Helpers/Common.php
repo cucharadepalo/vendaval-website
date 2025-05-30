@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /**
  * Converts minutes to hh:mm format to store the value in a 'time' type column.
  */
@@ -43,4 +45,24 @@ function printCssVariables(array $vars = []): string
 	}
 
 	return $output;
+}
+
+/**
+ * Devuelve el día de la semana en string de tres letras en galego
+ * a partir de una fecha en formato Y-m-d
+ */
+function printDDay(string $date): string
+{
+	$days = ['dom', 'lun', 'mar', 'mér', 'xov', 'ven', 'sáb'];
+
+	return $days[Carbon::createFromFormat('Y-m-d', $date)->dayOfWeek()];
+}
+
+/**
+ * Devuelve el mes en string de tres letras en galego
+ * a partir de una fecha en format Y-m-d
+ */
+function printMMonth(string $date): string
+{
+	return substr(Carbon::createFromFormat('Y-m-d', $date)->translatedFormat('M'), 0, 3);
 }
