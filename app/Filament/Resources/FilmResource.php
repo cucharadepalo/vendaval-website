@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Actions\Action;
 
 class FilmResource extends Resource
 {
@@ -63,8 +64,13 @@ class FilmResource extends Resource
 			->filters([
 				SelectFilter::make('editions')
 					->label('Edicións')
+					->placeholder('Todas')
 					->relationship('editions', 'name')
 			])
+			->persistFiltersInSession()
+			->filtersTriggerAction( function (Action $action) {
+				return $action->button()->label('Filtros');
+			})
 			->actions([
 				Tables\Actions\EditAction::make(),
 			])

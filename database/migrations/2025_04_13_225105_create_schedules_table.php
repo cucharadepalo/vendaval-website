@@ -13,12 +13,19 @@ return new class extends Migration
 		Schema::create('schedules', function (Blueprint $table) {
 			$table->id();
 			$table->dateTime('start_time');
-			$table->string('description');
+			$table->string('description')->nullable();
 			$table->text('notes')->nullable();
+
+			$table->foreignId('venue_id');
+			$table->timestamps();
+		});
+
+		Schema::create('schedulables', function (Blueprint $table) {
+			$table->id();
+			$table->unsignedInteger('schedule_id');
 			$table->unsignedInteger('schedulable_id');
 			$table->string('schedulable_type');
 
-			$table->foreignId('venue_id');
 			$table->timestamps();
 		});
 	}
@@ -26,5 +33,6 @@ return new class extends Migration
 	public function down(): void
 	{
 		Schema::dropIfExists('schedules');
+		Schema::dropIfExists('schedulables');
 	}
 };

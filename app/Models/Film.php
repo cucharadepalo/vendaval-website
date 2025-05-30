@@ -4,17 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Support\Enums\Alignment;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\HtmlString;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -44,9 +46,9 @@ class Film extends Model implements HasMedia
 	 * Get all of the film's schedules.
 	 *
 	 */
-	public function schedules(): MorphMany
+	public function schedules(): MorphToMany
 	{
-		return $this->morphMany(Schedule::class, 'schedulable');
+		return $this->morphToMany(Schedule::class, 'schedulable');
 	}
 
 	/**
@@ -144,7 +146,10 @@ class Film extends Model implements HasMedia
 										->relationship()
 										->addActionAlignment(Alignment::Start)
 										->addActionLabel('Añadir proxección')
-										->schema(Schedule::getForm())
+										->schema(Schedule::getForm()),
+									Placeholder::make('about_schedules')
+										->hiddenLabel()
+										->content(new HtmlString('<div class="font-medium">Se o filme se vai programar xunto con outro ou con unha actividade, debes facer a asociación na sección do programa, seleccionando a sesión e engadíndoo alí.</div>'))
 								])
 						])
 				])
