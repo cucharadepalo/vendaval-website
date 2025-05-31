@@ -182,8 +182,22 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'address' => 'Rúa Maior, 1. Xullán, Bóveda 27343 Lugo',
 			'map' => 'https://www.google.com/maps/place/Casa+da+memoria/@42.6392777,-7.4717012,17z/data=!3m1!4b1!4m6!3m5!1s0xd303f99e14d7301:0xdd44240b739d5051!8m2!3d42.6392738!4d-7.4691263!16s%2Fg%2F11sw2wf03p!5m1!1e4?hl=gl-ES&entry=ttu',
 			'website' => 'https://acasadamemoria.com',
-			'has_page' => false,
-			'in_menu' => false
+		]);
+
+		$venue_1 = Venue::create([
+			'name' => 'Centro do Viño da Ribeira Sacra',
+			'town' => 'Monforte de Lemos',
+			'address' => 'Rúa do Comercio, 6, 27400 Monforte de Lemos, Lugo',
+			'map' => 'https://www.google.com/maps/place/CENTROVINO/@42.522385,-7.51352,18z/data=!4m6!3m5!1s0xd3013e87ddc942f:0x3eb93bd44cc135ca!8m2!3d42.5223848!4d-7.5135201!16s%2Fg%2F11h1z2xvz6!5m1!1e4?hl=gl-ES&entry=ttu',
+			'website' => 'http://centrovino-ribeirasacra.com/'
+		]);
+
+		$venue_2 = Venue::create([
+			'name' => 'Casa Da Cultura Lois Pereiro',
+			'town' => 'Monforte de Lemos',
+			'address' => 'Praza de España, 3, 27400 Monforte de Lemos, Lugo',
+			'map' => 'https://www.google.com/maps/place/Casa+Da+Cultura+Lois+Pereiro/@42.5222892,-7.5130505,17z/data=!3m1!4b1!4m6!3m5!1s0xd3013e8670a4ceb:0x2c32a952e59c2e2!8m2!3d42.5222892!4d-7.5130505!16s%2Fg%2F11btlwp931!5m1!1e4?hl=gl-ES&entry=ttu',
+			'website' => 'http://www.monfortedelemos.es/'
 		]);
 
 		DB::table('edition_film')->insert([
@@ -393,7 +407,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'start_time' => Carbon::create(2024, 8, 25, 13, 0, 0),
 			'description' => 'Música',
 			'notes' => null,
-			'venue_id' => $venue->id,
+			'venue_id' => $venue_1->id,
 		]);
 
 		DB::table('schedulables')->insert([
@@ -410,7 +424,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'start_time' => Carbon::create(2024, 8, 25, 16, 30, 0),
 			'description' => 'Cinema',
 			'notes' => 'Coa presenza do DJ Celeste Mariposa.',
-			'venue_id' => $venue->id,
+			'venue_id' => $venue_2->id,
 		]);
 
 		DB::table('schedulables')->insert([
