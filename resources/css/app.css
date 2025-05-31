@@ -7,9 +7,9 @@
 @theme {
 	--font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	--font-sans-condensed: "IBM Plex Sans Condensed", "Roboto Condensed",
+	/* --font-sans-condensed: "IBM Plex Sans Condensed", "Roboto Condensed",
 		ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-		"Segoe UI Symbol", "Noto Color Emoji";
+		"Segoe UI Symbol", "Noto Color Emoji"; */
 	--font-brand: cofo-peshka-variable, "IBM Plex Sans Condensed", "Roboto Condensed",
 		ui-sans-serif, system-ui, sans-serif;
 	--font-brand--font-variation-settings: "slnt" 0, "wdth" 62.5, "wght" 700;
