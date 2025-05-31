@@ -3,7 +3,7 @@
 	<div class="w-full px-6 max-w-7xl mx-auto xl:grid xl:grid-cols-3 xl:gap-12">
 
 		<div class="col-span-2">
-			<h1><span class="splash-title {{ $height == 'tall' ? 'mega' : 'simple' }}">Vendaval</span> <span class="splash-subtitle {{ $height == 'tall' ? 'simple' : 'mega' }}">{{ $title }}</span> @isset($thirdLine)<span class="splash-subtitle simple">{{ $thirdLine }}</span>@endisset</h1>
+			<h1><a href="{{ route('home') }}" class="splash-title {{ $height == 'tall' ? 'mega' : 'simple' }}">Vendaval</a> <span class="splash-subtitle {{ $height == 'tall' ? 'simple' : 'mega' }}">{{ $title }}</span> @isset($thirdLine)<span class="splash-subtitle simple">{{ $thirdLine }}</span>@endisset</h1>
 		</div>
 
 		{{-- <nav class="pt-24 xl:h-full xl:flex xl:items-end xl:justify-start">
