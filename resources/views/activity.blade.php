@@ -48,6 +48,9 @@
 					</li>
 					@endforeach
 				</ul>
+				<nav class="mt-12 flex flex-col">
+					<a href="{{ route('schedule') }}" class="text-lg inline-block">&larr; Programa</a>
+				</nav>
 			</div>
 		</section>
 		@endif

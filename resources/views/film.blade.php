@@ -52,6 +52,10 @@
 				@else
 				<p class="text-lg my-4">Próximamente.</p>
 				@endif
+				<nav class="mt-12 flex flex-col">
+					<a href="{{ route('filmes') }}" class="text-lg inline-block">&larr; Filmes</a>
+					<a href="{{ route('schedule') }}" class="text-lg inline-block">&larr; Programa</a>
+				</nav>
 			</div>
 		</section>
 	</main>
