@@ -11,13 +11,9 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Venue extends Model implements HasMedia
+class Venue extends Model
 {
-	use InteractsWithMedia;
-
 	protected $fillable = [
 		'name',
 		'town',
@@ -25,8 +21,6 @@ class Venue extends Model implements HasMedia
 		'text',
 		'website',
 		'address',
-		'has_page',
-		'in_menu'
 	];
 
 	/**
@@ -35,15 +29,6 @@ class Venue extends Model implements HasMedia
 	public function schedules(): HasMany
 	{
 		return $this->hasMany(Schedule::class);
-	}
-
-	/**
-	 * Spatie Media Library collections.
-	 */
-	public function registerMediaCollections(): void
-	{
-		$this->addMediaCollection('images')
-			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 	}
 
 	/**
@@ -81,42 +66,19 @@ class Venue extends Model implements HasMedia
 						->prefixIcon('bx-link-alt')
 						->placeholder('https://')
 						->translateLabel(),
-				]),
-			Section::make('Páxina')
-				->columnSpanFull()
-				->columns(3)
-				->schema([
-					Toggle::make('has_page')
-						->label('Ten páxina propia')
-						->live()
-						->afterStateUpdated(function (bool $state, Get $get, Set $set) {
-							if (!$state && $get('in_menu')) {
-								$set('in_menu', false);
-							}
-						}),
-					Toggle::make('in_menu')
-						->label('Aparece no menú da web')
-						->disabled(fn(Get $get) => $get('has_page') == false),
-					MarkdownEditor::make('content')
+					MarkdownEditor::make('text')
 						->disableToolbarButtons([
 							'blockquote',
 							'codeBlock',
 							'strike',
+							'table',
+							'headings'
 						])
 						->fileAttachmentsDisk('media')
 						->fileAttachmentsDirectory('venues')
-						->label('Contido da páxina propia')
+						->label('Texto')
 						->columnSpanFull()
-						->requiredIf('has_page', true)
-						->helperText('Mostrarase na páxina do lugar.'),
-					SpatieMediaLibraryFileUpload::make('images')
-						->label('Imaxes')
-						->collection('images')
-						->multiple()
-						->image()
-						->maxSize(2048)
-						->columnSpanFull()
-				]),
+				])
 		];
 	}
 }
