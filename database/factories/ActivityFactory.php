@@ -22,6 +22,7 @@ class ActivityFactory extends Factory
 	{
 		return [
 			'title' => fake()->sentence(4),
+			'slug' => fake()->slug(),
 			'summary' => fake()->text(),
 			'text' => fake()->text(),
 		];

@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 			'start_date' => Carbon::create(2024, 8, 23, 0, 0, 0),
 			'end_date' => Carbon::create(2024, 8, 26, 0, 0, 0),
 			'title' => '1ª Mostra de Cinema Portugués',
-			'is_active' => false,
+			'is_active' => true,
 			'colors' => config('custom.edition.default_colors')
 		]);
 
@@ -43,12 +43,13 @@ class DatabaseSeeder extends Seeder
 			'start_date' => Carbon::create(2025, 8, 20, 0, 0, 0),
 			'end_date' => Carbon::create(2025, 8, 24, 0, 0, 0),
 			'title' => '2ª Mostra de Cinema Portugués',
-			'is_active' => true,
+			'is_active' => false,
 			'colors' => config('custom.edition.default_colors')
 		]);
 
 		$film_1 = Film::factory()->create([
 			'title' => 'Cartas a uma ditadura',
+			'slug' => 'cartas-a-uma-ditadura',
 			'director' => 'Inês de Medeiros',
 			'year' => 2008,
 			'genre' => 'Documentario',
@@ -62,6 +63,7 @@ Premio á Mellor Longametraxe Nacional no DocLisboa (2006), Fipa de Prata no Fip
 
 		$film_2 = Film::factory()->create([
 			'title' => '48',
+			'slug' => '48',
 			'director' => 'Susana Sousa Dias',
 			'year' => 2009,
 			'genre' => 'Documentario',
@@ -77,6 +79,7 @@ Grande premio do Cinéma du reel (2010), premio Opus Bonum no festival de Jihlav
 
 		$film_3 = Film::factory()->create([
 			'title' => 'O Casaco Rosa',
+			'slug' => 'o-casaco-rosa',
 			'director' => 'Mónica Santos',
 			'year' => 2022,
 			'genre' => 'Animación',
@@ -88,6 +91,7 @@ Grande premio do Cinéma du reel (2010), premio Opus Bonum no festival de Jihlav
 
 		$film_4 = Film::factory()->create([
 			'title' => 'O Corno',
+			'slug' => 'o-corno',
 			'director' => 'Jaoine Camborda',
 			'year' => 2023,
 			'genre' => 'Ficción',
@@ -101,6 +105,7 @@ Concha de Ouro ao Mellor Filme no Festival de San Sebastián (2023) e Goya á Me
 
 		$film_5 = Film::factory()->create([
 			'title' => 'Tão pequeninas, tinham o ar de serem já crescidas',
+			'slug' => 'tao-pequeninas-tinham-o-ar-de-serem-ja-crescidas',
 			'director' => 'Tânia Dinis',
 			'year' => 2024,
 			'genre' => 'Documentario',
@@ -114,6 +119,7 @@ Premio á Mellor Curtametraxe Nacional no Indie Lisboa (2024)'
 
 		$film_6 = Film::factory()->create([
 			'title' => 'Batida de Lisboa',
+			'slug' => 'batida-de-lisboa',
 			'director' => 'Rita Maia e Vasco Viana',
 			'year' => 2019,
 			'genre' => 'Documentario',
@@ -127,6 +133,7 @@ Desmantelados nos anos 90, os seus habitantes foron aloxados en novos barrios na
 
 		$film_7 = Film::factory()->create([
 			'title' => 'Prazer Camaradas!',
+			'slug' => 'prazer-camaradas',
 			'director' => 'José Filipe Costa',
 			'year' => 2019,
 			'genre' => 'Documentario',
@@ -138,6 +145,7 @@ Desmantelados nos anos 90, os seus habitantes foron aloxados en novos barrios na
 
 		$activity_1 = Activity::factory()->create([
 			'title' => 'DJ Jufra',
+			'slug' => 'dj-jufra',
 			'summary' => 'DJ set en vinilo de discográficas independientes dos anos 70 e bandas sonoras, ES',
 			'text' => 'DJ Jufra comezou a súa traxectoria artística no colectivo “La familia feliz”, na Compostela dos anos 90, pertencendo a varias formacións musicais, entre elas Taxi Driver e Hemisferio Izquierdo, formación coa que chegaría a gravar disco no programa Diario Pop de Radio 3. Máis tarde creou o seu propio proxecto musical baixo o nome de Almax, conseguido que unha das súas maquetas fose recoñecida como a segunda mellor maqueta do ano para a revista “Rock de Lux”. Destaca tamén o seu traballo como responsable dos teclados e samplers na banda Mequetrefe.DJ Jufra comezou a súa traxectoria artística no colectivo “La familia feliz”, na Compostela dos anos 90, pertencendo a varias formacións musicais, entre elas Taxi Driver e Hemisferio Izquierdo, formación coa que chegaría a gravar disco no programa Diario Pop de Radio 3. Máis tarde creou o seu propio proxecto musical baixo o nome de Almax, conseguido que unha das súas maquetas fose recoñecida como a segunda mellor maqueta do ano para a revista “Rock de Lux”. Destaca tamén o seu traballo como responsable dos teclados e samplers na banda Mequetrefe.
 
@@ -146,6 +154,7 @@ Nos últimos tempos compaxina a súa faceta de músico coa de DJ, realizando ses
 
 		$activity_2 = Activity::factory()->create([
 			'title' => 'Fíos de Fado',
+			'slug' => 'fios-de-fado',
 			'summary' => 'Iria Estévez e Gonzo Piña',
 			'text' => 'Iria Estévez presenta Fíos de Fado, un concerto dinámico no que explora os distintos estilos de fado, poñéndoo en diálogo con outras músicas, como a cantiga galega e a música brasileira, entre outras, e ofrecendo unha visión ampla do que o fado supón, a partir daqueles aspectos que comparte con outros estilos musicais.
 			',
@@ -153,6 +162,7 @@ Nos últimos tempos compaxina a súa faceta de músico coa de DJ, realizando ses
 
 		$activity_3 = Activity::factory()->create([
 			'title' => 'FITA – CINEMA COM OLHOS DE VER',
+			'slug' => 'fita-cinema-com-olhos-de-ver',
 			'summary' => 'Taller para nenos',
 			'text' => 'A partir do visionamento atento da curtametraxe “O Casaco Rosa” (O Abrigo Rosa), unha animación musical e política sobre un abrigo rosa sempre con un as na manga, o colectivo FITA &ndash; Cinema com olhos de ver impartirá un taller para nenos, nenas e xoves a partir dos 8 anos. Nun exercicio intuitivo e lúdico, escudriñaranse as claves narrativas do filme e xogarase a criar unha escena con algunhas personaxes da historia portuguesa. O taller será impartido en galego e portugués.
 
@@ -161,6 +171,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 
 		$activity_4 = Activity::factory()->create([
 			'title' => 'Celeste Mariposa',
+			'slug' => 'celeste-mariposa',
 			'summary' => 'DJ set de música da África lusófona',
 			'text' => 'A pesar de ter empezado a súa carreira no panorama da música techno underground e acid house, o DJ portugués, Celeste Mariposa, rapidamente se deixou enfeitizar pola poderosa música das antigas colonias africanas. Actualmente é un experto da diáspora musical de Angola, Cabo Verde, Guiné Bissau, Moçambique e São Tomé e Príncipe, adicándose a promover a músicas e os artistas da África lusófona por todo o mundo. A cultura portuguesa contemporánea está vinculada de forma indisociable á súa herdanza africana, e os seus sets están marcados por unha celebración de múltiples xéneros musicais como o funaná, o kuduro, a coladeira, o semba, e moitos mais.',
 		]);

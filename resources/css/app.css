@@ -13,7 +13,7 @@
 	--font-brand: cofo-peshka-variable, "IBM Plex Sans Condensed", "Roboto Condensed",
 		ui-sans-serif, system-ui, sans-serif;
 	--font-brand--font-variation-settings: "slnt" 0, "wdth" 62.5, "wght" 700;
-
+	--aspect-poster: 27 / 40;
 }
 
 @layer theme {
