@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Edition;
 use App\Models\Schedule;
 use Carbon\Carbon;
@@ -51,8 +52,15 @@ class ScheduleController extends Controller
 				return view('schedule', compact(['schedules', 'start_date', 'end_date']));
 
 			}
-
 		}
+	}
 
+	public function show(Request $request, string $slug): View
+	{
+		$activity = Activity::whereSlug($slug)->first();
+
+		abort_if(! $activity, 404);
+
+		return view('activity', compact('activity'));
 	}
 }

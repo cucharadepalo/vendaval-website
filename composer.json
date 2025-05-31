@@ -39,7 +39,8 @@
 		},
 		"files": [
 			"app/Helpers/Common.php",
-			"app/View/Composers/EditionComposer.php"
+			"app/View/Composers/EditionComposer.php",
+			"app/MediaLibrary/FileSizeOptimizedWidthCalculator.php"
 		]
 	},
 	"autoload-dev": {
