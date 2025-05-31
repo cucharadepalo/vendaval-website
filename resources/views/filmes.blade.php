@@ -9,22 +9,22 @@
 		height="short" />
 
 	<main>
-		<section class="w-full px-6 max-w-7xl mx-auto">
-			<div class="grid grid-cols-2 gap-2">
+		<section class="w-full my-12 px-6 max-w-7xl mx-auto">
+			<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
 				@foreach ($filmes as $film)
 					<article>
-						<a href="{{ route('film', ['slug' => $film->slug]) }}" class="flex flex-col">
+						<a href="{{ route('film', ['slug' => $film->slug]) }}" class="h-full flex flex-col">
 							<div class="aspect-poster overflow-hidden">
 								@if (count($film->getMedia('poster')))
 									{{ $film->getMedia('poster')[0]->img()->attributes(['class' => 'w-full h-full object-cover object-center'])->lazy() }}
 								@else
-									Placeholder
+									<img src="{{ Vite::asset('resources/images/poster_placeholder.svg') }}" class="w-full h-full object-cover object-center" alt="">
 								@endif
 							</div>
 							<div class="flex-grow flex flex-col">
-								<p class="font-semibold mt-2 leading-tight">{{ $film->title }}</p>
-								<p class="text-sm mt-auto">{{ $film->director }}</p>
-								<p class="text-sm">{{ $film->year }}</p>
+								<p class="font-semibold my-2 leading-tight md:text-lg">{{ $film->title }}</p>
+								<p class="text-sm mt-auto md:text-base">{{ $film->director }}</p>
+								<p class="text-sm md:text-base">{{ $film->year }}</p>
 							</div>
 						</a>
 					</article>

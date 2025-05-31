@@ -93,12 +93,16 @@ class Activity extends Model implements HasMedia
 								}),
 							Hidden::make('slug')
 								->required()
-								->unique(ignoreRecord: true)
-								->maxLength(191)
-								->minLength(2),
-							Textarea::make('summary')
+								->unique(ignoreRecord: true),
+							MarkdownEditor::make('summary')
 								->required()
 								->maxLength(255)
+								->toolbarButtons([
+									'bold',
+									'italic',
+									'link'
+								])
+								->minHeight('6rem')
 								->translateLabel()
 								->columnSpanFull(),
 							MarkdownEditor::make('text')
@@ -117,31 +121,23 @@ class Activity extends Model implements HasMedia
 							Section::make()
 								->schema([
 									SpatieMediaLibraryFileUpload::make('image')
-										->conversion('preview')
+										->collection('image')
+										->conversion('image_opt')
+										->panelAspectRatio('3:2')
 										->translateLabel()
 								]),
 							Section::make()
 								->schema([
 								Repeater::make('schedules')
-										->label('Sesións')
-										->relationship()
-										->addActionAlignment(Alignment::Start)
-										->addActionLabel('Añadir sesión')
-										->schema(Schedule::getForm())
+									->label('Sesións')
+									->relationship()
+									->addActionAlignment(Alignment::Start)
+									->addActionLabel('Añadir sesión')
+									->schema(Schedule::getForm())
 								])
 						])
 				])
 		];
-	}
-
-	/**
-	 * Thumbnail media conversion for Spatie media library.
-	 */
-	public function registerMediaConversions(?Media $media = null): void
-	{
-		$this->addMediaConversion('preview')
-			->fit(Fit::Contain, 300, 300)
-			->nonQueued();
 	}
 
 	/**
@@ -151,6 +147,26 @@ class Activity extends Model implements HasMedia
 	{
     $this->addMediaCollection('image')
 			->singleFile()
+			->useDisk('media')
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 	}
+
+	/**
+	 * Thumbnail media conversion for Spatie media library.
+	 */
+	public function registerMediaConversions(?Media $media = null): void
+	{
+		$this->addMediaConversion('image_opt')
+			->fit(Fit::Contain, 1600, 1067)
+			->quality(85)
+			->format('webp')
+			->withResponsiveImages();
+
+		$this->addMediaConversion('admin_thumb')
+			->fit(Fit::Crop, 192, 128)
+			->quality(75)
+			->format('webp')
+			->nonQueued();
+	}
+
 }

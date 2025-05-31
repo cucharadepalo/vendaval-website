@@ -101,9 +101,7 @@ class Film extends Model implements HasMedia
 								}),
 							Hidden::make('slug')
 								->required()
-								->unique(ignoreRecord: true)
-								->maxLength(191)
-								->minLength(2),
+								->unique(ignoreRecord: true),
 							TextInput::make('director')
 								->required()
 								->maxLength(191)
@@ -153,9 +151,12 @@ class Film extends Model implements HasMedia
 										->disk('media')
 										->responsiveImages(),
 									SpatieMediaLibraryFileUpload::make('stills')
+										->label('Imaxe')
 										->collection('stills')
-										->multiple()
-										->disk('media')
+										->conversion('still_opt')
+										->panelAspectRatio('16:9')
+										// ->multiple()
+										->disk('media'),
 							]),
 							Section::make()
 								->schema([
@@ -187,7 +188,6 @@ class Film extends Model implements HasMedia
 
 		$this->addMediaCollection('stills')
 			->useDisk('media')
-			->withResponsiveImages()
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 	}
 
@@ -199,7 +199,16 @@ class Film extends Model implements HasMedia
 	{
 		$this->addMediaConversion('poster_thumbnail')
 			->fit(Fit::Fill, 86, 128)
+			->performOnCollections('poster')
 			->quality(75)
+			->format('webp')
 			->nonQueued();
+
+		$this->addMediaConversion('still_opt')
+			->fit(Fit::Contain, 1600, 900)
+			->performOnCollections('stills')
+			->quality(85)
+			->format('webp')
+			->withResponsiveImages();
 	}
 }

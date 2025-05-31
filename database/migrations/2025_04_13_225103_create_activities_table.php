@@ -12,8 +12,8 @@ return new class extends Migration
 			$table->id();
 
 			$table->string('title', 191)->unique()->index();
-			$table->string('slug', 191)->unique();
-			$table->string('summary');
+			$table->string('slug', 191)->unique()->index();
+			$table->string('summary', 255);
 			$table->text('text');
 
 			$table->timestamps();

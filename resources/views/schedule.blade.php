@@ -50,11 +50,19 @@
 							<div class="text-lg mt-4 md:col-span-5 md:col-start-2 md:mt-0">
 
 								@foreach ($item->films as $film)
-									<p class="mt-2"><span class="font-semibold">{{ $film->title }},</span> {{ $film->director }} ({{ $film->year }})</p>
+									<p class="mt-2">
+										<a href="{{ route('film', ['slug' => $film->slug]) }}">
+											<span class="font-semibold">{{ $film->title }},</span> {{ $film->director }} ({{ $film->year }})
+										</a>
+									</p>
 								@endforeach
 
 								@foreach ($item->activities as $activity)
-									<p class="mt-2"><span class="font-semibold">{{ $activity->title }}</span></p>
+									<p class="mt-2">
+										<a href="{{ route('activity', ['slug' => $activity->slug]) }}">
+											<span class="font-semibold">{{ $activity->title }}</span>
+										</a>
+									</p>
 								@endforeach
 
 								@isset($item->notes)

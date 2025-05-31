@@ -7,9 +7,11 @@ export default defineConfig({
 		laravel({
 			input: [
 				"resources/css/app.css",
-				"resources/js/app.js"
+				"resources/js/app.js",
+				"resources/images/poster_placeholder.svg",
+				"resources/images/still_placeholder.svg",
 			],
-			refresh: ['resources/views/**/*'],
+			refresh: ["resources/views/**/*"],
 		}),
 		tailwindcss(),
 	],

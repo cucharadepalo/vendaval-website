@@ -13,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Support\Enums\FontWeight;
+use Illuminate\Support\HtmlString;
 
 class ActivityResource extends Resource
 {
@@ -44,12 +45,14 @@ class ActivityResource extends Resource
 					->width(96)
 					->height(64)
 					->collection('image')
-					->conversion('preview')
+					->conversion('admin_thumb')
 					->translateLabel(),
 				TextColumn::make('title')
 					->size(TextColumn\TextColumnSize::Large)
 					->weight(FontWeight::Bold)
-					->description(fn(Activity $item): string => $item->summary)
+					->description(function(Activity $item): HtmlString {
+						return new HtmlString('<div class="text-sm text-gray-500 dark:text-gray-400">' . mb_strimwidth(str($item->summary)->markdown()->sanitizeHtml(), 0, 80, '...') . '</div>');
+					})
 					->translateLabel(),
 				TextColumn::make('editions.name')
 					->label('Edicion(s')

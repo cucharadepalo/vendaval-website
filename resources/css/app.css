@@ -26,7 +26,7 @@
 
 @layer components {
 	.splash-title {
-		@apply block font-brand tracking-wide leading-[0.75] antialiased;
+		@apply block font-brand uppercase tracking-wide leading-[0.75] antialiased;
 	}
 	.splash-title.mega {
 		font-size: clamp(4rem, 25vw, 11.25rem);
@@ -35,7 +35,7 @@
 		font-size: clamp(2.25rem, 8vw, 3.5rem);
 	}
 	.splash-subtitle {
-		@apply block font-brand tracking-wide leading-none antialiased;
+		@apply block font-brand uppercase tracking-wide leading-none antialiased;
 		font-size: clamp(2rem, 8vw, 3.25rem);
 	}
 	.splash-subtitle.mega {
@@ -46,4 +46,8 @@
 	.splash-subtitle.simple {
 		font-size: clamp(2rem, 8vw, 3.25rem);
 	}
+}
+
+.md-wrapper :is(p, ul, ol, h1, h2, h3, h4, h5, blockquote, figure, image, table) {
+	margin-block-end: 1rem;
 }
