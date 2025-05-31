@@ -22,6 +22,7 @@ class FilmFactory extends Factory
 	{
 		return [
 			'title' => fake()->sentence(4),
+			'slug' => fake()->slug(),
 			'director' => fake()->regexify('[A-Za-z0-9]{191}'),
 			'year' => fake()->year(),
 			'genre' => fake()->regexify('[A-Za-z0-9]{191}'),

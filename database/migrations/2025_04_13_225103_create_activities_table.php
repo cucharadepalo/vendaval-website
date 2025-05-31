@@ -11,7 +11,8 @@ return new class extends Migration
 		Schema::create('activities', function (Blueprint $table) {
 			$table->id();
 
-			$table->string('title', 191)->index();
+			$table->string('title', 191)->unique()->index();
+			$table->string('slug', 191)->unique();
 			$table->string('summary');
 			$table->text('text');
 

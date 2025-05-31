@@ -5,8 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
+use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
@@ -15,8 +20,6 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Support\Enums\Alignment;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\HtmlString;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -33,6 +36,7 @@ class Film extends Model implements HasMedia
 	 */
 	protected $fillable = [
 		'title',
+		'slug',
 		'director',
 		'year',
 		'genre',
@@ -85,9 +89,21 @@ class Film extends Model implements HasMedia
 								->columnSpan(1),
 							TextInput::make('title')
 								->required()
+								->unique(ignoreRecord: true)
+								->validationMessages(['unique' => 'Este film xa existe.'])
 								->maxLength(191)
+								->minLength(2)
 								->columnSpanFull()
-								->translateLabel(),
+								->translateLabel()
+								->live(onBlur: true)
+								->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, ?string $state): void {
+										$set('slug', Str::slug($state));
+								}),
+							Hidden::make('slug')
+								->required()
+								->unique(ignoreRecord: true)
+								->maxLength(191)
+								->minLength(2),
 							TextInput::make('director')
 								->required()
 								->maxLength(191)
@@ -133,11 +149,13 @@ class Film extends Model implements HasMedia
 								->schema([
 									SpatieMediaLibraryFileUpload::make('poster')
 										->collection('poster')
-										->conversion('preview'),
+										->panelAspectRatio('4:5')
+										->disk('media')
+										->responsiveImages(),
 									SpatieMediaLibraryFileUpload::make('stills')
 										->collection('stills')
 										->multiple()
-										->conversion('preview')
+										->disk('media')
 							]),
 							Section::make()
 								->schema([
@@ -163,9 +181,13 @@ class Film extends Model implements HasMedia
 	{
 		$this->addMediaCollection('poster')
 			->singleFile()
+			->useDisk('media')
+			->withResponsiveImages()
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 
 		$this->addMediaCollection('stills')
+			->useDisk('media')
+			->withResponsiveImages()
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 	}
 
@@ -175,8 +197,9 @@ class Film extends Model implements HasMedia
 	 */
 	public function registerMediaConversions(?Media $media = null): void
 	{
-		$this->addMediaConversion('preview')
-			->fit(Fit::Contain, 427, 640)
+		$this->addMediaConversion('poster_thumbnail')
+			->fit(Fit::Fill, 86, 128)
+			->quality(75)
 			->nonQueued();
 	}
 }

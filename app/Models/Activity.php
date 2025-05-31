@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -16,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -32,6 +35,7 @@ class Activity extends Model implements HasMedia
 	 */
 	protected $fillable = [
 		'title',
+		'slug',
 		'summary',
 		'text',
 	];
@@ -77,9 +81,21 @@ class Activity extends Model implements HasMedia
 								->columnSpan(1),
 							TextInput::make('title')
 								->required()
+								->unique(ignoreRecord: true)
+								->validationMessages(['unique' => 'Esta actividad xa existe.'])
 								->maxLength(191)
+								->minLength(2)
+								->columnSpanFull()
 								->translateLabel()
-								->columnSpanFull(),
+								->live(onBlur: true)
+								->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, ?string $state): void {
+										$set('slug', Str::slug($state));
+								}),
+							Hidden::make('slug')
+								->required()
+								->unique(ignoreRecord: true)
+								->maxLength(191)
+								->minLength(2),
 							Textarea::make('summary')
 								->required()
 								->maxLength(255)

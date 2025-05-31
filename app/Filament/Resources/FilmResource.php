@@ -40,7 +40,7 @@ class FilmResource extends Resource
 			->columns([
 				SpatieMediaLibraryImageColumn::make('poster')
 					->collection('poster')
-					->conversion('preview')
+					->conversion('poster_thumbnail')
 					->height(64)
 					->width(43)
 					->translateLabel(),
