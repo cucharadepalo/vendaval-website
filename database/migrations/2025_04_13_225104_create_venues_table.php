@@ -15,7 +15,7 @@ return new class extends Migration
 			$table->string('map', 255)->nullable();
 			$table->string('address', 191)->nullable();
 			$table->string('website')->nullable();
-			$table->text('content')->nullable();
+			$table->text('text')->nullable();
 
 			$table->timestamps();
 		});
