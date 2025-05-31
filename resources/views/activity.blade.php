@@ -29,6 +29,28 @@
 				</div>
 			</div>
 		</section>
+		@if ($activity->schedules->count())
+		<section id="proxeccions" class="w-full py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color)">
+			<div class="px-6 max-w-7xl mx-auto">
+				<h2 class="font-semibold text-2xl">{{ $activity->title }}</h2>
+				<ul class="my-4 text-lg">
+					@foreach ($activity->schedules as $schedule)
+					<li>
+						<div class="font-semibold uppercase">
+							{{ printDDay($schedule->start_time->format('Y-m-d')) }}
+							{{ $schedule->start_time->format('d') }}
+							{{ printMMonth($schedule->start_time->format('Y-m-d')) }}
+							<span class="font-normal lowercase">ás </span>{{ $schedule->start_time->format('H:i') }}
+						</div>
+						<div>
+							<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
+						</div>
+					</li>
+					@endforeach
+				</ul>
+			</div>
+		</section>
+		@endif
 	</main>
 
 @endsection
