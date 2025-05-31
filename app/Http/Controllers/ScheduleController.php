@@ -44,12 +44,10 @@ class ScheduleController extends Controller
 
 				// Agrupamos por días y horas
 				// OJO: Cualquier acto que empiece antes de las 2:01 de la mañana se agrupa con el dia anterior
-				$schedules = $squery->groupBy([function (Schedule $item, int $key) {
+				$schedules = $squery->groupBy(function (Schedule $item, int $key) {
 					$day = Carbon::parse($item->start_time)->subHours(2);
 					return $day->startOfDay()->format('Y-m-d');
-				}, function (Schedule $item) {
-					return Carbon::createFromFormat('Y-m-d H:i:s', $item->start_time)->format('H:i');
-				}]);
+				});
 
 				return view('schedule', compact(['schedules', 'start_date', 'end_date']));
 

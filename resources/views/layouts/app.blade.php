@@ -8,8 +8,13 @@
 	<link rel="preload" href="https://use.typekit.net/kdg6lzn.css" as="style">
 	<link href="https://use.typekit.net/kdg6lzn.css" rel="stylesheet">
 	<link href="https://fonts.bunny.net/css?family=ibm-plex-sans|ibm-plex-sans-condensed" rel="stylesheet">
+
+	@if (config('app.env') == 'local')
+	@vite(['resources/css/app.css', 'resources/js/app.js'])
+	@else
 	<link href="{{ Vite::asset('resources/css/app.css') }}" rel="stylesheet">
 	<script src="{{ Vite::asset('resources/js/app.js') }}" defer></script>
+	@endif
 
 	{!! printCssVariables($edition->colors) !!}
 </head>
