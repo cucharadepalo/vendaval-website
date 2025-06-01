@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ScheduleResource\Pages;
-use App\Filament\Resources\ScheduleResource\RelationManagers;
 use App\Models\Schedule;
 use Filament\Forms;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -14,8 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Support\Enums\FontWeight;
 
 class ScheduleResource extends Resource
 {
@@ -47,11 +44,9 @@ class ScheduleResource extends Resource
 					->sortable()
 					->label('Data')
 					->dateTime('j/m/Y H:i'),
-				TextColumn::make('venue.name')
-					->sortable()
-					->translateLabel(),
 				TextColumn::make('description')
-					->translateLabel(),
+					->translateLabel()
+					->weight(FontWeight::Bold),
 				TextColumn::make('films.title')
 					->limit(24)
 					->label('Película(s)')
@@ -59,7 +54,10 @@ class ScheduleResource extends Resource
 				TextColumn::make('activities.title')
 					->limit(24)
 					->label('Actividade(s)')
-					->listWithLineBreaks()
+					->listWithLineBreaks(),
+				TextColumn::make('venue.name')
+					->sortable()
+					->translateLabel(),
 			])
 			->defaultSort('start_time', 'asc')
 			->filters([
@@ -90,11 +88,7 @@ class ScheduleResource extends Resource
 					->slideOver(),
 				Tables\Actions\DeleteAction::make(),
 			])
-			->bulkActions([
-				Tables\Actions\BulkActionGroup::make([
-					Tables\Actions\DeleteBulkAction::make(),
-				]),
-			]);
+			->bulkActions([]);
 	}
 
 	public static function getPages(): array

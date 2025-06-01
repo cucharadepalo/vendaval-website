@@ -277,6 +277,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Cinema',
 			'notes' => 'Coa presencia da realizadora. Presentación a cargo do crítico de cinema Martín Pawley.',
 			'venue_id' => 1,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -301,6 +302,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Cinema ao aire libre',
 			'notes' => 'Presentación a cargo do crítico de cinema Martín Pawley.',
 			'venue_id' => $venue->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -318,6 +320,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Música',
 			'notes' => null,
 			'venue_id' => $venue->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -335,6 +338,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Cinema + Taller',
 			'notes' => null,
 			'venue_id' => $venue->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -359,6 +363,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Cinema',
 			'notes' => 'Presentación a cargo do crítico de cinema Martín Pawley.',
 			'venue_id' => $venue->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -376,6 +381,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Cinema ao aire libre',
 			'notes' => 'Presentación a cargo do crítico de cinema Martín Pawley.',
 			'venue_id' => $venue->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -392,6 +398,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Música',
 			'notes' => null,
 			'venue_id' => $venue->id,
+			'edition_id' => $edition_1->id
 		]);
 		DB::table('schedulables')->insert([
 			[
@@ -408,6 +415,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Música',
 			'notes' => null,
 			'venue_id' => $venue_1->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([
@@ -425,6 +433,7 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 			'description' => 'Cinema',
 			'notes' => 'Coa presenza do DJ Celeste Mariposa.',
 			'venue_id' => $venue_2->id,
+			'edition_id' => $edition_1->id
 		]);
 
 		DB::table('schedulables')->insert([

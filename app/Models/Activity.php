@@ -45,7 +45,7 @@ class Activity extends Model implements HasMedia
 	 */
 	public function schedules(): MorphToMany
 	{
-		return $this->morphToMany(Schedule::class, 'schedulable');
+		return $this->morphToMany(Schedule::class, 'schedulable')->withTimestamps();
 	}
 
 	/**

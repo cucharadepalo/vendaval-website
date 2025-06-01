@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Facades\Log;
 
 class Schedule extends Model
 {
@@ -26,6 +28,7 @@ class Schedule extends Model
 		'schedulable_id',
 		'schedulable_type',
 		'venue_id',
+		'edition_id'
 	];
 
 	/**
@@ -38,15 +41,61 @@ class Schedule extends Model
 		'start_time' => 'datetime',
 		'schedulable_id' => 'integer',
 		'venue_id' => 'integer',
+		'edition_id' => 'integer'
 	];
+
+	protected static function booted(): void
+	{
+		// Asignamos edición al guardar
+		static::creating(function (Schedule $schedule) {
+			$editions = Edition::all();
+			foreach ($editions as $edition) {
+				if ($schedule->start_time->between($edition->start_date, $edition->end_date)) {
+					$schedule->fill(['edition_id' => $edition->id]);
+					break;
+				}
+			}
+		});
+
+		// Comprobamos la fecha y la edición
+		static::updating(function (Schedule $schedule) {
+			if ($schedule->isDirty('start_time')) {
+				$editions = Edition::all();
+
+				foreach ($editions as $edition) {
+					if ($schedule->start_time->between($edition->start_date, $edition->end_date)) {
+						$schedule->fill(['edition_id' => $edition->id]);
+						return;
+					}
+				}
+
+				$schedule->fill(['edition_id' => null]);
+			}
+		});
+
+		// Eliminamos las filas de la tabla Pivot al borrar
+		static::deleted(function (Schedule $schedule) {
+
+			$schedule->films()->detach();
+			$schedule->activities()->detach();
+
+		});
+	}
 
 	/**
 	 * Get the parent Venue model
-	 *
 	 */
 	public function venue(): BelongsTo
 	{
 		return $this->belongsTo(Venue::class);
+	}
+
+	/**
+	 * Get the parent Edition model
+	 */
+	public function edition(): BelongsTo
+	{
+		return $this->belongsTo(Edition::class);
 	}
 
 	/**
@@ -72,12 +121,12 @@ class Schedule extends Model
 	public static function getForm(): array
 	{
 		return [
+			Hidden::make('edition_id'),
 			DateTimePicker::make('start_time')
 				->label('Data')
 				->native(false)
 				->seconds(false)
 				->minutesStep(15)
-				// ->minDate(now())
 				->displayFormat('j / F / Y — H:i')
 				->locale('es')
 				->required(),
