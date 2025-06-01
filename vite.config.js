@@ -11,7 +11,10 @@ export default defineConfig({
 				"resources/images/poster_placeholder.svg",
 				"resources/images/still_placeholder.svg",
 			],
-			refresh: ["resources/views/**/*"],
+			refresh: [
+				"resources/views/**/*",
+				"app/Filament/**/*"
+			],
 		}),
 		tailwindcss(),
 	],
