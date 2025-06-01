@@ -17,7 +17,9 @@ class CreateFilm extends CreateRecord
 	 */
 	protected function mutateFormDataBeforeCreate(array $data): array
 	{
-		$data['duration'] = convertToHoursMinsSecs($data['duration']);
+		if ($data['duration']) {
+			$data['duration'] = convertToHoursMinsSecs($data['duration']);
+		}
 
 		return $data;
 	}

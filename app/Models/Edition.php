@@ -34,7 +34,6 @@ class Edition extends Model implements HasMedia
 		'title',
 		'is_active',
 		'colors',
-		'splash_alt_text'
 	];
 
 	/**
@@ -49,6 +48,14 @@ class Edition extends Model implements HasMedia
 			'end_date' => 'datetime',
 			'colors' => 'array'
 		];
+	}
+
+	/**
+	 * Get the Schedules of the edition.
+	 */
+	public function schedules(): HasMany
+	{
+		return $this->hasMany(Schedule::class);
 	}
 
 	/**

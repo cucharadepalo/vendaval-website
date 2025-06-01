@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->text('notes')->nullable();
 
 			$table->foreignId('venue_id');
+			$table->foreignId('edition_id')->nullable();
 			$table->timestamps();
 		});
 

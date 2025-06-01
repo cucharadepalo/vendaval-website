@@ -20,6 +20,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Support\Enums\Alignment;
+use Illuminate\Support\Arr;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -52,7 +53,7 @@ class Film extends Model implements HasMedia
 	 */
 	public function schedules(): MorphToMany
 	{
-		return $this->morphToMany(Schedule::class, 'schedulable');
+		return $this->morphToMany(Schedule::class, 'schedulable')->withTimestamps();
 	}
 
 	/**
@@ -81,8 +82,8 @@ class Film extends Model implements HasMedia
 								->multiple()
 								->relationship(titleAttribute: 'name')
 								->default(function () {
-									$active_edition = Edition::where('is_active', 1)->first();
-									return [$active_edition ? $active_edition->id : null];
+										$active_edition = Edition::where('is_active', 1)->first();
+										return [$active_edition ? $active_edition->id : null];
 								})
 								->options(Edition::all()->pluck('name', 'id'))
 								->required()
@@ -131,6 +132,7 @@ class Film extends Model implements HasMedia
 								->helperText('Ex: Versión orixinal con subtítulos en...')
 								->translateLabel(),
 							MarkdownEditor::make('text')
+								->required()
 								->disableToolbarButtons([
 									'attachFiles',
 									'codeBlock',
