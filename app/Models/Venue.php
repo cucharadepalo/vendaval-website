@@ -68,12 +68,12 @@ class Venue extends Model
 							'codeBlock',
 							'strike',
 							'table',
-							'headings'
+							'heading'
 						])
 						->fileAttachmentsDisk('media')
 						->fileAttachmentsDirectory('venues')
 						->label('Texto')
-						->columnSpanFull()
+						->columnSpan(2)
 				])
 		];
 	}

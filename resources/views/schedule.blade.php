@@ -37,7 +37,7 @@
 					@if (!$loop->first) hidden @endif>
 
 					@foreach ($items as $item)
-						<div class="mb-6 not-first:border-t not-first:border-(--vdl-splash-txt-color)/25 not-first:pt-6 md:grid md:grid-cols-6 md:gap-2">
+						<div class="not-first:mt-12 md:grid md:grid-cols-6 md:gap-2">
 
 							<p class="text-xl font-semibold inline-block mr-2">
 								{{ $item->start_time->format('H:i') }}
@@ -69,10 +69,12 @@
 									<p class="text-sm mt-2">{{ $item->notes }}</p>
 								@endisset
 
-								<p class="text-sm mt-4">
-									<x-filament::icon icon="bx-map" class="w-5 h-5 inline-block align-text-bottom"/>
-									<span class="font-semibold">{{ $item->venue->name }}</span>. {{ $item->venue->town }}
-								</p>
+								<div class="text-sm mt-6">
+									<a href="{{ route('where') }}">
+										<x-filament::icon icon="bx-map" class="w-5 h-5 inline-block align-text-bottom"/>
+										<span class="font-semibold">{{ $item->venue->name }}</span>. {{ $item->venue->town }}
+									</a>
+								</div>
 
 							</div>
 						</div>
