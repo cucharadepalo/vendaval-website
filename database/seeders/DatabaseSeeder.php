@@ -445,5 +445,9 @@ FITA &ndash; Cinema com olhos de ver é un colectivo educativo que nace có obxe
 				'updated_at' => Carbon::now()
 			],
 		]);
+
+		$this->call([
+			PagesSeeder::class,
+		]);
 	}
 }

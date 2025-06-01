@@ -12,9 +12,10 @@ return new class extends Migration
 			$table->id();
 			$table->string('title', 191)->unique();
 			$table->string('slug', 191)->unique();
-			$table->text('content');
-			$table->boolean('is_published');
-			$table->boolean('in_menu');
+			$table->string('type')->default('custom');
+			$table->text('content')->nullable();
+			$table->boolean('is_published')->default(false);
+			$table->boolean('in_menu')->default(false);
 
 			$table->timestamps();
 			$table->softDeletes();
