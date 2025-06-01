@@ -8,5 +8,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 Route::get('/programa', [ScheduleController::class, 'index'])->name('schedule');
 Route::get('/programa/{slug}', [ScheduleController::class, 'show'])->name('activity');
+Route::get('/ribeira-sacra', [ScheduleController::class, 'where'])->name('where');
 Route::get('/filmes', [FilmController::class, 'index'])->name('filmes');
 Route::get('/filmes/{slug}', [FilmController::class, 'show'])->name('film');

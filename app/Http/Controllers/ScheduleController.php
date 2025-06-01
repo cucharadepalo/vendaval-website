@@ -55,6 +55,9 @@ class ScheduleController extends Controller
 		}
 	}
 
+	/**
+	 * Show the Activity details page.
+	 */
 	public function show(Request $request, string $slug): View
 	{
 		$activity = Activity::whereSlug($slug)->first();
@@ -63,4 +66,22 @@ class ScheduleController extends Controller
 
 		return view('activity', compact('activity'));
 	}
+
+	/**
+	 * Show the venues list.
+	 */
+	public function where(Request $request): View
+	{
+		$venues = collect();
+		$schedules = $this->edition->schedules;
+
+		foreach ($schedules as $schedule) {
+			$venues->push($schedule->venue);
+		}
+
+		$venues = $venues->unique()->sortByDesc('text');
+
+		return view('where', compact('venues'));
+	}
+
 }

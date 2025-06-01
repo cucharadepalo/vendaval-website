@@ -21,7 +21,7 @@ class EditionComposer
 	 */
 	public function compose(View $view): void
 	{
-		$splash = $this->edition->getMedia('splash')->first();
+		$splash = $this->edition ? $this->edition->getMedia('splash')->first() : null;
 
 		$view->with(['edition' => $this->edition, 'splash' => $splash ]);
 	}
