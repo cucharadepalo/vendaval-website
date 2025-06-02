@@ -9,15 +9,6 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 	/**
-	 * Create a new schedule controller.
-	 */
-	public function __construct(
-		protected null | Edition $edition,
-	) {
-		$this->edition = Edition::where('is_active', 1)->first();
-	}
-
-	/**
 	 * Handle the incoming request.
 	 */
 	public function __invoke(Request $request)

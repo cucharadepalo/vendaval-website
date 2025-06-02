@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Programa')
+@section('title', $page->title)
 
 @section('content')
-	<x-header title="Programa"
+	<x-header title="{{ $page->title }}"
 		:$edition
 		:$splash
 		height="short" />
@@ -83,5 +83,13 @@
 			@endforeach
 
 		</section>
+
+		@if ($page->content)
+			<section class="w-full px-6 max-w-7xl mx-auto md:px-16 my-12">
+				<div class="md-wrapper md:columns-2 md:gap-12 xl:columns-3 space-y-6">
+					{!! str($page->content)->markdown()->sanitizeHtml() !!}
+				</div>
+			</section>
+		@endif
 	</main>
 @endsection

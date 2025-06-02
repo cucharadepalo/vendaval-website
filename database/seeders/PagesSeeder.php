@@ -44,7 +44,7 @@ Se puede poner cualquier información relevante al programa aqui.',
 
 		Page::create([
 			'title' => 'Ribeira Sacra',
-			'slug' => 'ribeira-sacra',
+			'slug' => 'lugares',
 			'type' => 'system',
 			'content' => 'Este contenido se mostrará al principio de la página de filmes.',
 			'is_published' => true,

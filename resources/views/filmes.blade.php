@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'Filmes')
+@section('title', $page->title)
 
 @section('content')
-	<x-header title="Filmes"
+	<x-header title="{{ $page->title }}"
 		:$edition
 		:$splash
 		height="short" />
 
 	<main>
+		@if ($page->content)
+			<section class="w-full my-12 px-6 max-w-7xl mx-auto">
+				<div class="md-wrapper md:columns-2 md:gap-12 xl:columns-3 space-y-6">
+					{!! str($page->content)->markdown()->sanitizeHtml() !!}
+				</div>
+			</section>
+		@endif
 		<section class="w-full my-12 px-6 max-w-7xl mx-auto">
 			<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
 				@foreach ($filmes as $film)

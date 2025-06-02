@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Ribeira Sacra')
+@section('title', $page->title)
 
 @section('content')
-	<x-header title="Ribeira Sacra"
+	<x-header title="{{ $page->title }}"
 		:$edition
 		:$splash
 		height="short" />
 
 	<main>
 		<section class="w-full px-6 max-w-7xl mx-auto md:px-16">
-
-			{{-- Aqui irá un texto introductorio --}}
+			@if ($page->content)
+				<div class="md-wrapper md:columns-2 md:gap-12 xl:columns-3 space-y-6">
+					{!! str($page->content)->markdown()->sanitizeHtml() !!}
+				</div>
+			@endif
 			<div class="text-pretty my-12">
 				@foreach ($venues as $venue)
 					<div class="mt-12">
