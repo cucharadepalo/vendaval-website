@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Edition;
 use App\Models\Film;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -30,8 +31,9 @@ class FilmController extends Controller
 		} else {
 
 			$filmes = $this->edition->films->sortBy('title');
+			$page = Page::whereSlug('filmes')->first();
 
-			return view('filmes', compact('filmes'));
+			return view('filmes', compact('filmes', 'page'));
 
 		}
 	}

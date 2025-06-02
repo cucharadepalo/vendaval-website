@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Edition;
+use App\Models\Page;
 use App\Models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -49,7 +50,9 @@ class ScheduleController extends Controller
 					return $day->startOfDay()->format('Y-m-d');
 				});
 
-				return view('schedule', compact(['schedules', 'start_date', 'end_date']));
+				$page = Page::whereSlug('programa')->first();
+
+				return view('schedule', compact(['schedules', 'start_date', 'end_date', 'page']));
 
 			}
 		}
@@ -72,6 +75,7 @@ class ScheduleController extends Controller
 	 */
 	public function where(Request $request): View
 	{
+		$page = Page::whereSlug('lugares')->first();
 		$venues = collect();
 		$schedules = $this->edition->schedules;
 
@@ -81,7 +85,7 @@ class ScheduleController extends Controller
 
 		$venues = $venues->unique()->sortByDesc('text');
 
-		return view('where', compact('venues'));
+		return view('where', compact('venues', 'page'));
 	}
 
 }
