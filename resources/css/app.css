@@ -16,8 +16,8 @@
 	--aspect-poster: 27 / 40;
 	--aspect-p-tall: 5 / 4;
 	--aspect-p-short: 5 / 3;
-	--aspect-l-tall: 5 / 1;
-	--aspect-l-short: 6 / 1;
+	--aspect-l-tall: 4 / 2;
+	--aspect-l-short: 5 / 1;
 }
 
 @layer theme {
@@ -53,5 +53,6 @@
 }
 
 .md-wrapper :is(p, ul, ol, h1, h2, h3, h4, h5, blockquote, figure, image, table) {
-	margin-block-end: 1rem;
+	@apply text-pretty;
+	margin-block-end: 1.5em;
 }
