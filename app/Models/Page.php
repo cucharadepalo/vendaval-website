@@ -29,4 +29,18 @@ class Page extends Model implements HasMedia
 		$this->addMediaCollection('images')
 			->acceptsMimeTypes(['image/jpeg', 'image/svg+xml', 'image/png', 'image/apng', 'image/jp2', 'image/gif', 'image/webp']);
 	}
+
+	/**
+	 * Devuelve el link de la página.
+	 */
+	public function getLink(): string
+	{
+		$url = config('app.url');
+
+		if ($this->slug !== 'home') {
+			$url .= '/' . $this->slug;
+		}
+
+		return $url;
+	}
 }

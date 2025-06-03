@@ -14,6 +14,10 @@
 		ui-sans-serif, system-ui, sans-serif;
 	--font-brand--font-variation-settings: "slnt" 0, "wdth" 62.5, "wght" 700;
 	--aspect-poster: 27 / 40;
+	--aspect-p-tall: 5 / 4;
+	--aspect-p-short: 5 / 3;
+	--aspect-l-tall: 5 / 1;
+	--aspect-l-short: 6 / 1;
 }
 
 @layer theme {

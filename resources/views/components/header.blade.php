@@ -1,6 +1,6 @@
-<header class="w-full {{ $height == 'tall' ? 'aspect-[5/4] pt-16' : 'aspect-[5/3] pt-6' }} bg-(--vdl-splash-bg-color) bg-cover bg-center bg-no-repeat text-(--vdl-splash-txt-color) "@isset($splash)style="background-image: url({{ $splash->getFullUrl() }})"@endisset>
+<header class="w-full {{ $height == 'tall' ? 'portrait:aspect-p-tall landscape:aspect-l-tall pt-16' : 'portrait:aspect-p-short landscape:aspect-l-short pt-6' }} bg-(--vdl-splash-bg-color) bg-size-[100%_100%] bg-center bg-no-repeat text-(--vdl-splash-txt-color) "@isset($splash)style="background-image: url({{ $splash->getFullUrl() }})"@endisset>
 
-	<div class="w-full px-6 max-w-7xl mx-auto xl:grid xl:grid-cols-3 xl:gap-12">
+	<div class="w-full px-6 max-w-7xl mx-auto md:px-16 xl:grid xl:grid-cols-3 xl:gap-12">
 
 		<div class="col-span-2">
 			<h1><a href="{{ route('home') }}" class="splash-title {{ $height == 'tall' ? 'mega' : 'simple' }}">Vendaval</a> <span class="splash-subtitle {{ $height == 'tall' ? 'simple' : 'mega' }}">{{ $title }}</span> @isset($thirdLine)<span class="splash-subtitle simple">{{ $thirdLine }}</span>@endisset</h1>
