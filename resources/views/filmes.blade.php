@@ -10,14 +10,14 @@
 
 	<main>
 		@if ($page->content)
-			<section class="w-full my-12 px-6 max-w-7xl mx-auto">
-				<div class="md-wrapper md:columns-2 md:gap-12 xl:columns-3 space-y-6">
+			<section class="my-12 px-6 xl:px-20 xl:my-16">
+				<div class="md-wrapper xl:text-lg xl:columns-2 xl:gap-16 xl:my-8">
 					{!! str($page->content)->markdown()->sanitizeHtml() !!}
 				</div>
 			</section>
 		@endif
-		<section class="w-full my-12 px-6 max-w-7xl mx-auto">
-			<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+		<section class="my-12 px-6 xl:px-20 xl:my-16">
+			<div class="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4 xl:gap-8">
 				@foreach ($filmes as $film)
 					<article>
 						<a href="{{ route('film', ['slug' => $film->slug]) }}" class="h-full flex flex-col">
@@ -29,7 +29,7 @@
 								@endif
 							</div>
 							<div class="flex-grow flex flex-col">
-								<p class="font-semibold my-2 leading-tight md:text-lg">{{ $film->title }}</p>
+								<p class="font-semibold my-2 leading-tight xl:text-xl xl:mt-4">{{ $film->title }}</p>
 								<p class="text-sm mt-auto md:text-base">{{ $film->director }}</p>
 								<p class="text-sm md:text-base">{{ $film->year }}</p>
 							</div>

@@ -9,8 +9,8 @@
 		height="short" />
 
 	<main>
-		<section id="info" class="w-full mb-12 max-w-6xl mx-auto">
-			<div class="xl:px-16 xl:pt-6">
+		<section id="info">
+			<div class="xl:px-20 xl:pt-16">
 				@php
 					$still = $film->getFirstMedia('stills');
 				@endphp
@@ -21,13 +21,13 @@
 				@endif
 			</div>
 
-			<div class="px-6 mt-4 md:px-16">
-				<h1 class="font-semibold text-3xl">{{ $film->title }}</h1>
-				<div class="my-4">
+			<div class="px-6 mt-4 md:px-16 xl:px-20 xl:mt-8 xl:mb-16">
+				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $film->title }}</h1>
+				<div class="my-4 xl:my-8 xl:text-xl">
 					<p class="font-semibold">{{ $film->director }}</p>
 					<p>{{ $film->year }} | {{ $film->genre }} | {{ convertToMinutes($film->duration) }}min | {{ $film->country }}</p>
 				</div>
-				<div class="md-wrapper">
+				<div class="md-wrapper xl:text-lg xl:columns-2 xl:gap-16 xl:my-8">
 					{!! str($film->text)->markdown()->sanitizeHtml() !!}
 				</div>
 			</div>

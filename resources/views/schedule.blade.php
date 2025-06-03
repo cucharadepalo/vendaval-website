@@ -9,13 +9,13 @@
 		height="short" />
 
 	<main>
-		<section class="w-full px-6 max-w-7xl mx-auto -mt-12 md:px-16">
+		<section class="px-6 -mt-12 md:px-16 xl:px-20">
 			<div class="w-full overflow-x-scroll md:overflow-hidden">
 				<nav class="flex items-center gap-2 justify-start md:gap-4" role="tablist">
 					@foreach ($schedules as $date => $items)
 						<button type="button"
 							id="tab-{{ Str::camel($date) }}"
-							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) border border-(--vdl-splash-txt-color)/50 p-3 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color) aria-selected:border-(--vdl-secondary-color)"
+							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color)"
 							aria-selected="{{ $loop->first ? 'true' : 'false' }}"
 							aria-controls="panel-{{ Str::camel($date) }}"
 							role="tab"
@@ -37,7 +37,7 @@
 					@if (!$loop->first) hidden @endif>
 
 					@foreach ($items as $item)
-						<div class="not-first:mt-12 md:grid md:grid-cols-6 md:gap-2 xl:not-first:mt-24">
+						<div class="not-first:mt-12 md:grid md:grid-cols-6 md:gap-2 xl:not-first:mt-24 xl:gap-8">
 
 							<p class="text-xl font-semibold inline-block mr-2 xl:text-2xl">
 								{{ $item->start_time->format('H:i') }}
