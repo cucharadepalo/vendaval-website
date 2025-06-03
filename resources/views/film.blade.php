@@ -9,17 +9,19 @@
 		height="short" />
 
 	<main>
-		<section id="info" class="w-full mb-12 max-w-7xl mx-auto">
-			@php
-				$still = $film->getFirstMedia('stills');
-			@endphp
-			@if ($still)
-				{{ $still('still_opt')->attributes(['class' => 'w-full h-auto']) }}
-			@else
-				<img src="{{ Vite::asset('resources/images/still_placeholder.svg') }}" class="w-full h-auto" alt="">
-			@endif
+		<section id="info" class="w-full mb-12 max-w-6xl mx-auto">
+			<div class="xl:px-16 xl:pt-6">
+				@php
+					$still = $film->getFirstMedia('stills');
+				@endphp
+				@if ($still)
+					{{ $still('still_opt')->attributes(['class' => 'w-full h-auto']) }}
+				@else
+					<img src="{{ Vite::asset('resources/images/still_placeholder.svg') }}" class="w-full h-auto" alt="">
+				@endif
+			</div>
 
-			<div class="px-6 mt-4">
+			<div class="px-6 mt-4 md:px-16">
 				<h1 class="font-semibold text-3xl">{{ $film->title }}</h1>
 				<div class="my-4">
 					<p class="font-semibold">{{ $film->director }}</p>
@@ -31,7 +33,7 @@
 			</div>
 		</section>
 		<section id="proxeccions" class="w-full py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color)">
-			<div class="px-6 max-w-7xl mx-auto">
+			<div class="px-6 max-w-6xl mx-auto md:px-16">
 				<h2 class="font-semibold text-2xl">Proxeccións</h2>
 				@if ($film->schedules->count())
 				<ul class="my-4 text-lg">
@@ -44,7 +46,9 @@
 							<span class="font-normal lowercase">ás </span>{{ $schedule->start_time->format('H:i') }}
 						</div>
 						<div>
-							<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
+							<a href="{{ route('where') }}">
+								<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
+							</a>
 						</div>
 					</li>
 					@endforeach

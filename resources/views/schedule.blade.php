@@ -11,7 +11,7 @@
 	<main>
 		<section class="w-full px-6 max-w-7xl mx-auto -mt-12 md:px-16">
 			<div class="w-full overflow-x-scroll md:overflow-hidden">
-				<nav class="flex items-center gap-2 justify-start md:justify-center md:gap-4" role="tablist">
+				<nav class="flex items-center gap-2 justify-start md:gap-4" role="tablist">
 					@foreach ($schedules as $date => $items)
 						<button type="button"
 							id="tab-{{ Str::camel($date) }}"
@@ -37,17 +37,17 @@
 					@if (!$loop->first) hidden @endif>
 
 					@foreach ($items as $item)
-						<div class="not-first:mt-12 md:grid md:grid-cols-6 md:gap-2">
+						<div class="not-first:mt-12 md:grid md:grid-cols-6 md:gap-2 xl:not-first:mt-24">
 
-							<p class="text-xl font-semibold inline-block mr-2">
+							<p class="text-xl font-semibold inline-block mr-2 xl:text-2xl">
 								{{ $item->start_time->format('H:i') }}
 							</p>
 
-							<p class="text-xl font-semibold inline-block md:col-span-3">
+							<p class="text-xl font-semibold inline-block md:col-span-3 xl:text-2xl">
 								{{ $item->description }}
 							</p>
 
-							<div class="text-lg mt-4 md:col-span-5 md:col-start-2 md:mt-0">
+							<div class="text-lg mt-4 md:col-span-5 md:col-start-2 md:mt-0 xl:text-2xl">
 
 								@foreach ($item->films as $film)
 									<p class="mt-2">
