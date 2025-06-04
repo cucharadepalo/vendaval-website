@@ -16,7 +16,7 @@
 	--aspect-poster: 27 / 40;
 	--aspect-p-tall: 5 / 4;
 	--aspect-p-short: 5 / 3;
-	--aspect-l-tall: 4 / 2;
+	--aspect-l-tall: 5 / 2;
 	--aspect-l-short: 5 / 1;
 }
 
@@ -30,13 +30,13 @@
 
 @layer components {
 	.splash-title {
-		@apply block font-brand uppercase tracking-wide leading-[0.75] antialiased;
+		@apply block font-brand uppercase tracking-wide leading-[0.85] antialiased;
 	}
 	.splash-title.mega {
 		font-size: clamp(4rem, 25vw, 11.25rem);
 	}
 	.splash-title.simple {
-		font-size: clamp(2.25rem, 8vw, 3.5rem);
+		font-size: clamp(3.25rem, 8vw, 4rem);
 	}
 	.splash-subtitle {
 		@apply block font-brand uppercase tracking-wide leading-none antialiased;

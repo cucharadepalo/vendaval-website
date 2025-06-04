@@ -40,9 +40,12 @@ class PageResource extends Resource
 							->translateLabel()
 							->maxLength(191)
 							->columnSpan(2),
+						Forms\Components\Hidden::make('type')
+							->default('custom'),
 						Forms\Components\TextInput::make('slug')
 							->label('Código / Slug')
 							->maxLength(191)
+							->columnSpan(1)
 							->readOnly(fn (Page $record): bool => $record->type === 'system')
 							->afterStateUpdated(function (?string $state): string {
 								return Str::slug($state);
@@ -54,10 +57,15 @@ class PageResource extends Resource
 									return 'A url da páxina';
 								}
 							}),
-						Forms\Components\Toggle::make('is_published')
-							->label('Publicada')
-							->disabled(fn (Page $record): bool => $record->type === 'system')
-
+						Forms\Components\MarkdownEditor::make('content')
+							->translateLabel()
+							->minHeight('30rem')
+							->columnSpan(3)
+							->fileAttachmentsDisk('media')
+							->fileAttachmentsDirectory('paxinas')
+							->disableToolbarButtons([
+								'codeBlock'
+							])
 					])
 			]);
 	}
@@ -71,7 +79,20 @@ class PageResource extends Resource
 					->weight(FontWeight::Bold)
 					->translateLabel(),
 				TextColumn::make('slug')
-					->label('Codigo / slug')
+					->label('Codigo / slug'),
+				Tables\Columns\ToggleColumn::make('is_published')
+					->label('Publicada')
+					->disabled(fn (Page $record): bool => $record->type === 'system')
+					->onColor(function (Page $record): string {
+						if ($record->type === 'system') {
+							return 'gray';
+						} else {
+							return 'success';
+						}
+					}),
+				Tables\Columns\ToggleColumn::make('in_menu')
+					->label('No menú')
+
 			])
 			->filters([
 				//
