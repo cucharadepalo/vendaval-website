@@ -75,7 +75,7 @@ class ScheduleController extends Controller
 	 */
 	public function where(Request $request): View
 	{
-		$page = Page::whereSlug('lugares')->first();
+		$page = Page::whereSlug('ribeira-sacra')->first();
 		$venues = collect();
 		$schedules = $this->edition->schedules;
 
