@@ -50,6 +50,10 @@
 	.splash-subtitle.simple {
 		font-size: clamp(2rem, 8vw, 3.25rem);
 	}
+
+	.site-menu {
+		transition: top .5s ease-in-out;
+	}
 }
 
 .md-wrapper :is(p, ul, ol, h1, h2, h3, h4, h5, blockquote, figure, image, table) {

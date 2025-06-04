@@ -58,3 +58,27 @@ function initTabs() {
 }
 
 initTabs();
+
+
+function toggleMenu() {
+	const menu = document.querySelector('.site-menu');
+
+	if (menu && menu.classList.contains('top-0')) {
+		menu.classList.remove('top-0');
+		menu.classList.add('-top-full');
+	} else if (menu && menu.classList.contains('-top-full')) {
+		menu.classList.remove('-top-full');
+		menu.classList.add('top-0');
+	}
+}
+
+const menuTogglers = document.querySelectorAll('.toggle-menu')
+
+menuTogglers.forEach( (element) => {
+	element.addEventListener('click', () => {
+		toggleMenu();
+		for (const child of element.children) {
+			child.classList.toggle('hidden')
+		}
+	});
+})

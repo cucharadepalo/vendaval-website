@@ -18,7 +18,7 @@
 
 	{!! printCssVariables($edition->colors) !!}
 </head>
-<body class="bg-(--vdl-bg-color) text-(--vdl-txt-color) max-w-7xl mx-auto">
+<body class="bg-(--vdl-bg-color) text-(--vdl-txt-color) max-w-7xl mx-auto min-h-dvh">
 @yield('content')
 </body>
 </html>
