@@ -9,7 +9,7 @@
 		height="short" />
 
 	<main>
-		<section class="px-6 -mt-12 md:px-16 xl:px-20">
+		<section class="relative px-6 -mt-12 md:px-16 xl:px-20">
 			<div class="w-full overflow-x-scroll md:overflow-hidden">
 				<nav class="flex items-center gap-2 justify-start md:gap-4" role="tablist">
 					@foreach ($schedules as $date => $items)

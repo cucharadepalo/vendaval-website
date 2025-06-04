@@ -52,7 +52,7 @@
 	}
 
 	.site-menu {
-		transition: top .5s ease-in-out;
+		transition: top .5s ease;
 	}
 }
 

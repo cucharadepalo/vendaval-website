@@ -6,12 +6,25 @@
 			<h1><a href="{{ route('home') }}" class="splash-title {{ $height == 'tall' ? 'mega' : 'simple' }}">Vendaval</a> <span class="splash-subtitle {{ $height == 'tall' ? 'simple' : 'mega' }}">{{ $title }}</span> @isset($thirdLine)<span class="splash-subtitle simple">{{ $thirdLine }}</span>@endisset</h1>
 		</div>
 
-		<nav class="site-menu absolute w-full h-full -top-full right-0 bottom-0 left-0 bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color) flex items-center justify-center">
+		<nav class="site-menu absolute w-full h-full -top-full right-0 bottom-0 left-0 bg-(--vdl-splash-bg-color)/80 text-(--vdl-splash-txt-color) flex items-center justify-center backdrop-blur-lg">
 
 			<ul class="text-3xl space-y-2 text-center">
 				@foreach ($pages as $page)
 				<li><a href="{{ $page->getLink() }}">{{ $page->title }}</a></li>
 				@endforeach
+			</ul>
+
+			<ul class="absolute bottom-2 w-full flex gap-2 items-center justify-center">
+				<li>
+					<a href="https://www.instagram.com/vendaval_mostracinemapt/" target="_blank" title="Instagram">
+						<x-filament::icon icon="bxl-instagram" class="w-8 h-8 inline-block"/>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.facebook.com/vendavalmostracinemapt" target="_blank" title="Facebook">
+						<x-filament::icon icon="bxl-facebook-circle" class="w-8 h-8 inline-block"/>
+					</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -20,7 +33,7 @@
 				<x-filament::icon icon="bx-menu" class="w-8 h-8 block" />
 			</span>
 			<span class="state-open hidden">
-				<span class="text-4xl">&times;</span>
+				<span class="text-4xl leading-6">&times;</span>
 				<span class="sr-only">Pechar</span>
 			</span>
 		</button>
