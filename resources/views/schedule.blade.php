@@ -8,21 +8,21 @@
 		:$splash
 		height="short" />
 
-	<main>
-		<section class="relative px-6 mt-6 md:px-16 xl:px-20">
+	<main class="pb-24">
+		<section id="programa" class="relative px-6 mt-6 md:px-16 xl:px-20 xl:mt-12">
 			<div class="w-full overflow-x-scroll md:overflow-hidden">
-				<nav class="flex items-center gap-2 justify-start md:gap-4" role="tablist">
+				<nav class="flex items-center gap-2 justify-start md:gap-4 lg:justify-center" role="tablist">
 					@foreach ($schedules as $date => $items)
 						<button type="button"
 							id="tab-{{ Str::camel($date) }}"
-							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color)"
+							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 border border-(--vdl-splash-txt-color)/30 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color) aria-selected:border-(--vdl-secondary-color) xl:p-4"
 							aria-selected="{{ $loop->first ? 'true' : 'false' }}"
 							aria-controls="panel-{{ Str::camel($date) }}"
 							role="tab"
 							tabindex="{{ $loop->first ? '0' : '-1' }}">
-							<span class="block uppercase text-xl leading-4">{{ printDDay($date) }}</span>
-							<span class="block font-semibold text-5xl leading-none">{{ substr($date, 8, 2) }}</span>
-							<span class="block uppercase font-bold text-xl leading-4">{{ printMMonth($date) }}</span>
+							<span class="block uppercase text-xl leading-4 xl:text-2xl xl:leading-5">{{ printDDay($date) }}</span>
+							<span class="block font-semibold text-5xl leading-none xl:text-6xl">{{ substr($date, 8, 2) }}</span>
+							<span class="block uppercase font-bold text-xl leading-4 xl:text-2xl xl:leading-5">{{ printMMonth($date) }}</span>
 						</button>
 					@endforeach
 				</nav>
@@ -30,52 +30,56 @@
 
 			@foreach ($schedules as $date => $items)
 				<div id="panel-{{ Str::camel($date) }}"
-					class="my-12"
+					class="my-6 max-w-4xl mx-auto xl:my-12"
 					aria-labelledby="tab-{{ Str::camel($date) }}"
 					role="tabpanel"
 					tabindex="0"
 					@if (!$loop->first) hidden @endif>
 
 					@foreach ($items as $item)
-						<div class="not-first:mt-12 md:grid md:grid-cols-6 md:gap-2 xl:not-first:mt-24 xl:gap-8">
+						<div class="not-first:mt-12 border-t border-(--vdl-splash-txt-color)/30 pt-4 lg:grid lg:grid-cols-4 lg:gap-6 lg:items-center xl:pt-8 xl:gap-8 xl:not-first:mt-16">
 
-							<p class="text-xl font-semibold inline-block mr-2 xl:text-2xl">
+							<p class="text-xl font-semibold inline-block mr-2 lg:mr-0 lg:text-right lg:text-2xl xl:text-3xl">
 								{{ $item->start_time->format('H:i') }}
 							</p>
 
-							<p class="text-xl font-semibold inline-block md:col-span-3 xl:text-2xl">
+							<p class="text-xl inline-block lg:col-span-3 lg:text-2xl xl:text-3xl">
 								{{ $item->description }}
 							</p>
 
-							<div class="text-lg mt-4 md:col-span-5 md:col-start-2 md:mt-0 xl:text-2xl">
-
-								@foreach ($item->films as $film)
-									<p class="mt-2">
-										<a href="{{ route('film', ['slug' => $film->slug]) }}">
-											<span class="font-semibold">{{ $film->title }},</span> {{ $film->director }} ({{ $film->year }})
-										</a>
-									</p>
-								@endforeach
-
-								@foreach ($item->activities as $activity)
-									<p class="mt-2">
-										<a href="{{ route('activity', ['slug' => $activity->slug]) }}">
-											<span class="font-semibold">{{ $activity->title }}</span>
-										</a>
-									</p>
-								@endforeach
-
-								@isset($item->notes)
-									<p class="text-sm mt-2">{{ $item->notes }}</p>
-								@endisset
-
-								<div class="text-sm mt-6">
-									<a href="{{ route('where') }}">
-										<x-filament::icon icon="bx-map" class="w-5 h-5 inline-block align-text-bottom"/>
-										<span class="font-semibold">{{ $item->venue->name }}</span>. {{ $item->venue->town }}
+							@foreach ($item->films as $film)
+								<div class="hidden lg:block">
+									{{ $film->getFirstMedia('stills') ? $film->getFirstMedia('stills')('still_opt')->attributes(['class' => 'w-full aspect-video object-center rounded-sm', 'width' => '160', 'height' => '90'])->lazy() : '' }}
+								</div>
+								<div class="text-lg text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:text-xl">
+									<a href="{{ route('film', ['slug' => $film->slug]) }}">
+										<span class="block font-semibold lg:text-2xl xl:text-3xl">{{ $film->title }}</span>
+										{{ $film->director }} <span class="lg:block">({{ $film->year }})</span>
 									</a>
 								</div>
+							@endforeach
 
+							@foreach ($item->activities as $activity)
+								<div class="hidden lg:block">
+									{{ $activity->getFirstMedia('image') ? $activity->getFirstMedia('image')('image_opt')->attributes(['class' => 'w-full aspect-video object-center object-cover rounded-sm', 'width' => '160', 'height' => '90'])->lazy() : '' }}
+								</div>
+								<div class="text-lg text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:text-xl">
+									<a href="{{ route('activity', ['slug' => $activity->slug]) }}">
+										<span class="block font-semibold lg:text-2xl xl:text-3xl">{{ $activity->title }}</span>
+										{{ $activity->summary }}
+									</a>
+								</div>
+							@endforeach
+
+							@isset($item->notes)
+								<p class="text-sm text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:col-start-2 lg:text-lg">{{ $item->notes }}</p>
+							@endisset
+
+							<div class="text-sm mt-4 lg:mt-0 lg:col-span-3 lg:col-start-2 lg:text-lg">
+								<a href="{{ route('where') }}">
+									<x-filament::icon icon="bx-map" class="w-5 h-5 inline-block align-text-bottom lg:w-6 lg:h-6"/>
+									<span class="font-semibold">{{ $item->venue->name }}</span>
+								</a>
 							</div>
 						</div>
 					@endforeach
@@ -85,8 +89,8 @@
 		</section>
 
 		@if ($page->content)
-			<section class="w-full px-6 max-w-7xl mx-auto md:px-16 my-12">
-				<div class="md-wrapper md:columns-2 md:gap-12 xl:columns-3 space-y-6">
+			<section id="contido" class="my-12 px-6 md:px-16 xl:px-20 xl:my-24">
+				<div class="md-wrapper lg:text-lg lg:columns-2 lg:gap-16">
 					{!! str($page->content)->markdown()->sanitizeHtml() !!}
 				</div>
 			</section>

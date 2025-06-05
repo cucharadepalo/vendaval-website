@@ -10,7 +10,14 @@
 
 	<main>
 		<section id="info">
-			<div class="xl:px-20 xl:pt-16">
+			<div class="px-6 mt-6 md:px-16 xl:px-20 xl:mt-16">
+				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $film->title }}</h1>
+				<div class="my-6 xl:text-xl xl:mb-12">
+					<p class="font-semibold">{{ $film->director }}</p>
+					<p>{{ $film->year }} | {{ $film->genre }} | {{ convertToMinutes($film->duration) }}min | {{ $film->country }}</p>
+				</div>
+			</div>
+			<div class="xl:px-20">
 				@php
 					$still = $film->getFirstMedia('stills');
 				@endphp
@@ -20,14 +27,8 @@
 					<img src="{{ Vite::asset('resources/images/still_placeholder.svg') }}" class="w-full h-auto" alt="">
 				@endif
 			</div>
-
-			<div class="px-6 mt-4 md:px-16 xl:px-20 xl:mt-8 xl:mb-16">
-				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $film->title }}</h1>
-				<div class="my-4 xl:my-8 xl:text-xl">
-					<p class="font-semibold">{{ $film->director }}</p>
-					<p>{{ $film->year }} | {{ $film->genre }} | {{ convertToMinutes($film->duration) }}min | {{ $film->country }}</p>
-				</div>
-				<div class="md-wrapper xl:text-lg xl:columns-2 xl:gap-16 xl:my-8">
+			<div class="px-6 my-6 md:px-16 xl:px-20 xl:my-12">
+				<div class="md-wrapper xl:text-lg xl:columns-2 xl:gap-16">
 					{!! str($film->text)->markdown()->sanitizeHtml() !!}
 				</div>
 			</div>
