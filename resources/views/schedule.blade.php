@@ -15,11 +15,12 @@
 					@foreach ($schedules as $date => $items)
 						<button type="button"
 							id="tab-{{ Str::camel($date) }}"
-							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 border border-(--vdl-splash-txt-color)/30 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color) aria-selected:border-(--vdl-secondary-color) xl:p-4"
-							aria-selected="{{ $loop->first ? 'true' : 'false' }}"
+							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 border border-(--vdl-splash-txt-color)/30 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color) aria-selected:border-(--vdl-secondary-color) focus:outline-0 xl:p-4"
+							aria-selected="false"
 							aria-controls="panel-{{ Str::camel($date) }}"
 							role="tab"
-							tabindex="{{ $loop->first ? '0' : '-1' }}">
+							datetime="{{ $date }}"
+							tabindex="-1">
 							<span class="block uppercase text-xl leading-4 xl:text-2xl xl:leading-5">{{ printDDay($date) }}</span>
 							<span class="block font-semibold text-5xl leading-none xl:text-6xl">{{ substr($date, 8, 2) }}</span>
 							<span class="block uppercase font-bold text-xl leading-4 xl:text-2xl xl:leading-5">{{ printMMonth($date) }}</span>

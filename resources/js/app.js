@@ -1,7 +1,22 @@
 function initTabs() {
 	const tabBtns = document.querySelectorAll('button[role="tab"]');
 	const panels = document.querySelectorAll('[role="tabpanel"]');
+	const currentUrl = new URL(document.location.href);
+	const dayUrl = currentUrl.searchParams.get('dia');
 	let activeIndex = 0;
+	if (dayUrl) {
+		for (let i = 0; i < tabBtns.length; i++) {
+			if (tabBtns[i].getAttribute('datetime') == dayUrl){
+				setActiveTab(i, false);
+				activeIndex = i;
+				break;
+			}
+		}
+	} else {
+		setActiveTab(activeIndex, false);
+		currentUrl.searchParams.set('dia', tabBtns[activeIndex].getAttribute('datetime'));
+		history.replaceState({activeTab: activeIndex}, "", currentUrl)
+	}
 
 	tabBtns.forEach( (tab, index) => {
 		tab.addEventListener('click', (event) => {
@@ -36,9 +51,9 @@ function initTabs() {
 				setActiveTab(lastIndex);
 			}
 		});
-	})
+	});
 
-	function setActiveTab(index) {
+	function setActiveTab(index, push = true) {
 		tabBtns[activeIndex].setAttribute('aria-selected', 'false');
 		tabBtns[activeIndex].tabIndex = -1;
 		tabBtns[index].setAttribute('aria-selected', 'true');
@@ -46,6 +61,10 @@ function initTabs() {
 		tabBtns[index].focus();
 
 		setActivePanel(index);
+		if (push) {
+			currentUrl.searchParams.set('dia', tabBtns[index].getAttribute('datetime'));
+			history.pushState({activeTab: index}, "", currentUrl);
+		}
 		activeIndex = index;
 	}
 
@@ -55,10 +74,14 @@ function initTabs() {
 		panels[index].removeAttribute('hidden');
 		panels[index].tabIndex = 0;
 	}
+
+	window.addEventListener('popstate', (event) => {
+		if (event.state && 'activeTab' in event.state) {
+			setActiveTab(event.state.activeTab, false);
+		}
+	});
+
 }
-
-initTabs();
-
 
 function toggleMenu() {
 	const menu = document.querySelector('.site-menu');
@@ -82,3 +105,7 @@ menuTogglers.forEach( (element) => {
 		}
 	});
 })
+
+if (document.querySelectorAll('button[role="tab"]').length) {
+	initTabs();
+}
