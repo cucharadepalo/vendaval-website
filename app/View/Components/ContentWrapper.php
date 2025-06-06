@@ -22,7 +22,6 @@ class ContentWrapper extends Component
 	 */
 	public function hasCols(): bool
 	{
-
 		return $this->words > 200;
 	}
 
