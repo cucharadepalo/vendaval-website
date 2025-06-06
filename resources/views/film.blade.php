@@ -31,35 +31,34 @@
 				<x-content-wrapper :content="$film->text" />
 			</div>
 		</section>
-		<section id="proxeccions" class="w-full py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color)">
-			<div class="px-6 max-w-6xl mx-auto md:px-16">
-				<h2 class="font-semibold text-2xl">Proxeccións</h2>
-				@if ($film->schedules->count())
-				<ul class="my-4 text-lg">
-					@foreach ($film->schedules as $schedule)
-					<li>
-						<div class="font-semibold uppercase">
-							{{ printDDay($schedule->start_time->format('Y-m-d')) }}
-							{{ $schedule->start_time->format('d') }}
-							{{ printMMonth($schedule->start_time->format('Y-m-d')) }}
-							<span class="font-normal lowercase">ás </span>{{ $schedule->start_time->format('H:i') }}
-						</div>
-						<div>
-							<a href="{{ route('where') }}">
-								<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
-							</a>
-						</div>
-					</li>
-					@endforeach
-				</ul>
-				@else
-				<p class="text-lg my-4">Próximamente.</p>
-				@endif
-				<nav class="mt-12 flex flex-col">
-					<a href="{{ route('filmes') }}" class="text-lg inline-block">&larr; Filmes</a>
-					<a href="{{ route('schedule') }}" class="text-lg inline-block">&larr; Programa</a>
-				</nav>
-			</div>
+
+		<section id="proxeccions" class="py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color) px-6 md:px-16 lg:px-8 xl:px-20">
+			<h2 class="font-semibold text-2xl">Proxeccións</h2>
+			@if ($film->schedules->count())
+			<ul class="my-4 text-lg xl:my-8 md:grid md:grid-cols-2 md:gap-8 md:items-center lg:grid-cols-3">
+				@foreach ($film->schedules as $schedule)
+				<li>
+					<div class="font-semibold uppercase">
+						{{ printDDay($schedule->start_time->format('Y-m-d')) }}
+						{{ $schedule->start_time->format('d') }}
+						{{ printMMonth($schedule->start_time->format('Y-m-d')) }}
+						<span class="font-normal lowercase">ás </span>{{ $schedule->start_time->format('H:i') }}
+					</div>
+					<div>
+						<a href="{{ route('where') }}">
+							<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
+						</a>
+					</div>
+				</li>
+				@endforeach
+			</ul>
+			@else
+			<p class="text-lg my-4">Próximamente.</p>
+			@endif
+			<nav class="mt-12 flex flex-col">
+				<a href="{{ route('filmes') }}" class="text-lg inline-block">&larr; Filmes</a>
+				<a href="{{ route('schedule') }}" class="text-lg inline-block">&larr; Programa</a>
+			</nav>
 		</section>
 	</main>
 

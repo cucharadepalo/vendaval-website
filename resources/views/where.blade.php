@@ -9,7 +9,7 @@
 		height="short" />
 
 	<main>
-		<section class="w-full px-6 max-w-7xl mx-auto md:px-16">
+		<section class="my-12 px-6 md:px-16 lg:px-8 xl:px-20 xl:my-16">
 			@if ($page->content)
 				<x-content-wrapper :content="$page->content" />
 			@endif
@@ -50,7 +50,7 @@
 			</div>
 		</section>
 		<nav class="w-full py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color)">
-			<div class="px-6 max-w-7xl mx-auto flex flex-col">
+			<div class="px-6 md:px-16 lg:px-8 xl:px-20 flex flex-col">
 				<a href="{{ route('filmes') }}" class="text-lg inline-block">&larr; Filmes</a>
 				<a href="{{ route('schedule') }}" class="text-lg inline-block">&larr; Programa</a>
 			</div>
