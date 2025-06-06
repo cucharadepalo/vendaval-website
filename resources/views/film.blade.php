@@ -28,9 +28,7 @@
 				@endif
 			</div>
 			<div class="px-6 my-6 md:px-16 xl:px-20 xl:my-12">
-				<div class="md-wrapper xl:text-lg xl:columns-2 xl:gap-16">
-					{!! str($film->text)->markdown()->sanitizeHtml() !!}
-				</div>
+				<x-content-wrapper :content="$film->text" />
 			</div>
 		</section>
 		<section id="proxeccions" class="w-full py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color)">

@@ -91,9 +91,7 @@
 
 		@if ($page->content)
 			<section id="contido" class="my-12 px-6 md:px-16 xl:px-20 xl:my-24">
-				<div class="md-wrapper lg:text-lg lg:columns-2 lg:gap-16">
-					{!! str($page->content)->markdown()->sanitizeHtml() !!}
-				</div>
+				<x-content-wrapper :content="$page->content" />
 			</section>
 		@endif
 	</main>

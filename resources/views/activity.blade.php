@@ -24,9 +24,7 @@
 				<div class="my-4">
 					{!! str($activity->summary)->markdown()->sanitizeHtml() !!}
 				</div>
-				<div class="md-wrapper">
-					{!! str($activity->text)->markdown()->sanitizeHtml() !!}
-				</div>
+				<x-content-wrapper :content="$activity->text" />
 			</div>
 		</section>
 		@if ($activity->schedules->count())
