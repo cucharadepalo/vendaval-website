@@ -60,3 +60,18 @@
 	@apply text-pretty;
 	margin-block-end: 1.5em;
 }
+.md-wrapper {
+	@apply text-base xl:text-lg;
+}
+.md-wrapper ul {
+	@apply pl-4 list-disc;
+}
+.md-wrapper ol {
+	@apply pl-4 list-decimal;
+}
+.md-wrapper :is(h1, h2, h3, h4, h5) {
+	@apply text-xl xl:text-2xl font-semibold;
+}
+.md-wrapper a {
+	@apply underline;
+}

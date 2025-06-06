@@ -53,7 +53,8 @@
 									{{ $film->getFirstMedia('stills') ? $film->getFirstMedia('stills')('still_opt')->attributes(['class' => 'w-full aspect-video object-center rounded-sm', 'width' => '160', 'height' => '90'])->lazy() : '' }}
 								</div>
 								<div class="text-lg text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:text-xl">
-									<a href="{{ route('film', ['slug' => $film->slug]) }}">
+									<a href="{{ route('film', ['slug' => $film->slug]) }}"
+										class="block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:pl-6 transition-all">
 										<span class="block font-semibold lg:text-2xl xl:text-3xl">{{ $film->title }}</span>
 										{{ $film->director }} <span class="lg:block">({{ $film->year }})</span>
 									</a>
@@ -65,7 +66,8 @@
 									{{ $activity->getFirstMedia('image') ? $activity->getFirstMedia('image')('image_opt')->attributes(['class' => 'w-full aspect-video object-center object-cover rounded-sm', 'width' => '160', 'height' => '90'])->lazy() : '' }}
 								</div>
 								<div class="text-lg text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:text-xl">
-									<a href="{{ route('activity', ['slug' => $activity->slug]) }}">
+									<a href="{{ route('activity', ['slug' => $activity->slug]) }}"
+										class="block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:pl-6 transition-all">
 										<span class="block font-semibold lg:text-2xl xl:text-3xl">{{ $activity->title }}</span>
 										{{ $activity->summary }}
 									</a>
