@@ -11,9 +11,7 @@
 	<main>
 		@if ($page->content)
 			<section class="my-12 px-6 xl:px-20 xl:my-16">
-				<div class="md-wrapper xl:text-lg xl:columns-2 xl:gap-16 xl:my-8">
-					{!! str($page->content)->markdown()->sanitizeHtml() !!}
-				</div>
+				<x-content-wrapper :content="$page->content" />
 			</section>
 		@endif
 		<section class="my-12 px-6 xl:px-20 xl:my-16">
