@@ -54,7 +54,7 @@
 								</div>
 								<div class="text-lg text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:text-xl">
 									<a href="{{ route('film', ['slug' => $film->slug]) }}"
-										class="block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:pl-6 transition-all">
+										class="inline-block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:px-6 transition-all">
 										<span class="block font-semibold lg:text-2xl xl:text-3xl">{{ $film->title }}</span>
 										{{ $film->director }} <span class="lg:block">({{ $film->year }})</span>
 									</a>
@@ -67,7 +67,7 @@
 								</div>
 								<div class="text-lg text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:text-xl">
 									<a href="{{ route('activity', ['slug' => $activity->slug]) }}"
-										class="block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:pl-6 transition-all">
+										class="inline-block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:px-6 transition-all">
 										<span class="block font-semibold lg:text-2xl xl:text-3xl">{{ $activity->title }}</span>
 										{{ $activity->summary }}
 									</a>
@@ -78,8 +78,8 @@
 								<p class="text-sm text-pretty mt-4 lg:mt-0 lg:col-span-3 lg:col-start-2 lg:text-lg">{{ $item->notes }}</p>
 							@endisset
 
-							<div class="text-sm mt-4 lg:mt-0 lg:col-span-3 lg:col-start-2 lg:text-lg">
-								<a href="{{ route('where') }}">
+							<div class="text-sm mt-2 lg:mt-0 lg:col-span-3 lg:col-start-2 lg:text-lg">
+								<a href="{{ route('where') }}" class="inline-block py-2 rounded-md hover:bg-(--vdl-splash-txt-color)/30 hover:px-6 transition-all">
 									<x-filament::icon icon="bx-map" class="w-5 h-5 inline-block align-text-bottom lg:w-6 lg:h-6"/>
 									<span class="font-semibold">{{ $item->venue->name }}</span>
 								</a>

@@ -9,7 +9,7 @@
 		height="short" />
 
 	<main>
-		<section id="info">
+		<section>
 			<div class="px-6 mt-6 md:px-16 xl:px-20 xl:mt-16">
 				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $film->title }}</h1>
 				<div class="my-6 xl:text-xl xl:mb-12">
@@ -28,11 +28,11 @@
 				@endif
 			</div>
 			<div class="px-6 my-6 md:px-16 xl:px-20 xl:my-12">
-				<x-content-wrapper :content="$film->text" />
+				<x-content-wrapper :content="$film->text" class="xl:text-lg" />
 			</div>
 		</section>
 
-		<section id="proxeccions" class="py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color) px-6 md:px-16 lg:px-8 xl:px-20">
+		<section class="py-12 bg-(--vdl-secondary-color) text-(--vdl-secondary-txt-color) px-6 md:px-16 lg:px-8 xl:px-20">
 			<h2 class="font-semibold text-2xl">Proxeccións</h2>
 			@if ($film->schedules->count())
 			<ul class="my-4 text-lg xl:my-8 md:grid md:grid-cols-2 md:gap-8 md:items-center lg:grid-cols-3">
@@ -45,7 +45,7 @@
 						<span class="font-normal lowercase">ás </span>{{ $schedule->start_time->format('H:i') }}
 					</div>
 					<div>
-						<a href="{{ route('where') }}">
+						<a href="{{ route('where') }}" class="inline-block py-2 rounded-md hover:bg-white/10 hover:px-6 transition-all">
 							<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
 						</a>
 					</div>
