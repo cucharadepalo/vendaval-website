@@ -21,13 +21,6 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run(): void
 	{
-		// User::factory(10)->create();
-
-		User::factory()->create([
-			'name' => 'Abraham',
-			'email' => 'abs@vendaval.test',
-			'password' => 'zirvyb-Xekfy1-pinzuw'
-		]);
 
 		$edition_1 = Edition::create([
 			'name' => '2024',
