@@ -15,4 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })->registered(function ($app) {
+    	$app->usePublicPath(path: realpath(base_path('www')));
+  	})->create();

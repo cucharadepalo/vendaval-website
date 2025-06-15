@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
 		return $panel
 			->default()
 			->id('admin')
-			->path('admin')
+			->path('v-admin')
 			// ->domain('admin.vendaval.test')
 			->login()
 			->brandLogo(fn () => view('filament.admin.logo'))

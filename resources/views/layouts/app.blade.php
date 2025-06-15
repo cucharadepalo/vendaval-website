@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.bunny.net">
 	<link href="https://use.typekit.net/kdg6lzn.css" rel="stylesheet">
 	<link href="https://fonts.bunny.net/css?family=ibm-plex-sans:400,400i,600,600i" rel="stylesheet">
+	{{ Vite::useBuildDirectory('build') }}
 
 	@if (config('app.env') == 'local')
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
