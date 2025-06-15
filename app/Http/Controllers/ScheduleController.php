@@ -63,11 +63,18 @@ class ScheduleController extends Controller
 	 */
 	public function show(Request $request, string $slug): View
 	{
-		$activity = Activity::whereSlug($slug)->first();
+		if (! $this->edition) {
 
-		abort_if(! $activity, 404);
+			return view('inactive');
 
-		return view('activity', compact('activity'));
+		} else {
+
+			$activity = Activity::whereSlug($slug)->first();
+
+			abort_if(! $activity, 404);
+
+			return view('activity', compact('activity'));
+		}
 	}
 
 	/**
@@ -75,17 +82,23 @@ class ScheduleController extends Controller
 	 */
 	public function where(Request $request): View
 	{
-		$page = Page::whereSlug('ribeira-sacra')->first();
-		$venues = collect();
-		$schedules = $this->edition->schedules;
+		if (! $this->edition) {
 
-		foreach ($schedules as $schedule) {
-			$venues->push($schedule->venue);
+			return view('inactive');
+
+		} else {
+			$page = Page::whereSlug('ribeira-sacra')->first();
+			$venues = collect();
+			$schedules = $this->edition->schedules;
+
+			foreach ($schedules as $schedule) {
+				$venues->push($schedule->venue);
+			}
+
+			$venues = $venues->unique()->sortByDesc('text');
+
+			return view('where', compact('venues', 'page'));
 		}
-
-		$venues = $venues->unique()->sortByDesc('text');
-
-		return view('where', compact('venues', 'page'));
 	}
 
 }
