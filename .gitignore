@@ -45,3 +45,7 @@ ftp
 logs/
 www-original
 .procmailrc
+.metadata/
+.rc/
+.db/
+Maildir/
