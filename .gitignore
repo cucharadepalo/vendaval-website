@@ -3,6 +3,8 @@
 /public/hot
 /public/storage
 /public/media
+/www/media
+/www/storage
 /storage/*.key
 /storage/pail
 /storage/framework
