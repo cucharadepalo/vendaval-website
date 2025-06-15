@@ -83,8 +83,8 @@ return [
     */
 
 	'links' => [
-		public_path('storage') => storage_path('app/public'),
-		public_path('media') => storage_path('app/media'),
+		base_path('www/storage') => storage_path('app/public'),
+		base_path('www/media') => storage_path('app/media'),
 	],
 
 ];
