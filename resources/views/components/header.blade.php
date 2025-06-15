@@ -16,7 +16,6 @@
 
 		</nav>
 
-
 		<button type="button" class="toggle-menu w-10 h-10 absolute top-6 right-6 bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color) flex items-center justify-center z-20">
 			<span class="state-close">
 				<x-filament::icon icon="bx-menu" class="w-8 h-8 block" />

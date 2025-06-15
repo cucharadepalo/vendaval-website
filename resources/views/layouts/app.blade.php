@@ -16,7 +16,7 @@
 	<script src="{{ Vite::asset('resources/js/app.js') }}" defer></script>
 	@endif
 
-	{!! printCssVariables($edition->colors) !!}
+	{!! printCssVariables($edition ? $edition->colors : config('custom.edition.default_colors')) !!}
 </head>
 <body class="bg-(--vdl-bg-color) text-(--vdl-txt-color) max-w-7xl mx-auto min-h-dvh">
 @yield('content')
