@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Activity;
 use App\Models\Edition;
+use App\Models\Page;
 use App\Models\Page;
 use App\Models\Schedule;
 use Carbon\Carbon;
@@ -46,6 +48,7 @@ class ScheduleController extends Controller
 				// Agrupamos por días y horas
 				// OJO: Cualquier acto que empiece antes de las 2:01 de la mañana se agrupa con el dia anterior
 				$schedules = $squery->groupBy(function (Schedule $item, int $key) {
+				$schedules = $squery->groupBy(function (Schedule $item, int $key) {
 					$day = Carbon::parse($item->start_time)->subHours(2);
 					return $day->startOfDay()->format('Y-m-d');
 				});
@@ -63,11 +66,18 @@ class ScheduleController extends Controller
 	 */
 	public function show(Request $request, string $slug): View
 	{
-		$activity = Activity::whereSlug($slug)->first();
+		if (! $this->edition) {
 
-		abort_if(! $activity, 404);
+			return view('inactive');
 
-		return view('activity', compact('activity'));
+		} else {
+
+			$activity = Activity::whereSlug($slug)->first();
+
+			abort_if(! $activity, 404);
+
+			return view('activity', compact('activity'));
+		}
 	}
 
 	/**
@@ -75,17 +85,23 @@ class ScheduleController extends Controller
 	 */
 	public function where(Request $request): View
 	{
-		$page = Page::whereSlug('ribeira-sacra')->first();
-		$venues = collect();
-		$schedules = $this->edition->schedules;
+		if (! $this->edition) {
 
-		foreach ($schedules as $schedule) {
-			$venues->push($schedule->venue);
+			return view('inactive');
+
+		} else {
+			$page = Page::whereSlug('ribeira-sacra')->first();
+			$venues = collect();
+			$schedules = $this->edition->schedules;
+
+			foreach ($schedules as $schedule) {
+				$venues->push($schedule->venue);
+			}
+
+			$venues = $venues->unique()->sortByDesc('text');
+
+			return view('where', compact('venues', 'page'));
 		}
-
-		$venues = $venues->unique()->sortByDesc('text');
-
-		return view('where', compact('venues', 'page'));
 	}
 
 }

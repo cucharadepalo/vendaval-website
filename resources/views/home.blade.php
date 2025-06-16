@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('title', $page->title)
+@section('title', $page->title)
 
 @section('content')
+@if ($edition)
 	<x-header
 		:$edition
 		:$splash
@@ -17,7 +19,9 @@
 			@endif
 		</section>
 		<section id="logos">
-
 		</section>
 	</main>
+@else
+@include('inactive-chunk')
+@endif
 @endsection

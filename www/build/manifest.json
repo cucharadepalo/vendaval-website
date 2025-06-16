@@ -1,0 +1,21 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-CbOa1fl4.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/images/poster_placeholder.svg": {
+    "file": "assets/poster_placeholder-ChwE1SrM.svg",
+    "src": "resources/images/poster_placeholder.svg"
+  },
+  "resources/images/still_placeholder.svg": {
+    "file": "assets/still_placeholder-DamcflLW.svg",
+    "src": "resources/images/still_placeholder.svg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-z6qn5n4k.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
