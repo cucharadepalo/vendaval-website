@@ -43,10 +43,10 @@ Se puede poner cualquier información relevante al programa aqui.',
 		]);
 
 		Page::create([
-			'title' => 'Ribeira Sacra',
-			'slug' => 'lugares',
+			'title' => 'Espazos',
+			'slug' => 'espazos',
 			'type' => 'system',
-			'content' => 'Este contenido se mostrará al principio de la página de filmes.',
+			'content' => 'Este contenido se mostrará al principio de la página de espazos.',
 			'is_published' => true,
 			'in_menu' => true,
 		]);
