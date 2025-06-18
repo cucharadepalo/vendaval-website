@@ -87,7 +87,7 @@ class ScheduleController extends Controller
 			return view('inactive');
 
 		} else {
-			$page = Page::whereSlug('ribeira-sacra')->first();
+			$page = Page::whereSlug('espazos')->first();
 			$venues = collect();
 			$schedules = $this->edition->schedules;
 

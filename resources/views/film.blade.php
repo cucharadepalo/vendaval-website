@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $film->title)
+@section('title', 'Filmes – ' . $film->title)
 
 @section('content')
 	<x-header title="Filmes"
@@ -10,14 +10,7 @@
 
 	<main>
 		<section>
-			<div class="px-6 mt-6 md:px-16 xl:px-20 xl:mt-16">
-				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $film->title }}</h1>
-				<div class="my-6 xl:text-xl xl:mb-12">
-					<p class="font-semibold">{{ $film->director }}</p>
-					<p>{{ $film->year }} | {{ $film->genre }} | {{ convertToMinutes($film->duration) }}min | {{ $film->country }}</p>
-				</div>
-			</div>
-			<div class="xl:px-20">
+			<div class="md:px-16 md:pt-8 lg:px-8 xl:px-20 xl:pt-12">
 				@php
 					$still = $film->getFirstMedia('stills');
 				@endphp
@@ -27,8 +20,20 @@
 					<img src="{{ Vite::asset('resources/images/still_placeholder.svg') }}" class="w-full h-auto" alt="">
 				@endif
 			</div>
-			<div class="px-6 my-6 md:px-16 xl:px-20 xl:my-12">
-				<x-content-wrapper :content="$film->text" class="xl:text-lg" />
+			<div class="px-6 my-6 md:px-16 lg:px-8 xl:px-20 xl:my-12">
+				<div class="lg:grid lg:grid-cols-5 lg:gap-12">
+					<div class="lg:col-span-2">
+						<h1 class="font-semibold text-3xl xl:text-5xl">{{ $film->title }}</h1>
+						<div class="my-6 xl:text-xl xl:mb-12">
+							<p class="font-semibold xl:text-2xl">{{ $film->director }}</p>
+							<p>{{ $film->year }} {{ $film->genre ? '| ' . $film->genre : '' }} {{ $film->duration ? '| ' . convertToMinutes($film->duration) . 'min' : '' }} {{ $film->country ? '| ' . $film->country : '' }}</p>
+							@if ($film->version)
+							<p class="text-sm xl:text-base italic">{{ $film->version }}</p>
+							@endif
+						</div>
+					</div>
+					<x-content-wrapper :content="$film->text" no-cols="true" class="lg:col-span-3 lg:text-lg xl:text-xl" />
+				</div>
 			</div>
 		</section>
 

@@ -15,13 +15,13 @@
 	<main class="pb-24">
 		<section id="home" class="my-12 px-6 md:px-16 lg:px-8 xl:px-20 xl:my-16">
 			@if ($page->content)
-				<x-content-wrapper :content="$page->content" />
+				<x-content-wrapper :content="$page->content" class="lg:text-lg xl:text-xl" />
 			@endif
 		</section>
 		<section id="logos">
 		</section>
 	</main>
 @else
-@include('inactive-chunk')
+	@include('inactive-chunk')
 @endif
 @endsection

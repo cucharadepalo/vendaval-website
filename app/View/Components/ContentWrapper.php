@@ -15,6 +15,7 @@ class ContentWrapper extends Component
 	public function __construct(
 		public string $content,
 		public ?int $words,
+		public ?bool $noCols,
 	) {}
 
 	/**
@@ -22,7 +23,7 @@ class ContentWrapper extends Component
 	 */
 	public function hasCols(): bool
 	{
-		return $this->words > 200;
+		return $this->words > 100;
 	}
 
 	/**
