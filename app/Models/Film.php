@@ -40,7 +40,7 @@ class Film extends Model implements HasMedia
 		'director',
 		'year',
 		'genre',
-		'language',
+		'country',
 		'version',
 		'duration',
 		'text',
