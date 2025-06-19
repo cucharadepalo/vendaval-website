@@ -35,7 +35,7 @@ class ScheduleController extends Controller
 			$start_date = $this->edition->start_date;
 			$end_date = $this->edition->end_date;
 
-			$squery = Schedule::whereBetween('start_time', [$start_date, $end_date])->get();
+			$squery = Schedule::whereBetween('start_time', [$start_date, $end_date])->orderBy('start_time')->get();
 
 			if (! $squery->count()) {
 
