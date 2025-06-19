@@ -23,8 +23,8 @@
 
 			<div class="px-6 pb-6 md:px-16 lg:px-8 lg:pb-8 xl:px-20 xl:pb-16">
 				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $activity->title }}</h1>
-				<x-content-wrapper :content="$activity->summary" class="my-6 xl:text-xl xl:mb-12" />
-				<x-content-wrapper :content="$activity->text" class="xl:text-lg" />
+				<x-content-wrapper :content="$activity->summary" class="my-6 lg:text-lg xl:text-xl xl:mb-12" />
+				<x-content-wrapper :content="$activity->text" class="lg:text-lg xl:text-xl" />
 			</div>
 		</section>
 

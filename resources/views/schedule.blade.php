@@ -93,7 +93,7 @@
 
 		@if ($page->content)
 			<section id="contido" class="my-12 px-6 md:px-16 xl:px-20 xl:my-24">
-				<x-content-wrapper :content="$page->content" />
+				<x-content-wrapper :content="$page->content" class="lg:text-lg xl:text-xl" />
 			</section>
 		@endif
 	</main>

@@ -11,7 +11,7 @@
 	<main>
 		<section class="my-12 px-6 md:px-16 lg:px-8 xl:px-20 xl:my-16">
 			@if ($page->content)
-				<x-content-wrapper :content="$page->content" />
+				<x-content-wrapper :content="$page->content" class="lg:text-lg xl:text-xl"/>
 			@endif
 			<div class="text-pretty my-12">
 				@foreach ($venues as $venue)
@@ -43,7 +43,7 @@
 							@endif
 						</ul>
 						@if ($venue->text)
-							<x-content-wrapper :content="$venue->text" />
+							<x-content-wrapper :content="$venue->text" class="lg:text-lg xl:text-xl" />
 						@endif
 					</div>
 				@endforeach

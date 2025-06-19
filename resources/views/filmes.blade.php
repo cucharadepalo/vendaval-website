@@ -11,7 +11,7 @@
 	<main>
 		@if ($page->content)
 			<section class="my-12 px-6 md:px-16 lg:px-8 xl:px-20 xl:my-16">
-				<x-content-wrapper :content="$page->content" />
+				<x-content-wrapper :content="$page->content" class="lg:text-lg xl:text-xl" />
 			</section>
 		@endif
 		<section class="mt-12 px-6 pb-12 md:px-16 lg:px-8 xl:px-20 xl:mt-16">
