@@ -11,6 +11,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,7 @@ class Edition extends Model implements HasMedia
 		'title',
 		'is_active',
 		'colors',
+		'footer'
 	];
 
 	/**
@@ -188,6 +190,18 @@ class Edition extends Model implements HasMedia
 								->image()
 								->columnSpan(3)
 								->helperText('Esta é a imaxe que se verá cando a páxina se comparta nas redes sociais.'),
+							MarkdownEditor::make('footer')
+								->disableToolbarButtons([
+									'blockquote',
+									'codeBlock',
+									'strike',
+									'table',
+									'heading'
+								])
+								->fileAttachmentsDisk('media')
+								->fileAttachmentsDirectory('footer')
+								->label('Footer')
+								->columnSpan(5)
 						])
 				])
 		];

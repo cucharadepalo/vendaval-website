@@ -20,7 +20,9 @@
 
 	{!! printCssVariables($edition ? $edition->colors : config('custom.edition.default_colors')) !!}
 </head>
-<body class="bg-(--vdl-bg-color) text-(--vdl-txt-color) max-w-7xl mx-auto min-h-dvh max-w-7xl mx-auto min-h-dvh">
+<body class="bg-(--vdl-bg-color) text-(--vdl-txt-color) max-w-7xl mx-auto min-h-dvh">
 @yield('content')
+
+@include('footer')
 </body>
 </html>
