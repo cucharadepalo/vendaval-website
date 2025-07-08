@@ -95,7 +95,7 @@ class ScheduleController extends Controller
 				$venues->push($schedule->venue);
 			}
 
-			$venues = $venues->unique()->sortByDesc('text');
+			$venues = $venues->unique()->sortBy('name');
 
 			return view('where', compact('venues', 'page'));
 		}
