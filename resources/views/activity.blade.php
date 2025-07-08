@@ -10,7 +10,7 @@
 
 	<main>
 		<section>
-			<div class="xl:px-20 xl:my-16">
+			<div class="md:px-16 md:pt-8 lg:px-8 xl:px-20 xl:pt-12">
 				@php
 					$image = $activity->getFirstMedia('image');
 				@endphp
@@ -21,10 +21,16 @@
 				@endif
 			</div>
 
-			<div class="px-6 pb-6 md:px-16 lg:px-8 lg:pb-8 xl:px-20 xl:pb-16">
-				<h1 class="font-semibold text-3xl xl:text-5xl">{{ $activity->title }}</h1>
-				<x-content-wrapper :content="$activity->summary" class="my-6 lg:text-lg xl:text-xl xl:mb-12" />
-				<x-content-wrapper :content="$activity->text" class="lg:text-lg xl:text-xl" />
+			<div class="px-6 my-6 md:px-16 lg:px-8 xl:px-20 xl:my-12">
+				<div class="lg:grid lg:grid-cols-5 lg:gap-12">
+					<div class="lg:col-span-2">
+						<h1 class="font-semibold text-3xl xl:text-5xl">{{ $activity->title }}</h1>
+					</div>
+					<div class="lg:col-span-3">
+						<x-content-wrapper :content="$activity->summary" class="my-6 lg:mt-0 lg:text-lg xl:text-xl" />
+						<x-content-wrapper :content="$activity->text" no-cols="true" class="lg:text-lg xl:text-xl" />
+					</div>
+				</div>
 			</div>
 		</section>
 

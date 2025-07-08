@@ -20,6 +20,7 @@
 					<img src="{{ Vite::asset('resources/images/still_placeholder.svg') }}" class="w-full h-auto" alt="">
 				@endif
 			</div>
+
 			<div class="px-6 my-6 md:px-16 lg:px-8 xl:px-20 xl:my-12">
 				<div class="lg:grid lg:grid-cols-5 lg:gap-12">
 					<div class="lg:col-span-2">
