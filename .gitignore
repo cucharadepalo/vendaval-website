@@ -11,6 +11,7 @@
 /storage/framework
 /storage/logs
 /storage/media
+/storage/media-library
 /vendor
 .env
 .env.backup
