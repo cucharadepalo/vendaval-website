@@ -23,6 +23,9 @@
 			<li>
 				<a href="https://www.facebook.com/vendavalmostracinemapt" target="_blank" title="Facebook"><x-filament::icon icon="bxl-facebook" class="w-8 h-8 inline-block" /></a>
 			</li>
+			<li>
+				<a href="https://www.youtube.com/@Vendaval_mostracinemaportugues" target="_blank" title="Youtube"><x-filament::icon icon="bxl-youtube" class="w-8 h-8 inline-block" /></a>
+			</li>
 		</ul>
 	</nav>
 
