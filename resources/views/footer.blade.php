@@ -16,8 +16,8 @@
 				<p class="text-orange-300">Financiado por</p>
 				<div class="flex flex-wrap items-center justify-start gap-6">
 					<img src="{{ asset('images/logos/deputacion-lugo.png') }}" alt="Logo Deputación de Lugo" loading="lazy" width="167" height="45">
-					<img src="{{ asset('images/logos/ICA.png') }}" alt="Instituto do cinema e do audiovisual" loading="lazy" width="180" height="41">
 					<img src="{{ asset('images/logos/republica-portuguesa.png') }}" alt="República Portuguesa. Cultura Juventude e desporto" loading="lazy" width="123" height="64">
+					<img src="{{ asset('images/logos/ICA.png') }}" alt="Instituto do cinema e do audiovisual" loading="lazy" width="180" height="41">
 					<img src="{{ asset('images/logos/camoes.png') }}" alt="Logo Instituto Camoes" loading="lazy" width="120" height="60">
 					<img src="{{ asset('images/logos/sober-logo.svg') }}" alt="Sober" loading="lazy" width="84" height="36">
 				</div>
