@@ -2,9 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Support\Enums\TextSize;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use App\Filament\Resources\VenueResource\Pages\ListVenues;
+use App\Filament\Resources\VenueResource\Pages\CreateVenue;
+use App\Filament\Resources\VenueResource\Pages\EditVenue;
 use App\Filament\Resources\VenueResource\Pages;
 use App\Models\Venue;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
@@ -16,9 +22,9 @@ class VenueResource extends Resource
 {
 	protected static ?string $model = Venue::class;
 
-	protected static ?string $navigationIcon = 'bx-buildings';
+	protected static string | \BackedEnum | null $navigationIcon = 'bx-buildings';
 
-	protected static ?string $activeNavigationIcon = 'bxs-buildings';
+	protected static string | \BackedEnum | null $activeNavigationIcon = 'bxs-buildings';
 
 	protected static ?string $navigationLabel = 'Lugares';
 
@@ -28,10 +34,10 @@ class VenueResource extends Resource
 
 	protected static ?int $navigationSort = 6;
 
-	public static function form(Form $form): Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
-			->schema(Venue::getForm());
+		return $schema
+			->components(Venue::getForm());
 	}
 
 	public static function table(Table $table): Table
@@ -39,7 +45,7 @@ class VenueResource extends Resource
 		return $table
 			->columns([
 				TextColumn::make('name')
-					->size(TextColumn\TextColumnSize::Large)
+					->size(TextSize::Large)
 					->weight(FontWeight::Bold)
 					->translateLabel(),
 				TextColumn::make('town')
@@ -54,19 +60,19 @@ class VenueResource extends Resource
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\EditAction::make(),
-				Tables\Actions\DeleteAction::make(),
+			->recordActions([
+				EditAction::make(),
+				DeleteAction::make(),
 			])
-			->bulkActions([]);
+			->toolbarActions([]);
 	}
 
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListVenues::route('/'),
-			'create' => Pages\CreateVenue::route('/create'),
-			'edit' => Pages\EditVenue::route('/{record}/edit')
+			'index' => ListVenues::route('/'),
+			'create' => CreateVenue::route('/create'),
+			'edit' => EditVenue::route('/{record}/edit')
 		];
 	}
 }

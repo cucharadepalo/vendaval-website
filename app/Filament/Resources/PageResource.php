@@ -2,11 +2,21 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Support\Enums\TextSize;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Actions\EditAction;
+use App\Filament\Resources\PageResource\Pages\ListPages;
+use App\Filament\Resources\PageResource\Pages\CreatePage;
+use App\Filament\Resources\PageResource\Pages\EditPage;
 use App\Filament\Resources\PageResource\Pages;
 use App\Filament\Resources\PageResource\RelationManagers;
 use App\Models\Page;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
@@ -20,9 +30,9 @@ class PageResource extends Resource
 {
 	protected static ?string $model = Page::class;
 
-	protected static ?string $navigationIcon = 'bx-layer';
+	protected static string | \BackedEnum | null $navigationIcon = 'bx-layer';
 
-	protected static ?string $activeNavigationIcon = 'bxs-layer';
+	protected static string | \BackedEnum | null $activeNavigationIcon = 'bxs-layer';
 
 	protected static ?string $navigationLabel = 'Páxinas';
 
@@ -30,19 +40,19 @@ class PageResource extends Resource
 
 	protected static ?int $navigationSort = 2;
 
-	public static function form(Form $form): Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
-			->schema([
-				Forms\Components\Grid::make(5)
+		return $schema
+			->components([
+				Grid::make(5)
 					->schema([
-						Forms\Components\TextInput::make('title')
+						TextInput::make('title')
 							->translateLabel()
 							->maxLength(191)
 							->columnSpan(2),
-						Forms\Components\Hidden::make('type')
+						Hidden::make('type')
 							->default('custom'),
-						Forms\Components\TextInput::make('slug')
+						TextInput::make('slug')
 							->label('Código / Slug')
 							->maxLength(191)
 							->columnSpan(1)
@@ -57,7 +67,7 @@ class PageResource extends Resource
 									return 'A url da páxina';
 								}
 							}),
-						Forms\Components\MarkdownEditor::make('content')
+						MarkdownEditor::make('content')
 							->translateLabel()
 							->minHeight('30rem')
 							->columnSpan(3)
@@ -75,12 +85,12 @@ class PageResource extends Resource
 		return $table
 			->columns([
 				TextColumn::make('title')
-					->size(TextColumn\TextColumnSize::Large)
+					->size(TextSize::Large)
 					->weight(FontWeight::Bold)
 					->translateLabel(),
 				TextColumn::make('slug')
 					->label('Codigo / slug'),
-				Tables\Columns\ToggleColumn::make('is_published')
+				ToggleColumn::make('is_published')
 					->label('Publicada')
 					->disabled(fn (Page $record): bool => $record->type === 'system')
 					->onColor(function (Page $record): string {
@@ -90,17 +100,17 @@ class PageResource extends Resource
 							return 'success';
 						}
 					}),
-				Tables\Columns\ToggleColumn::make('in_menu')
+				ToggleColumn::make('in_menu')
 					->label('No menú')
 
 			])
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\EditAction::make(),
+			->recordActions([
+				EditAction::make(),
 			])
-			->bulkActions([]);
+			->toolbarActions([]);
 	}
 
 	public static function getRelations(): array
@@ -113,9 +123,9 @@ class PageResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListPages::route('/'),
-			'create' => Pages\CreatePage::route('/create'),
-			'edit' => Pages\EditPage::route('/{record}/edit'),
+			'index' => ListPages::route('/'),
+			'create' => CreatePage::route('/create'),
+			'edit' => EditPage::route('/{record}/edit'),
 		];
 	}
 }

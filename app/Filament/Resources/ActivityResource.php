@@ -2,13 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Support\Enums\TextSize;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use App\Filament\Resources\ActivityResource\Pages\ListActivities;
+use App\Filament\Resources\ActivityResource\Pages\CreateActivity;
+use App\Filament\Resources\ActivityResource\Pages\EditActivity;
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Models\Activity;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -19,9 +24,9 @@ class ActivityResource extends Resource
 {
 	protected static ?string $model = Activity::class;
 
-	protected static ?string $navigationIcon = 'bx-music';
+	protected static string | \BackedEnum | null $navigationIcon = 'bx-music';
 
-	protected static ?string $activeNavigationIcon = 'bxs-music';
+	protected static string | \BackedEnum | null $activeNavigationIcon = 'bxs-music';
 
 	protected static ?string $navigationLabel = 'Actividades';
 
@@ -31,10 +36,10 @@ class ActivityResource extends Resource
 
 	protected static ?int $navigationSort = 4;
 
-	public static function form(Form $form): Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
-			->schema(Activity::getForm());
+		return $schema
+			->components(Activity::getForm());
 	}
 
 	public static function table(Table $table): Table
@@ -48,7 +53,7 @@ class ActivityResource extends Resource
 					->conversion('admin_thumb')
 					->translateLabel(),
 				TextColumn::make('title')
-					->size(TextColumn\TextColumnSize::Large)
+					->size(TextSize::Large)
 					->weight(FontWeight::Bold)
 					->description(function(Activity $item): HtmlString {
 						return new HtmlString('<div class="text-sm text-gray-500 dark:text-gray-400">' . mb_strimwidth(str($item->summary)->markdown()->sanitizeHtml(), 0, 80, '...') . '</div>');
@@ -73,10 +78,10 @@ class ActivityResource extends Resource
 			->filtersTriggerAction( function (Action $action) {
 				return $action->button()->label('Filtros');
 			})
-			->actions([
-				Tables\Actions\EditAction::make(),
+			->recordActions([
+				EditAction::make(),
 			])
-			->bulkActions([]);
+			->toolbarActions([]);
 	}
 
 	public static function getRelations(): array
@@ -89,9 +94,9 @@ class ActivityResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListActivities::route('/'),
-			'create' => Pages\CreateActivity::route('/create'),
-			'edit' => Pages\EditActivity::route('/{record}/edit'),
+			'index' => ListActivities::route('/'),
+			'create' => CreateActivity::route('/create'),
+			'edit' => EditActivity::route('/{record}/edit'),
 		];
 	}
 }

@@ -2,9 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Support\Enums\TextSize;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use App\Filament\Resources\FilmResource\Pages\ListFilms;
+use App\Filament\Resources\FilmResource\Pages\CreateFilm;
+use App\Filament\Resources\FilmResource\Pages\EditFilm;
 use App\Filament\Resources\FilmResource\Pages;
 use App\Models\Film;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -12,15 +18,14 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Actions\Action;
 
 class FilmResource extends Resource
 {
 	protected static ?string $model = Film::class;
 
-	protected static ?string $navigationIcon = 'bx-movie';
+	protected static string | \BackedEnum | null $navigationIcon = 'bx-movie';
 
-	protected static ?string $activeNavigationIcon = 'bxs-movie';
+	protected static string | \BackedEnum | null $activeNavigationIcon = 'bxs-movie';
 
 	protected static ?string $navigationLabel = 'Filmes';
 
@@ -28,10 +33,10 @@ class FilmResource extends Resource
 
 	protected static ?int $navigationSort = 3;
 
-	public static function form(Form $form): Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
-			->schema(Film::getForm());
+		return $schema
+			->components(Film::getForm());
 	}
 
 	public static function table(Table $table): Table
@@ -45,7 +50,7 @@ class FilmResource extends Resource
 					->width(43)
 					->translateLabel(),
 				TextColumn::make('title')
-					->size(TextColumn\TextColumnSize::Large)
+					->size(TextSize::Large)
 					->weight(FontWeight::Bold)
 					->translateLabel(),
 				TextColumn::make('director')
@@ -71,10 +76,10 @@ class FilmResource extends Resource
 			->filtersTriggerAction( function (Action $action) {
 				return $action->button()->label('Filtros');
 			})
-			->actions([
-				Tables\Actions\EditAction::make(),
+			->recordActions([
+				EditAction::make(),
 			])
-			->bulkActions([]);
+			->toolbarActions([]);
 	}
 
 	public static function getRelations(): array
@@ -87,9 +92,9 @@ class FilmResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListFilms::route('/'),
-			'create' => Pages\CreateFilm::route('/create'),
-			'edit' => Pages\EditFilm::route('/{record}/edit'),
+			'index' => ListFilms::route('/'),
+			'create' => CreateFilm::route('/create'),
+			'edit' => EditFilm::route('/{record}/edit'),
 		];
 	}
 }

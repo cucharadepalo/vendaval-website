@@ -2,6 +2,11 @@
 
 namespace App\Models;
 
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Group;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -9,14 +14,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Support\Enums\Alignment;
@@ -96,7 +98,7 @@ class Film extends Model implements HasMedia
 								->columnSpanFull()
 								->translateLabel()
 								->live(onBlur: true)
-								->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, ?string $state): void {
+								->afterStateUpdated(function (Set $set, Get $get, ?string $state): void {
 										$set('slug', Str::slug($state));
 								}),
 							Hidden::make('slug')

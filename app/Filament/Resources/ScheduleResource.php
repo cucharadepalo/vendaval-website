@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\EditAction;
+use Filament\Schemas\Components\Section;
+use Filament\Actions\DeleteAction;
+use App\Filament\Resources\ScheduleResource\Pages\ManageSchedules;
 use App\Filament\Resources\ScheduleResource\Pages;
 use App\Models\Schedule;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -18,9 +21,9 @@ class ScheduleResource extends Resource
 {
 	protected static ?string $model = Schedule::class;
 
-	protected static ?string $navigationIcon = 'bx-calendar-alt';
+	protected static string | \BackedEnum | null $navigationIcon = 'bx-calendar-alt';
 
-	protected static ?string $activeNavigationIcon = 'bxs-calendar-alt';
+	protected static string | \BackedEnum | null $activeNavigationIcon = 'bxs-calendar-alt';
 
 	protected static ?string $navigationLabel = 'Programa';
 
@@ -30,10 +33,10 @@ class ScheduleResource extends Resource
 
 	protected static ?int $navigationSort = 5;
 
-	public static function form(Form $form): Form
+	public static function form(Schema $schema): Schema
 	{
-		return $form
-			->schema(Schedule::getForm());
+		return $schema
+			->components(Schedule::getForm());
 	}
 
 	public static function table(Table $table): Table
@@ -63,9 +66,9 @@ class ScheduleResource extends Resource
 			->filters([
 				//
 			])
-			->actions([
-				Tables\Actions\EditAction::make()
-					->form([
+			->recordActions([
+				EditAction::make()
+					->schema([
 						Section::make()
 							->schema(Schedule::getForm())
 							->columns(2),
@@ -86,15 +89,15 @@ class ScheduleResource extends Resource
 
 					])
 					->slideOver(),
-				Tables\Actions\DeleteAction::make(),
+				DeleteAction::make(),
 			])
-			->bulkActions([]);
+			->toolbarActions([]);
 	}
 
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ManageSchedules::route('/'),
+			'index' => ManageSchedules::route('/'),
 		];
 	}
 }
