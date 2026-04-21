@@ -2,6 +2,11 @@
 
 namespace App\Filament\Resources\Pages;
 
+use App\Filament\Resources\Pages\Pages\ListPages;
+use App\Filament\Resources\Pages\Pages\CreatePage;
+use App\Filament\Resources\Pages\Pages\EditPage;
+use App\Models\Page;
+use BackedEnum;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\TextInput;
@@ -10,29 +15,20 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Support\Enums\TextSize;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Actions\EditAction;
-use App\Filament\Resources\Pages\Pages\ListPages;
-use App\Filament\Resources\Pages\Pages\CreatePage;
-use App\Filament\Resources\Pages\Pages\EditPage;
-use App\Filament\Resources\PageResource\Pages;
-use App\Filament\Resources\PageResource\RelationManagers;
-use App\Models\Page;
-use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
-use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
 class PageResource extends Resource
 {
 	protected static ?string $model = Page::class;
 
-	protected static string | \BackedEnum | null $navigationIcon = 'bx-layer';
+	protected static string | BackedEnum | null $navigationIcon = 'bx-layer';
 
-	protected static string | \BackedEnum | null $activeNavigationIcon = 'bxs-layer';
+	protected static string | BackedEnum | null $activeNavigationIcon = 'bxs-layer';
 
 	protected static ?string $navigationLabel = 'Páxinas';
 
@@ -44,7 +40,10 @@ class PageResource extends Resource
 	{
 		return $schema
 			->components([
-				Grid::make(5)
+				Grid::make([
+					'default' => 1,
+					'lg' => 5,
+				])
 					->schema([
 						TextInput::make('title')
 							->translateLabel()
@@ -77,6 +76,7 @@ class PageResource extends Resource
 								'codeBlock'
 							])
 					])
+					->columnSpanFull()
 			]);
 	}
 
