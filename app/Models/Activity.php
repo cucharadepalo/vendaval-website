@@ -139,6 +139,7 @@ class Activity extends Model implements HasMedia
 								])
 						])
 				])
+				->columnSpanFull()
 		];
 	}
 

@@ -204,6 +204,7 @@ class Edition extends Model implements HasMedia
 								->columnSpan(5)
 						])
 				])
+				->columnSpanFull()
 		];
 	}
 }

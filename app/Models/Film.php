@@ -175,6 +175,7 @@ class Film extends Model implements HasMedia
 								])
 						])
 				])
+				->columnSpanFull()
 		];
 	}
 
