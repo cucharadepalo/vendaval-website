@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Activities\Pages;
 
 use App\Filament\Resources\Activities\ActivityResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateActivity extends CreateRecord
