@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Activities;
+namespace App\Filament\Resources;
 
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\TextSize;
