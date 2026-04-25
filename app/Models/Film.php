@@ -13,14 +13,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-use Filament\Forms;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Callout;
 use Filament\Support\Enums\Alignment;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -169,9 +169,9 @@ class Film extends Model implements HasMedia
 										->addActionAlignment(Alignment::Start)
 										->addActionLabel('Añadir proxección')
 										->schema(Schedule::getForm()),
-									Placeholder::make('about_schedules')
-										->hiddenLabel()
-										->content(new HtmlString('<div class="font-medium">Se o filme se vai programar xunto con outro ou con unha actividade, debes facer a asociación na sección do programa, seleccionando a sesión e engadíndoo alí.</div>'))
+									Callout::make('Atención')
+										->description('Se o filme se vai programar xunto con outro ou con unha actividade, debes facer a asociación na sección do programa, seleccionando a sesión e engadíndoo alí.')
+										->info(),
 								])
 						])
 				])

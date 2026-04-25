@@ -9,10 +9,8 @@ use Filament\Actions\EditAction;
 use App\Filament\Resources\Films\Pages\ListFilms;
 use App\Filament\Resources\Films\Pages\CreateFilm;
 use App\Filament\Resources\Films\Pages\EditFilm;
-use App\Filament\Resources\FilmResource\Pages;
 use App\Models\Film;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -46,7 +44,6 @@ class FilmResource extends Resource
 				SpatieMediaLibraryImageColumn::make('poster')
 					->collection('poster')
 					->conversion('poster_thumbnail')
-					->height(64)
 					->width(43)
 					->translateLabel(),
 				TextColumn::make('title')

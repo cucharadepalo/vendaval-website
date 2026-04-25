@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Edition;
 use App\Models\Page;
 use App\Models\Schedule;
+use App\Models\Venue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -88,14 +89,7 @@ class ScheduleController extends Controller
 
 		} else {
 			$page = Page::whereSlug('espazos')->first();
-			$venues = collect();
-			$schedules = $this->edition->schedules;
-
-			foreach ($schedules as $schedule) {
-				$venues->push($schedule->venue);
-			}
-
-			$venues = $venues->unique()->sortBy('name');
+			$venues = Venue::all();
 
 			return view('where', compact('venues', 'page'));
 		}

@@ -9,10 +9,8 @@ use Filament\Actions\EditAction;
 use App\Filament\Resources\Activities\Pages\ListActivities;
 use App\Filament\Resources\Activities\Pages\CreateActivity;
 use App\Filament\Resources\Activities\Pages\EditActivity;
-use App\Filament\Resources\ActivityResource\Pages;
 use App\Models\Activity;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -48,7 +46,6 @@ class ActivityResource extends Resource
 			->columns([
 				SpatieMediaLibraryImageColumn::make('image')
 					->width(96)
-					->height(64)
 					->collection('image')
 					->conversion('admin_thumb')
 					->translateLabel(),
