@@ -6,7 +6,7 @@
 			@endisset
 			@empty($edition->footer)
 			<div class="space-y-2">
-				<p class="text-orange-300">Financiado por</p>
+				<p class="text-(--vdl-splash-text-color)">Financiado por</p>
 				<div class="flex flex-wrap items-center justify-start gap-6">
 					<img src="{{ asset('images/logos/cultura-lingua-xuventude-negativo.png') }}" alt="Xunta de Galicia. Consellería de cultura, lingua e xuventude" loading="lazy" width="231" height="36">
 					<img src="{{ asset('images/logos/mcul.gob.web.png') }}" alt="Gobierno de España. Ministerio de Cultura" loading="lazy" width="139" height="40">
@@ -17,14 +17,14 @@
 				</div>
 			</div>
 			<div class="space-y-2">
-				<p class="text-orange-300">Promovido por</p>
+				<p class="text-(--vdl-splash-text-color)">Promovido por</p>
 				<div class="flex items-center justify-start gap-6">
 					<img src="{{ asset('images/logos/memoria-e-naufraga.png') }}" alt="Logo a Memoria é naufraga" loading="lazy" width="120" height="76">
 					<img src="{{ asset('images/logos/duplacena.png') }}" alt="Duplacena" loading="lazy" width="180" height="23">
 				</div>
 			</div>
 			<div class="space-y-2">
-				<p class="text-orange-300">Espazo</p>
+				<p class="text-(--vdl-splash-text-color)">Espazo</p>
 				<img src="{{ asset('images/logos/a-casa-da-memoria.png') }}" alt="A Casa de Memoria" loading="lazy" width="100" height="76">
 			</div>
 			@endempty

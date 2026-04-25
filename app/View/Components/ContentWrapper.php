@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use JSW\Figure\FigureExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 
 class ContentWrapper extends Component
@@ -43,7 +44,7 @@ class ContentWrapper extends Component
         'disallowed_tags' => ['title', 'textarea', 'style', 'xmp', 'noembed', 'noframes', 'script', 'plaintext'],
     	],
 		], [
-			new DisallowedRawHtmlExtension()
+			new DisallowedRawHtmlExtension(), new FigureExtension()
 		]);
 
 		return view('components.content-wrapper', compact('words', 'html_string'));
