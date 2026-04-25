@@ -15,7 +15,7 @@
 			@endif
 			<div class="text-pretty my-12">
 				@foreach ($venues as $venue)
-					<div class="mt-12 lg:grid lg:grid-cols-3 lg:col-span-8 xl:col-span-12">
+					<div class="mt-12 not-first:border-t border-(--vdl-splash-txt-color)/30 not-first:pt-6 lg:grid lg:grid-cols-3 lg:col-span-8 xl:col-span-12">
 						<div>
 							<h2 class="text-xl font-semibold lg:text-2xl xl:text-3xl">{{ $venue->name }}</h2>
 							<p class="text-lg lg:text-xl">{{ $venue->town }}</p>

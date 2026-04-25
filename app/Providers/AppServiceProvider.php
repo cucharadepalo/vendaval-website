@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use App\View\Composers\EditionComposer;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades;
@@ -32,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
 			'venue' => 'App\Models\Venue'
 		]);
 
-		Facades\View::composer('*', EditionComposer::class);
+		View::composer('*', EditionComposer::class);
 	}
 }

@@ -26,7 +26,7 @@
 									<img src="{{ Vite::asset('resources/images/poster_placeholder.svg') }}" class="w-full h-full object-cover object-center" alt="">
 								@endif
 							</div>
-							<div class="flex-grow flex flex-col">
+							<div class="grow flex flex-col">
 								<p class="font-semibold my-2 leading-tight md:text-lg xl:text-2xl xl:mt-4">{{ $film->title }}</p>
 								<p class="text-sm mt-auto md:text-base xl:text-lg">{{ $film->director }}</p>
 								<p class="text-sm md:text-base xl:text-lg">{{ $film->year }}</p>

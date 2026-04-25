@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use JSW\Figure\FigureExtension;
+use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 
 class ContentWrapper extends Component
 {
@@ -35,7 +37,16 @@ class ContentWrapper extends Component
 		$strip = strip_tags($html);
 		$this->words = Str::of($strip)->wordCount();
 		$words = strval($this->words);
+		$html_string = Str::markdown($this->content, [
+			'html_input' => 'allow',
+			'allow_unsafe_links' => false,
+			'disallowed_raw_html' => [
+        'disallowed_tags' => ['title', 'textarea', 'style', 'xmp', 'noembed', 'noframes', 'script', 'plaintext'],
+    	],
+		], [
+			new DisallowedRawHtmlExtension(), new FigureExtension()
+		]);
 
-		return view('components.content-wrapper', compact('words'));
+		return view('components.content-wrapper', compact('words', 'html_string'));
 	}
 }
