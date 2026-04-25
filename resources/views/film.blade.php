@@ -51,9 +51,11 @@
 						<span class="font-normal lowercase">ás </span>{{ $schedule->start_time->format('H:i') }}
 					</div>
 					<div>
+						@isset ($schedule->venue)
 						<a href="{{ route('where') }}" class="inline-block py-2 rounded-md hover:bg-white/10 hover:px-6 transition-all">
 							<x-filament::icon icon="bx-map" class="w-6 h-6 inline-block align-text-bottom"/> {{ $schedule->venue->name }}
 						</a>
+						@endisset
 					</div>
 				</li>
 				@endforeach
