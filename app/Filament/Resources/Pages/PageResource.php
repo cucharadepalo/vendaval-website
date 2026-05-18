@@ -55,12 +55,12 @@ class PageResource extends Resource
 							->label('Código / Slug')
 							->maxLength(191)
 							->columnSpan(1)
-							->readOnly(fn (Page $record): bool => $record->type === 'system')
+							->readOnly(fn (?Page $record): bool => $record && $record->type === 'system')
 							->afterStateUpdated(function (?string $state): string {
 								return Str::slug($state);
 							})
-							->helperText(function (Page $record): string {
-								if ($record->type === 'system') {
+							->helperText(function (?Page $record): string {
+								if ($record && $record->type === 'system') {
 									return 'No modificable';
 								} else {
 									return 'A url da páxina';
