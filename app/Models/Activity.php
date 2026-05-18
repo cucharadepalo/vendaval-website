@@ -106,6 +106,7 @@ class Activity extends Model implements HasMedia
 								->translateLabel()
 								->columnSpanFull(),
 							MarkdownEditor::make('text')
+								->required()
 								->disableToolbarButtons([
 									'attachFiles',
 									'codeBlock',
