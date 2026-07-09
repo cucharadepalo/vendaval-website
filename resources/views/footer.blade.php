@@ -10,7 +10,7 @@
 				<div class="flex flex-wrap items-center justify-start gap-6">
 					<img src="{{ asset('images/logos/cultura-lingua-xuventude-negativo.png') }}" alt="Xunta de Galicia. Consellería de cultura, lingua e xuventude" loading="lazy" width="231" height="36">
 					<img src="{{ asset('images/logos/mcul.gob.web.png') }}" alt="Gobierno de España. Ministerio de Cultura" loading="lazy" width="139" height="40">
-					<img src="{{ asset('images/logos/deputacion-lugo.png') }}" alt="Logo Deputación de Lugo" loading="lazy" width="167" height="45">
+					<img src="{{ asset('images/logos/deputacion-lugo-mocidade.webp') }}" alt="Logo Deputación de Lugo" loading="lazy" width="188" height="45">
 					<img src="{{ asset('images/logos/republica-portuguesa.png') }}" alt="República Portuguesa. Cultura Juventude e desporto" loading="lazy" width="115" height="60">
 					<img src="{{ asset('images/logos/ICA.png') }}" alt="Instituto do cinema e do audiovisual" loading="lazy" width="180" height="41">
 					<img src="{{ asset('images/logos/camoes.png') }}" alt="Logo Instituto Camoes" loading="lazy" width="120" height="60">
