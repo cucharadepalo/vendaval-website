@@ -9,7 +9,7 @@
 		:$edition
 		:$splash
 		height="tall"
-		third-line="Ribeira Sacra"
+		third-line="25-30 Agosto 2026"
 		:title="$edition->title" />
 
 	<main class="pb-24">

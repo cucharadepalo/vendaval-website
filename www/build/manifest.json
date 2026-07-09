@@ -1,8 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-2aaKijxU.css",
+    "file": "assets/app-BSlzlAzS.css",
     "src": "resources/css/app.css",
     "isEntry": true
+  },
+  "resources/fonts/Downward_Fall-webfont.ttf": {
+    "file": "assets/Downward_Fall-webfont-CGLCqgyX.ttf",
+    "src": "resources/fonts/Downward_Fall-webfont.ttf"
+  },
+  "resources/fonts/Downward_Fall-webfont.woff2": {
+    "file": "assets/Downward_Fall-webfont-DmUHIj3q.woff2",
+    "src": "resources/fonts/Downward_Fall-webfont.woff2"
   },
   "resources/images/poster_placeholder.svg": {
     "file": "assets/poster_placeholder-ChwE1SrM.svg",

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="gl" class="bg-(--vdl-txt-color)" class="bg-(--vdl-txt-color)">
+<html lang="gl" class="bg-(--vdl-splash-bg-color)">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
