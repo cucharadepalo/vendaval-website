@@ -4,53 +4,33 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+	font-family: 'Downward Fall';
+	src: url('../fonts/Downward_Fall-webfont.woff2') format('woff2'),
+			url('../fonts/Downward_Fall-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
 @theme {
 	--font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	/* --font-sans-condensed: "IBM Plex Sans Condensed", "Roboto Condensed",
-		ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-		"Segoe UI Symbol", "Noto Color Emoji"; */
-	--font-brand: cofo-peshka-variable, "IBM Plex Sans Condensed", "Roboto Condensed",
-		ui-sans-serif, system-ui, sans-serif;
-	--font-brand--font-variation-settings: "slnt" 0, "wdth" 62.5, "wght" 700;
+	--font-brand: "Downward Fall", ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--aspect-poster: 27 / 40;
-	--aspect-p-tall: 5 / 4;
-	--aspect-p-short: 5 / 3;
-	--aspect-l-tall: 5 / 2;
-	--aspect-l-short: 5 / 1;
 }
 
-@layer theme {
-
-}
+@layer theme {}
 
 @layer base {
-
+	main {
+		max-width: var(--container-7xl);
+		margin: 0 auto;
+	}
 }
 
 @layer components {
-	.splash-title {
-		@apply block font-brand uppercase tracking-wide leading-[0.85] antialiased;
-	}
-	.splash-title.mega {
-		font-size: clamp(4rem, 25vw, 11.25rem);
-	}
-	.splash-title.simple {
-		font-size: clamp(3.25rem, 8vw, 4rem);
-	}
-	.splash-subtitle {
-		@apply block font-brand uppercase tracking-wide leading-none antialiased;
-		font-size: clamp(2rem, 8vw, 3.25rem);
-	}
-	.splash-subtitle.mega {
-		@apply leading-[0.85];
-		font-size: clamp(4rem, 15vw, 7rem);
-		font-variation-settings: "slnt" 0, "wdth" 62.5, "wght" 600;
-	}
-	.splash-subtitle.simple {
-		font-size: clamp(2rem, 8vw, 3.25rem);
-	}
-
 	.site-menu {
 		transition: top .5s ease;
 	}

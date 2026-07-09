@@ -15,7 +15,7 @@
 					@foreach ($schedules as $date => $items)
 						<button type="button"
 							id="tab-{{ Str::camel($date) }}"
-							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 border border-(--vdl-splash-txt-color)/30 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color) aria-selected:border-(--vdl-secondary-color) focus:outline-0 xl:p-4"
+							class="text-center rounded-sm transition-colors bg-(--vdl-bg-color) text-(--vdl-txt-color) p-3 border border-(--vdl-txt-color)/30 aria-selected:bg-(--vdl-secondary-color) aria-selected:text-(--vdl-secondary-txt-color) aria-selected:border-(--vdl-secondary-color) focus:outline-0 xl:p-4"
 							aria-selected="false"
 							aria-controls="panel-{{ Str::camel($date) }}"
 							role="tab"
