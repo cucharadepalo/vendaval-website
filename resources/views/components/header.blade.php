@@ -23,21 +23,21 @@
 
 <nav class="site-menu absolute w-full h-screen -top-full right-0 bottom-0 left-0 bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color) flex items-center justify-center z-10">
 
-	<ul class="text-4xl font-brand text-center space-y-2">
+	<ul class="text-4xl font-brand text-center space-y-2 2xl:text-5xl 2xl:space-y-6">
 		@foreach ($pages as $page)
-		<li><a href="{{ $page->getLink() }}">{{ $page->title }}</a></li>
+		<li><a href="{{ $page->getLink() }}" class="hover:text-(--vdl-secondary-color)">{{ $page->title }}</a></li>
 		@endforeach
 	</ul>
 
-	<ul class="absolute bottom-4 text-center flex justify-center gap-1 items-center">
+	<ul class="absolute bottom-4 text-center flex justify-center gap-1 items-center 2xl:gap-2 2xl:bottom-8">
 		<li>
-			<a href="https://www.instagram.com/vendaval_mostracinemapt/" target="_blank" title="Instagram"><x-filament::icon icon="bxl-instagram" class="w-8 h-8 inline-block" /></a>
+			<a href="https://www.instagram.com/vendaval_mostracinemapt/" target="_blank" title="Instagram"><x-filament::icon icon="bxl-instagram" class="w-8 h-8 inline-block 2xl:w-12 2xl:h-12" /></a>
 		</li>
 		<li>
-			<a href="https://www.facebook.com/vendavalmostracinemapt" target="_blank" title="Facebook"><x-filament::icon icon="bxl-facebook" class="w-8 h-8 inline-block" /></a>
+			<a href="https://www.facebook.com/vendavalmostracinemapt" target="_blank" title="Facebook"><x-filament::icon icon="bxl-facebook" class="w-8 h-8 inline-block 2xl:w-12 2xl:h-12" /></a>
 		</li>
 		<li>
-			<a href="https://www.youtube.com/@Vendaval_mostracinemaportugues" target="_blank" title="Youtube"><x-filament::icon icon="bxl-youtube" class="w-8 h-8 inline-block" /></a>
+			<a href="https://www.youtube.com/@Vendaval_mostracinemaportugues" target="_blank" title="Youtube"><x-filament::icon icon="bxl-youtube" class="w-8 h-8 inline-block 2xl:w-12 2xl:h-12" /></a>
 		</li>
 	</ul>
 </nav>
