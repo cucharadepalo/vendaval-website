@@ -15,7 +15,8 @@ export default defineConfig({
 				"resources/images/poster_placeholder.svg",
 				"resources/images/still_placeholder.svg",
 				"resources/images/lgo-vndvl-26-hrz-lirio.webp",
-				"resources/images/lgo-vndvl-26-hrz-laranja-boho.webp"
+				"resources/images/lgo-vndvl-26-hrz-laranja-boho.webp",
+				"resources/images/lgo-vndvl-26-hrz-branco.webp"
 			],
 			refresh: [
 				"resources/views/**/*",
