@@ -21,7 +21,7 @@
 	</button>
 </header>
 
-<nav class="site-menu absolute w-full h-screen -top-full right-0 bottom-0 left-0 bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color) flex items-center justify-center z-10">
+<nav class="site-menu absolute w-full h-dvh -top-full right-0 bottom-0 left-0 bg-(--vdl-splash-bg-color) text-(--vdl-splash-txt-color) flex items-center justify-center z-10">
 
 	<ul class="text-4xl font-brand text-center space-y-2 2xl:text-5xl 2xl:space-y-6">
 		@foreach ($pages as $page)
