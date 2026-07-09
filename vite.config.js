@@ -14,6 +14,8 @@ export default defineConfig({
 				"resources/js/app.js",
 				"resources/images/poster_placeholder.svg",
 				"resources/images/still_placeholder.svg",
+				"resources/images/lgo-vndvl-26-hrz-lirio.webp",
+				"resources/images/lgo-vndvl-26-hrz-laranja-boho.webp"
 			],
 			refresh: [
 				"resources/views/**/*",
